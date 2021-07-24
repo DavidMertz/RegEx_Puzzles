@@ -8,7 +8,7 @@ papersize: a5
 geometry:
     - margin=0.5in
     - top=0.75in
-    - bottom=0.75in
+    - bottom=0.5in
 number-sections: true
 toc: true
 mainfont: DejaVuSerif.ttf
@@ -588,9 +588,11 @@ However, it can also become unworkably slow when checking some messages.
 For example:
 
 ```
-Quick match     | '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
+Quick match     |
+        '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
                 |  Checked in 0.00 seconds
-Quick failure   | '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
+Quick failure   |
+        '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
                 |  Checked in 0.00 seconds
 Failure         | '▲□□▲▲□□▲▲▲□□□□□□□□▲▲□▲□▲□▲X' is Invalid
                 |  Checked in 4.42 seconds
@@ -619,9 +621,9 @@ letters or numerals that are easy to type for the symbols used here.  It
 doesn't change the nature of the puzzle at all; it merely might make it
 easier to use your keyboard.
 
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-Try hard to avoid catastrophies.
-
+**Try hard to avoid catastrophies.**
 
 \newpage
 
@@ -679,9 +681,11 @@ Structure 1 2 1 2  | Message '■▲◉ ▫ ■ ▪▫!' is Valid
 Missing terminator | Message '■▲◉▫■▪▫' is Invalid
 Structure 1 1 2 1  | Message '▲▲▲ ■■■ ▫▫▫ ○○○!' is Invalid
 
-Quick match     | '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
+Quick match     | 
+        '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
                 |  Checked in 0.00 seconds
-Quick failure   | '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
+Quick failure   | 
+        '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
                 |  Checked in 0.00 seconds
 Failure         | '▲□□▲▲□□▲▲▲□□□□□□□□▲▲□▲□▲□▲X' is Invalid
                 |  Checked in 0.00 seconds
@@ -985,9 +989,9 @@ then the much more difficult to read `patA` which uses several symbols
 requiring escaping for the pattern definition since they would otherwise
 have regex meanings.
 
-
 ```
-patB =  r'^(((?=LL|Lu|LF|HH|Hd|HF|uH|dL|FH|FL)|(?=.$))[LHudF])+$'
+patB =  (r'^(((?=LL|Lu|LF|HH|Hd|HF|uH|dL|FH|FL)'
+         r'|(?=.$))[LHudF])+$'
 
 patA =  (r'^(((?=__|_/|_\||\^\^|\^\\|\^\||/\^|\\_|\|\^|\|_)'
          r'|(?=.$))[_\^/\\\|])+$')
@@ -1006,7 +1010,6 @@ inline.
 The Python method `str.count()` is widely useful to find substrings
 inside a larger string.  For example, here is some typical code you
 might write: 
-
 
 ```
 # Lyric from song "Hot Knife" by Fiona Apple
@@ -1111,13 +1114,14 @@ For example, using it to count nucleotides:
 
 ```
 >>> mRNA = '''
-GGGAAATAAGAGAGAAAAGAAGAGTAAGAAGAAATATAAGACCCCGGCGCCGCCACCATGTTCGTGTTC
-CTGGTGCTGCTGCCCCTGGTGAGCAGCCAGTGCGTGAACCTGACCACCCGGACCCAGCTGCCACCAGCC
-TACACCAACAGCTTCACCCGGGGCGTCTACTACCCCGACAAGGTGTTCCGGAGCAGCGTCCTGCACAGC
-ACCCAGGACCTGTTCCTGCCCTTCTTCAGCAACGTGACCTGGTTCCACGCCATCCACGTGAGCGGCACC
-AACGGCACCAAGCGGTTCGACAACCCCGTGCTGCCCTTCAACGACGGCGTGTACTTCGCCAGCACCGAG
-AAGAGCAACATCATCCGGGGCTGGATCTTCGGCACCACCCTGGACAGCAAGACCCAGAGCCTGCTGATC
-GTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
+GGGAAATAAGAGAGAAAAGAAGAGTAAGAAGAAATATAAGACCCCGGCGCCGCCACCAT
+GTTCGTGTTCCTGGTGCTGCTGCCCCTGGTGAGCAGCCAGTGCGTGAACCTGACCACCC
+GGACCCAGCTGCCACCAGCCTACACCAACAGCTTCACCCGGGGCGTCTACTACCCCGAC
+AAGGTGTTCCGGAGCAGCGTCCTGCACAGCACCCAGGACCTGTTCCTGCCCTTCTTCAG
+CAACGTGACCTGGTTCCACGCCATCCACGTGAGCGGCACCAACGGCACCAAGCGGTTCG
+ACAACCCCGTGCTGCCCTTCAACGACGGCGTGTACTTCGCCAGCACCGAGAAGAGCAAC
+ATCATCCGGGGCTGGATCTTCGGCACCACCCTGGACAGCAAGACCCAGAGCCTGCTGAT
+CGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
 '''
 >>> let_count('G', mRNA)
 '120'
