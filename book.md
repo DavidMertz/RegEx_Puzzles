@@ -23,6 +23,19 @@ monofont: DejaVuSansMono.ttf
 mathfont: texgyredejavu-math.otf 
 ...
 
+# Acknowledgements
+
+I thank my friend Miki Tebeka, who invited me to write this book, albeit
+in slightly different form than the version you see.  I am very grateful
+to my friends Brad Huntting and Mary Ann Sushinsky who provided clever
+ideas in the directions of these puzzles.
+
+A number of other friends and family members listened to me enumerate
+the foibles of another publisher who cling to a cargo-culted toolchain.
+
+I ambivalently thank Noam Chomsky for arranging computability into a
+neat hierarchy, with regular expressions at the bottom.
+
 # Preface
 
 Regular expressions—sometimes given the playful back formation *regexen*
@@ -46,12 +59,12 @@ software includes `[efr]?grep` `sed`, `awk`, *Perl*, *Java*, *.NET*,
 programming language via a library. 
 
 For this book, we will use Python to pose these puzzles.  In particular,
-we will use the standard library module <class>re</class>.  Often code
-samples are used in puzzles and in explanation; where I wish to show the
-output from code, the example emulates to the Python shell with lines
-starting with `>>> ` (or continuing with `... `).  Outputs are echoed
-without a prompt in this case.  Where code defines a function that is
-not necessarily executed in the mention, only the plain code is shown. 
+we will use the standard library module `re`  Often code samples are
+used in puzzles and in explanation; where I wish to show the output from
+code, the example emulates to the Python shell with lines starting with
+`>>> ` (or continuing with `... `).  Outputs are echoed without a prompt
+in this case.  Where code defines a function that is not necessarily
+executed in the mention, only the plain code is shown. 
 
 While you are reading this book, I strongly encourage you to keep
 open an interactive Python environment.  Many tools enable this, such
@@ -115,9 +128,11 @@ words can look like:
 xy_words = re.findall(_pat, txt)
 ```
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Think about what each pattern will match.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -127,7 +142,6 @@ Both `pat1` and `pat2` match the wrong thing, but in different ways.
 If you liked `pat1`, you've greedily matched too much. The 'y' might
 occur in later words (per line), and the match won't end until the last
 'y' on a line.
-
 
 ```
 >>> for match in re.findall(pat1, txt):
@@ -242,10 +256,11 @@ As you can see, we matched a number of substrings within word, not only
 whole words.  What pattern can you use actually to match only words that
 start with 'x' and end with 'y'?
 
-
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Think about what defines word boundaries.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -310,10 +325,11 @@ xanthenes xylenol xylol yexing xylenes coextensively
 What went wrong there? Clearly we matched some words we do not want,
 even though all of them began with 'x' or 'y' and ended with 'x' or 'y'.
 
+Before you turn the page...
+
+**Try to refine the regular expression to match what we want.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-**Try to refine the regular expression to match what we want. **
 
 \newpage
 
@@ -381,9 +397,11 @@ above example would produce:
 {3: 'foobar', 14: 'baz', 9: 'fizzbuzz', 21: 'more_stuff,here'}
 ```
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Remember that shapes have edges**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -505,8 +523,11 @@ valid telomeres.  In the second mismatch, the 'N' symbol is used.  Both
 of these are valid FASTA encoding, but not the sequences specified for
 puzzle.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
+
 **Remember the central dogma of molecular biology.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -621,9 +642,11 @@ letters or numerals that are easy to type for the symbols used here.  It
 doesn't change the nature of the puzzle at all; it merely might make it
 easier to use your keyboard.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Try hard to avoid catastrophies.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -755,21 +778,22 @@ expression that distinguishes every winning play from a losing play.
 Note that any character sequence that doesn't define a series of one or
 more tiles is trivially losing.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **You may be able to do this more efficiently than your first thought.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
 Because of our ASCII encoding we have a shortcut available for the
 regular expression that can judge whether a play is winning.  This would
-not be available with the icon characters for the domino tiles.  
+not be available with the icon characters for the domino tiles.
 
 The same digit must occur at the end of one tile, and again at the start
 of the next tile.  Therefore, we can shortcut specifically matching '3's
 with '3's and '5's with '5's.  Instead, we can just use a lookahead to
 match a back reference group.
-
 
 ```
 >>> good = '{1:3}{3:3}{3:6}{6:1}{1:3}{3:3}{3:3}'
@@ -856,9 +880,11 @@ four tile types to use.  Write a regular expression that distinguishes
 every winning play from a losing play.  Note that any character outside
 the tile symbol set is trivially losing.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Thoughts about digrams are always pleasant thoughts.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -877,7 +903,6 @@ a match to begin at the start of the play and end at the end of the
 play, so be sure to include the match patterns `^` and `$` to indicate
 that.
 
-
 ```
 >>> win = 'ABCDABB'
 >>> lose = 'ABDABCB'
@@ -888,13 +913,10 @@ that.
 'No Match'
 ```
 
-	
-
 \newpage
 
 ## Sensor Art
 
-	
 A hypothical data format uses a character string to represent state
 transitions in a two-state system.  For example, this might be the
 status of some sort of electrical sensor.  Each string represents a
@@ -912,7 +934,6 @@ line drawing characters have special meanings in regex syntax. Special
 characters can be escaped, but it makes the patterns harder to read.
 
 Some valid and invalid signals are below:
-
 
 ```
 valid_1a = "_/^^^\_/^|___|^\____|^^\__/"
@@ -955,9 +976,11 @@ you need.
 That is, find the pattern that will work *only if* regular expressions
 are sufficienty powerful to perform this test. 
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Find a matching pattern, if possible.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1035,16 +1058,17 @@ def my_count(substring: str, string: str) -> int:
     ...
 ```
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **How can a regex count the substring occurrences?**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
 Two functions in the Python `re` module seem especially likely to be
 useful.  The `re.sub()` function will replace a pattern with something
 else.  We might try a solution using that, for example:
-
 
 ```
 >>> def my_count(substring, string):
@@ -1079,7 +1103,7 @@ as a bonus puzzle), but even easier is using `re.findall()`:
 
 \newpage
 
-## Reimplementing str.count() (With More Restrictions)
+## Reimplementing str.count() (more restrictions)
 
 	
 In the last puzzle, we reimplemented `str.count()` using regular
@@ -1133,16 +1157,18 @@ CGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
 '109'
 ```
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Try to write a Python function with the restrictions given.**
 
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
 \newpage
 
-This one turns out to be somewhat difficult, but also to be
-<emph>possible</emph>, which is itself sort of amazing.  No numbers
-whatsoever are involved in the solution shown.  No counters, no integer
-variables, no Python functions returning numbers. 
+This one turns out to be somewhat difficult, but also to be *possible*,
+which is itself sort of amazing.  No numbers whatsoever are involved in
+the solution shown.  No counters, no integer variables, no Python
+functions returning numbers. 
 
 We also do not need to use any Python string methods, although it is
 fair to note that some of what is performed via regular expressions
@@ -1150,11 +1176,10 @@ might be more simple to express as string methods.  The function can
 perform strictly and only regular expressions operations... along with a
 little bit of Python looping (but never over numbers).
 
-We use two sentinels in alternation for the loop, indicating either the number
-of items at a certain power of ten, or the number at the next higher power.  A
-dictionary can map zero to nine repetions of a sentinel to the corresponding
-numeral, but leave the rest of string unchanged.
-
+We use two sentinels in alternation for the loop, indicating either the
+number of items at a certain power of ten, or the number at the next
+higher power.  A dictionary can map zero to nine repetions of a sentinel
+to the corresponding numeral, but leave the rest of string unchanged.
 
 ```
 # Group 1: zero or more leading @'s
@@ -1233,9 +1258,11 @@ def is_something(s):
 For this puzzle, simply provide a good name and a docstring for this
 function, to be kind to later programmers.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
-**Code is read far more often than it is written...**
+**Code is read far more often than it is written.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1243,7 +1270,6 @@ This puzzle certainly has many possible answers.  For all of them,
 understanding what the regular expression is doing is the crucual
 element.  The short pattern might look odd, and you need to figure it
 out.  Here is a possibility.
-
 
 ```
 def repeated_prefix(s):
@@ -1279,7 +1305,7 @@ symbol combination.
 * Straight flush, e.g. `J♣ T♣ 9♣ 8♣ 7♣`
 * Four of a kind, e.g. `A♥ 3♠ 3♥ 3♦ 3♣`
 * Full house, e.g. `K♠ K♣ 6♥ 6♦ 6♣`
-* Flush, e.g. `J♦ 9♦ 6♦ 5♦ `2♦`
+* Flush, e.g. `J♦ 9♦ 6♦ 5♦ 2♦`
 * Straight, e.g. `9♦ 8♣ 7♣ 6♥ 5♣`
 * Three of a kind, e.g. `Q♣ 8♠ 8♦ 8♣ 3♥`
 * Two pairs, e.g. `J♠ J♣ 9♥ 8♥ 8♦`
@@ -1301,18 +1327,19 @@ This second function, `cardsort(hand)` uses more Python than regular
 expressions per se, so just read the solution if you are less
 comfortable with Python itself.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Functions are a big help in larger programs.**
 
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
 \newpage
 
-The truth is, we do not genuinely *need* regular expressions for either of
-these support functions.  But we do have the opportunity to use them.
+The truth is, we do not genuinely *need* regular expressions for either
+of these support functions.  But we do have the opportunity to use them.
 First let's transform any ASCII version of a hand into the Unicode
-version. Along the way, we make sure the hand consists of five valid ASCII
-cards.
-
+version. Along the way, we make sure the hand consists of five valid
+ASCII cards.
 
 ```
 def prettify(hand):
@@ -1328,7 +1355,6 @@ Sorting uses mostly plain Python techniques.  In particular, we can rely
 on the fact that Python's sort is *stable*.  This means the order will not
 change between equivalent elements.  Therefore, sorting first by suit,
 then by number will be guaranteed to have the right overall effect.
-
 
 ```
 def cardsort(hand):
@@ -1386,9 +1412,11 @@ represented in the same manner as the last puzzle (including the cards
 being in descending order).  Feel free to use the `prettify()`
 function you wrote if it makes entering test cases easier.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Functions are a big help in larger programs.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1492,9 +1520,11 @@ This and the next frew puzzles cover the various functions. See if you
 can solve all of them (possibly using shared functionality) before
 looking at the discussion.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Functions are a big help in larger programs.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1503,7 +1533,6 @@ first or second card.  In fact, if we retain our assumption that the
 cards are completely ordered, then the four can only occur as the
 initial four or the final four.  But the following implementation does
 not rely on that ordering:
-
 
 ```
 >> def is_four_of_kind(hand):
@@ -1555,9 +1584,11 @@ Four-of-a-kind we did in the last puzzle, so now we want to deal with a
 full house.  Write a function, using regular expressions as much as
 possible, to identify a hand that contains a full house.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **You might risk identifying the "dead man's hand".**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1581,7 +1612,6 @@ number.  For later use, we can be extra nice in by returning the 3-card
 number first as the "truthy" value in a match.  In most poker rules, the
 3-card match takes precedence when the same hands are evaluated for the
 win.
-
 
 ```
 >>> def is_full_house(hand):
@@ -1616,12 +1646,9 @@ But the heart of it is the same reduction to number-only we saw with
 part is really only to provide the friendly truthy values, not in asking
 the predicate itself.
 
-	
-
 \newpage
 
 ## Playing Poker (Part 5)
-
 
 In the last couple puzzles we identified four-of-a-kind and full house.
 Much of the logic for this puzzle will be similar to those, but
@@ -1640,9 +1667,11 @@ Create these three functions in this puzzle:
 * `is_two_pairs(hand)`
 * `is_pair()`
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Remember that three is more than two, but less than four.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1650,7 +1679,6 @@ Identifying two or three of a kind is a lot like identifying
 four-of-a-kind, just with fewer repetitions.  We could do it without
 sorting the hand, but doing so, as with our full house solution, is a
 bit easier.
-
 
 ```
 >>> def is_three_of_kind(hand):
@@ -1762,9 +1790,11 @@ followed by the same number of 'B' characters.
 For example `AAABBB` and `AAAAAAABBBBBBB` should match, while
 `AAAABBBBBB` should fail to match.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Lateral thinking might help you find the answer.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -1831,16 +1861,17 @@ reoccurs.  But the second word 'and' does occur later in the phrase, and
 therefore it, and everything following the duplicated word must be
 excluded.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Find a pattern that will fulfill the requirment.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
 This match pattern is indeed possible to write as a regular expression.
 We need to use back references to check it, but those are a standard
 feature of reqular expression engines.
-
 
 ```
 pat = r'((\w+\b)(?!.*\2\b)\W*)+'
@@ -1900,16 +1931,17 @@ the permitted integer range in one quad.  The second invalid address has
 5 dotted elements rather than 4.  The third invalid address contains
 characters other than decimal digits in one of the quads.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Always think about whether regexen are powerful enough for a problem.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
 It would be very easy to match naive *dotted quads* that simply
 consisted of four numbers with up to three digits, separated by dots.
 You might express that as:
-
 
 ```
 pat = r'^(\d{1-3}){3}\.\d{1-3}$'
@@ -2019,9 +2051,11 @@ that fail to follow it all the way to their end.  The final "number" in
 a string will always be followed by a space, otherwise it won't have
 been terminated and shouldn't match.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Be sure to rule out the strings that do not express the sequence.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -2097,9 +2131,11 @@ wrong2 = "@ @ @@ @@@ @@@@ @@@@@@@ "
 Can you create a regular expression that matches only Fibonacci-like
 sequences within encoded strings?
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
-**The Golden Spiral beautifully generalizes the Fibonacci Numbers.**
+**The Golden Spiral beautifully generalizes Fibonacci Numbers.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -2112,7 +2148,6 @@ The main difference in the solution to this puzzle versus the last one
 is that we need to backreference two groups in the lookahead pattern
 rather than just one.  Study the explanation of the last puzzle before
 looking at the solution to this one.
-
 
 ```
 >>> pat1 = r"^(((@+) (@+) )(?=$|\3\4 ))+(\3\4)?$"
@@ -2201,9 +2236,11 @@ for this puzzle).  Before you look at the discussion, try to either find
 a regular expression to match the valid sequences or formulate clearly
 why you cannot.
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Honor the Fundamental Theorem of Arithmetic.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
@@ -2287,9 +2324,11 @@ fail2 = "@@@@@ @@@@@@@ @@ @@@ @@@@@@@@@@ "
 ```
 Are relative primes consigned to the same fate as primes?
 
-![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+Before you turn the page...
 
 **Nothing is either true or false but thinking makes it so.**
+
+![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
 \newpage
 
