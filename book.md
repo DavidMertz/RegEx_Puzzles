@@ -13,17 +13,17 @@ number-sections: true
 toc: true
 mainfont: DejaVuSerif.ttf
 mainfontoptions:
-- Extension=.ttf
-- - UprightFont=*
-- - BoldFont=*-Bold
-- - ItalicFont=*-Italic
-- - BoldItalicFont=*-BoldItalic
+    - Extension=.ttf
+    - UprightFont=*
+    - BoldFont=*-Bold
+    - ItalicFont=*-Italic
+    - BoldItalicFont=*-BoldItalic
 sansfont: DejaVuSans.ttf
 monofont: DejaVuSansMono.ttf 
 mathfont: texgyredejavu-math.otf 
 ...
 
-# Acknowledgements
+# Acknowledgments
 
 I thank my friend Miki Tebeka, who invited me to write this book, albeit
 in slightly different form than the version you see.  I am very grateful
@@ -31,10 +31,32 @@ to my friends Brad Huntting and Mary Ann Sushinsky who provided clever
 ideas in the directions of these puzzles.
 
 A number of other friends and family members listened to me enumerate
-the foibles of another publisher who cling to a cargo-culted toolchain.
+the foibles of another publisher who clings to a cargo-culted toolchain.
 
-I ambivalently thank Noam Chomsky for arranging computability into a
-neat hierarchy, with regular expressions at the bottom.
+With ambivalence, I thank Noam Chomsky for arranging computability into
+a neat hierarchy, with regular expressions at the bottom.
+
+*Freely licensed images used*
+
+Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746_0db0b8eba0_o.jpg
+
+Pixabay (https://pixabay.com/service/license/): clown-28772.svg 
+
+Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black.svg
+
+freesvg.org (Public Domain): clown-1549219095.svg;
+johnny-automatic-left-hand-1.svg; pointerfingerright.svg
+
+OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19.svg
+
+"Stuck in the Middle with You", by Gerry Rafferty and Joe Egan (Stealer
+Wheels), 1973:
+
+> Clowns to the left of me! /
+> Jokers to the right! /
+> Here I am stuck in the middle with you.
+
+![Clowns to the left of me; freesvg.org](images/clown-1549219095.svg)
 
 # Preface
 
@@ -44,17 +66,17 @@ patterns in text.  Many tutorials and "cheat sheets" exist to understand
 their syntax and semantics in a formally correct manner.  I encourage
 you to read some of those, if you have not already.
 
-These brain teasers begin at a certain point where the formal
-descriptions leave off.  As you work with regexen, you will find subtle
-pitfalls.  A pattern that seems like it should obviously do one thing,
-actually matches something slightly different than you intended.  Or
-perhaps a match pattern has "pathological" behavior and takes far too
-long.  Or sometimes it is simply that a more concise pattern can also be
-clearer in describing what you actually wish to match. 
+These puzzles begin at a certain point where the formal descriptions
+leave off.  As you work with regexen, you will find subtle pitfalls.  A
+pattern that seems like it should obviously match one thing, actually
+matches something slightly different than you intended.  Or perhaps a
+match pattern has "pathological" behavior and takes far too long.  Or
+sometimes it is simply that a more concise pattern can also be clearer
+in describing what you actually wish to match. 
 
 A great many programming languages, libraries, and tools support regular
 expressions, with relatively minor variations in the syntax used.  Such
-software includes `[efr]?grep` `sed`, `awk`, *Perl*, *Java*, *.NET*,
+software includes `[efr]?grep`, `sed`, `awk`, *Perl*, *Java*, *.NET*,
 *JavaScript*, *Julia*, *XML Schema*, or indeed, pretty much every other
 programming language via a library. 
 
@@ -84,28 +106,27 @@ understanding of the different quantifiers that regular expressions
 provide, and to pay careful attention to when you should use
 sub-patterns (themselves likely quanitifed).
 
+![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+
 \newpage
 
 ## Wildcard Scope
 
-	
-A powerful element of Python regular expression syntax—shared by many other
-regex engines—is the option of creating either "greedy" or "non-greedy"
-matches.  The former matches as much as it possibly can, as long as it finds
-the later part of a pattern.  The latter matches as little as it possibly can
-to reach the next part of a pattern.
+A powerful element of Python regular expression syntax—shared by many
+other regex engines—is the option of creating either "greedy" or
+"non-greedy" matches.  The former matches as much as it possibly can, as
+long as it finds the later part of a pattern.  The latter matches as
+little as it possibly can to reach the next part of a pattern.
 
 Suppose you have these two regular expressions:
-
 
 ```
 pat1 = re.compile(r'x.*y')    # greedy
 pat2 = re.compile(r'x.*?y')   # non-greedy
 ```
 
-And also this block of text that you want to match.  You can think of it as a
-sort of *lorem ipsum* that only has 'X' words, if you will.
-
+And also this block of text that you want to match.  You can think of it
+as a sort of *lorem ipsum* that only has 'X' words, if you will.
 
 ```
 txt = """
@@ -122,7 +143,6 @@ xylopyrography xanthopterines xerochasy xenium xenic
 You'd like to match all and only words that start with 'X' and end with
 'Y'.  What pattern makes sense to use, and why?  The code to find the
 words can look like:
-
 
 ```
 xy_words = re.findall(_pat, txt)
@@ -221,12 +241,11 @@ Everything we matched, anywhere on each line, had an 'x', some other
 letters (perhaps including 'x's or 'y's along the way), then a 'y'.
 Whatever came after each match was a non-letter character.
 
-	
+![Blank verso page](images/johnny-automatic-left-hand-1.svg)
 
 \newpage
 
 ## Words and Sequences
-
 	
 In the previous problem, we identified words that started with 'x' and
 ended with 'y'.  You may have noticed, however, that we had already
@@ -234,7 +253,6 @@ included the assumption that all the words started with 'x'.  Perhaps
 your solution was clever enough not to fall for the danger shown in this
 puzzle.  Namely, perhaps not all words will actually start with 'x' to
 begin with.
- 
 
 ```
 >>> txt = """
@@ -399,7 +417,7 @@ above example would produce:
 
 Before you turn the page...
 
-**Remember that shapes have edges**
+**Remember that shapes have edges.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -523,11 +541,13 @@ valid telomeres.  In the second mismatch, the 'N' symbol is used.  Both
 of these are valid FASTA encoding, but not the sequences specified for
 puzzle.
 
-Before you turn the page...
+Before you turn the page.
 
 **Remember the central dogma of molecular biology.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+![Blank recto page](images/pointyfingerright.svg)
 
 \newpage
 
@@ -557,7 +577,6 @@ least to understand and identify, where such difficulties arise.
 \newpage
 
 ## Catastrophic Backtracking
-
 
 In this puzzle, we imagine a certain message protocol (as we do in many
 of the other puzzles).  We have an message alphabet that consists of the
@@ -741,18 +760,18 @@ zero to six dots on each half.  We will come back to those characters in
 the next puzzle.  As a reminder, some of those Unicode characters are
 listed in this table.
 
-![Domino examples](images/Dominoes-examples.png)
+![](images/Dominoes-examples.png)
 
 The actual codepoints are hard to enter, and hard to see unless they are
 displayed at a large font size (as here).  But to illustrate the "game"
 our regex will play, we can show examples of, first, a valid/winning
 pattern:
 
-![Dominoes good](images/Dominoes-good.png)
+![](images/Dominoes-good.png)
 
 And second, an invalid/losing pattern:
 
-![Dominoes bad](images/Dominoes-bad.png)
+![](images/Dominoes-bad.png)
 
 In this game, tiles are placed in linear order, and two may occur
 adjacently only if they have the same number of dots where they "touch."
@@ -842,11 +861,11 @@ the examples of winning and losing plays from the prior lesson:
 
 Winning:
 
-![Dominoes good](images/Dominoes-good.png)
+![](images/Dominoes-good.png)
 
 Losing:
 
-![Dominoes bad](images/Dominoes-bad.png)
+![](images/Dominoes-bad.png)
 
 For this game we will simplify in two ways.  First, rather than use
 hard-to-enter and hard-to-see tile icons, we will use ASCII characters.
@@ -885,6 +904,8 @@ Before you turn the page...
 **Thoughts about digrams are always pleasant thoughts.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+![Blank recto page](images/pointyfingerright.svg)
 
 \newpage
 
@@ -982,6 +1003,8 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
+![Blank recto page](images/pointyfingerright.svg)
+
 \newpage
 
 This puzzle *is* solvable with regexen.  There are a few observations to
@@ -1014,7 +1037,7 @@ have regex meanings.
 
 ```
 patB =  (r'^(((?=LL|Lu|LF|HH|Hd|HF|uH|dL|FH|FL)'
-         r'|(?=.$))[LHudF])+$'
+         r'|(?=.$))[LHudF])+$')
 
 patA =  (r'^(((?=__|_/|_\||\^\^|\^\\|\^\||/\^|\\_|\|\^|\|_)'
          r'|(?=.$))[_\^/\\\|])+$')
@@ -1025,6 +1048,8 @@ patA =  (r'^(((?=__|_/|_\||\^\^|\^\\|\^\||/\^|\\_|\|\^|\|_)'
 Very often in Python, or in other programming languages, you will want
 to wrap a regular expression in a small function rather than repeat it
 inline.	
+
+![Blank verso page](images/johnny-automatic-left-hand-1.svg)
 
 \newpage
 
@@ -1147,6 +1172,11 @@ ACAACCCCGTGCTGCCCTTCAACGACGGCGTGTACTTCGCCAGCACCGAGAAGAGCAAC
 ATCATCCGGGGCTGGATCTTCGGCACCACCCTGGACAGCAAGACCCAGAGCCTGCTGAT
 CGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
 '''
+```
+
+\newpage
+
+```
 >>> let_count('G', mRNA)
 '120'
 >>> let_count('C', mRNA)
@@ -1159,9 +1189,13 @@ CGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
 
 Before you turn the page...
 
-**Try to write a Python function with the restrictions given.**
+**Write a Python function with the restrictions given.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+\newpage
+
+![Blank recto page](images/pointyfingerright.svg)
 
 \newpage
 
@@ -1236,12 +1270,11 @@ def let_count(c, s):
         s = re.sub('@', '_', s)
 ```
 
-
+![Blank verso page](images/clown-28772.svg)
 
 \newpage
 
 ## Finding a Name for a Function
-
 	
 Suppose you come across some code that a previous employee on your
 project, long moved on an unavailable wrote.  Their code passes unit
@@ -1281,12 +1314,9 @@ def repeated_prefix(s):
     return not re.match(r'^(.+?)\1+$', s)
 ```
 
-	
-
 \newpage
 
 ## Playing Poker (Part 1)
-
 
 In earlier puzzles, we had fun playing dominoes.  For the next few
 puzzles, let's play poker.  In particular, let's says that a player has
@@ -1326,6 +1356,8 @@ hearts, diamonds, clubs.
 This second function, `cardsort(hand)` uses more Python than regular
 expressions per se, so just read the solution if you are less
 comfortable with Python itself.
+
+\newpage
 
 Before you turn the page...
 
@@ -1377,20 +1409,19 @@ def cardsort(hand):
 
 Combining these:
 
-
 ```
 >>> cardsort(prettify('8C AS 4H KS 2C'))
 'A♠ K♠ 8♣ 4♥ 2♣'
 ```
 
-More regular expressions in the next puzzles which continue this theme.
+\newpage
 
-	
+We will need more regular expressions in the next few puzzles which
+continue this poker theme.
 
 \newpage
 
 ## Playing Poker (Part 2)
-
 
 In the last puzzle, you converted "poker hands" from ASCII to Unicode
 suit symbols, and you also made sure that hands are listed in
@@ -1406,11 +1437,11 @@ def is_straight_flush(hand):
     return is_straight(hand) and is_flush(hand)
 ```
 
-For this puzzle, write the functions `is_flush(hand)` and
+For this puzzle, you wish to write the functions `is_flush(hand)` and
 `is_straight(hand)`, continuing with the assumption that hands are
 represented in the same manner as the last puzzle (including the cards
-being in descending order).  Feel free to use the `prettify()`
-function you wrote if it makes entering test cases easier.
+being in descending order).  Feel free to use the `prettify()` function
+you wrote if it makes entering test cases easier.
 
 Before you turn the page...
 
@@ -1488,12 +1519,13 @@ At this point, you might consider a richer implementation of
 False
 ```
 
-	
+\newpage
+
+![Blank verso page](images/johnny-automatic-left-hand-1.svg)
 
 \newpage
 
 ## Playing Poker (Part 3)
-
 
 In this puzzle let's continue with matching poker hands.  We handled
 straights and flushes in the last puzzle (and straight flushes by
@@ -1646,6 +1678,8 @@ But the heart of it is the same reduction to number-only we saw with
 part is really only to provide the friendly truthy values, not in asking
 the predicate itself.
 
+![Clowns to the left of me (Pixabay)](images/clown-28772.svg)
+
 \newpage
 
 ## Playing Poker (Part 5)
@@ -1766,11 +1800,15 @@ The remainder of your poker game program is left for a further exercise.
 The rest of what you'd need to do won't have much to do with regular
 expressions, simply usual program flow and data structures. 
 
+![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+
 # Easy, Difficult, and Impossible Tasks
 
 Some things are difficult or impossible with regular expressions, and
 many are elegant and highly expressive.  The puzzles in this section ask
 you to think about which situation each puzzle describes.
+
+![Blank verso page](images/johnny-automatic-left-hand-1.svg)
 
 \newpage
 
@@ -1933,7 +1971,7 @@ characters other than decimal digits in one of the quads.
 
 Before you turn the page...
 
-**Always think about whether regexen are powerful enough for a problem.**
+**Always ask whether regexen are powerful enough for a problem.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -2056,6 +2094,9 @@ Before you turn the page...
 **Be sure to rule out the strings that do not express the sequence.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+![Joker to the right, by Leo
+Reynolds](images/joker-48067975746_0db0b8eba0_o.jpg)
 
 \newpage
 
@@ -2229,6 +2270,8 @@ def get_primes():
         candidate += 1
 ```
 
+\newpage
+
 The form of the Sieve is definitely reminiscent of lookahead assertions
 which we have used in many of the puzzles.  Think about whether you can
 implement this using regular expressions (don't think about performance
@@ -2241,6 +2284,10 @@ Before you turn the page...
 **Honor the Fundamental Theorem of Arithmetic.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+\newpage
+
+![Blank recto page](images/pointyfingerright.svg)
 
 \newpage
 
@@ -2322,6 +2369,8 @@ fail1 = "@@ @@@ @@@@ @@@@@ @@@@@@@ "
 # Fail: 5 7 2 3 11 (all primes, non-ascending)
 fail2 = "@@@@@ @@@@@@@ @@ @@@ @@@@@@@@@@ "
 ```
+\newpage
+
 Are relative primes consigned to the same fate as primes?
 
 Before you turn the page...
@@ -2329,6 +2378,8 @@ Before you turn the page...
 **Nothing is either true or false but thinking makes it so.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+![Atlas joker, by Dmitry Fomin](images/Atlas_deck_joker_black.svg)
 
 \newpage
 
