@@ -36,6 +36,8 @@ the foibles of another publisher who clings to a cargo-culted toolchain.
 With ambivalence, I thank Noam Chomsky for arranging computability into
 a neat hierarchy, with regular expressions at the bottom.
 
+---
+
 *Freely licensed images used*
 
 Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746_0db0b8eba0_o.jpg
@@ -45,7 +47,9 @@ Pixabay (https://pixabay.com/service/license/): clown-28772.svg
 Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black.svg
 
 freesvg.org (Public Domain): clown-1549219095.svg;
-johnny-automatic-left-hand-1.svg; pointerfingerright.svg
+johnny-automatic-right-hand.svg; johnny-automatic-left-hand.svg;
+johnny-automatic-left-hand.svg; pointerfingerright.svg; DNA-1540353349.svg;
+Prismatic-DNA-Helix-Circles-3.svg
 
 OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19.svg
 
@@ -56,7 +60,9 @@ Wheels), 1973:
 > Jokers to the right! /
 > Here I am stuck in the middle with you.
 
-![Clowns to the left of me; freesvg.org](images/clown-1549219095.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/clown-1549219095.svg)
 
 # Preface
 
@@ -106,7 +112,9 @@ understanding of the different quantifiers that regular expressions
 provide, and to pay careful attention to when you should use
 sub-patterns (themselves likely quanitifed).
 
-![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/Prismatic-DNA-Helix-Circles-3.svg)
 
 \newpage
 
@@ -241,7 +249,11 @@ Everything we matched, anywhere on each line, had an 'x', some other
 letters (perhaps including 'x's or 'y's along the way), then a 'y'.
 Whatever came after each match was a non-letter character.
 
-![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+\newpage
+
+<!-- blank verso page -->
+
+![Blank verso page](images/DNA-1540353349.svg)
 
 \newpage
 
@@ -454,8 +466,6 @@ of ways we might achieve that in Python, but one easy one is:
 {3: 'foobar', 14: 'baz', 9: 'fizzbuzz', 21: 'more_stuff,here'}
 ```
 
-	
-
 \newpage
 
 ## The Human Genome
@@ -546,6 +556,8 @@ Before you turn the page.
 **Remember the central dogma of molecular biology.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+<!-- blank recto page -->
 
 ![Blank recto page](images/pointyfingerright.svg)
 
@@ -905,7 +917,9 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-![Blank recto page](images/pointyfingerright.svg)
+<!-- blank recto page -->
+
+![Blank recto page](images/johnny-automatic-right-hand.svg)
 
 \newpage
 
@@ -1003,6 +1017,8 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
+<!-- blank recto page -->
+
 ![Blank recto page](images/pointyfingerright.svg)
 
 \newpage
@@ -1049,7 +1065,9 @@ Very often in Python, or in other programming languages, you will want
 to wrap a regular expression in a small function rather than repeat it
 inline.	
 
-![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/johnny-automatic-left-hand.svg)
 
 \newpage
 
@@ -1195,7 +1213,9 @@ Before you turn the page...
 
 \newpage
 
-![Blank recto page](images/pointyfingerright.svg)
+<!-- blank recto page -->
+
+![Blank recto page](images/johnny-automatic-right-hand.svg)
 
 \newpage
 
@@ -1270,6 +1290,8 @@ def let_count(c, s):
         s = re.sub('@', '_', s)
 ```
 
+<!-- blank verso page -->
+
 ![Blank verso page](images/clown-28772.svg)
 
 \newpage
@@ -1314,6 +1336,10 @@ def repeated_prefix(s):
     return not re.match(r'^(.+?)\1+$', s)
 ```
 
+<!-- blank recto page -->
+
+![Blank recto page](images/Atlas_deck_joker_black.svg)
+
 \newpage
 
 ## Playing Poker (Part 1)
@@ -1348,6 +1374,8 @@ should write a function `prettify(hand)` that takes an easier to type
 representation of suits as 'S', 'H', 'D', 'C', and turns the hands into
 their Unicode symbols.
 
+\newpage
+
 The second and more difficult function for this puzzle asks you to make
 sure all the cards are sorted in descending order (as in the examples),
 where aces are always considered high, and the suits are ordered spades,
@@ -1356,8 +1384,6 @@ hearts, diamonds, clubs.
 This second function, `cardsort(hand)` uses more Python than regular
 expressions per se, so just read the solution if you are less
 comfortable with Python itself.
-
-\newpage
 
 Before you turn the page...
 
@@ -1406,6 +1432,7 @@ def cardsort(hand):
     hand.sort(key=by_num, reverse=True)
     return ' '.join(hand)
 ```
+\newpage
 
 Combining these:
 
@@ -1414,10 +1441,12 @@ Combining these:
 'A♠ K♠ 8♣ 4♥ 2♣'
 ```
 
-\newpage
-
 We will need more regular expressions in the next few puzzles which
 continue this poker theme.
+
+<!-- blank verso page -->
+
+![Blank verso page](images/johnny-automatic-left-hand-spread.svg)
 
 \newpage
 
@@ -1521,7 +1550,9 @@ False
 
 \newpage
 
-![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/DNA-1540353349.svg)
 
 \newpage
 
@@ -1678,7 +1709,9 @@ But the heart of it is the same reduction to number-only we saw with
 part is really only to provide the friendly truthy values, not in asking
 the predicate itself.
 
-![Clowns to the left of me (Pixabay)](images/clown-28772.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/clown-28772.svg)
 
 \newpage
 
@@ -1800,7 +1833,9 @@ The remainder of your poker game program is left for a further exercise.
 The rest of what you'd need to do won't have much to do with regular
 expressions, simply usual program flow and data structures. 
 
-![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/johnny-automatic-left-hand-spread.svg)
 
 # Easy, Difficult, and Impossible Tasks
 
@@ -1808,7 +1843,9 @@ Some things are difficult or impossible with regular expressions, and
 many are elegant and highly expressive.  The puzzles in this section ask
 you to think about which situation each puzzle describes.
 
-![Blank verso page](images/johnny-automatic-left-hand-1.svg)
+<!-- blank verso page -->
+
+![Blank verso page](images/johnny-automatic-left-hand.svg)
 
 \newpage
 
@@ -2095,8 +2132,9 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-![Joker to the right, by Leo
-Reynolds](images/joker-48067975746_0db0b8eba0_o.jpg)
+<!-- blank recto page -->
+
+![Blank recto page](images/joker-48067975746_0db0b8eba0_o.jpg)
 
 \newpage
 
@@ -2287,6 +2325,8 @@ Before you turn the page...
 
 \newpage
 
+<!-- blank recto page -->
+
 ![Blank recto page](images/pointyfingerright.svg)
 
 \newpage
@@ -2379,7 +2419,9 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-![Atlas joker, by Dmitry Fomin](images/Atlas_deck_joker_black.svg)
+<!-- blank recto page -->
+
+![Blank recto page](images/Atlas_deck_joker_black.svg)
 
 \newpage
 
