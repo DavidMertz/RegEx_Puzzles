@@ -36,7 +36,13 @@ the foibles of another publisher who clings to a cargo-culted toolchain.
 With ambivalence, I thank Noam Chomsky for arranging computability into
 a neat hierarchy, with regular expressions at the bottom.
 
----
+\newpage
+
+<!-- blank verso page -->
+
+![Blank verso page](images/Striated_Verso.png)
+
+# Credits
 
 *Freely licensed images used*
 
@@ -46,12 +52,30 @@ Pixabay (https://pixabay.com/service/license/): clown-28772.svg
 
 Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black.svg
 
-freesvg.org (Public Domain): clown-1549219095.svg;
-johnny-automatic-right-hand.svg; johnny-automatic-left-hand.svg;
-johnny-automatic-left-hand.svg; pointerfingerright.svg; DNA-1540353349.svg;
+freesvg.org (Public Domain): 
+johnny-automatic-right-hand.svg; 
+johnny-automatic-left-hand.svg;
+johnny-automatic-left-hand.svg; 
+clown-1549219095.svg;
+pointerfingerright.svg;
 Prismatic-DNA-Helix-Circles-3.svg
 
 OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19.svg
+
+Samuel MacGregor Liddel Mathews, "The Goetia: The Lesser Key of Solomon the King" (1904, Public Domain): N_A_B_E_R_I_U_S.jpg
+
+Images by Jay Trolinger (https://www.spoonflower.com/profiles/ormolu) used
+by permission: 
+Basket-Verso.png; 
+Root5spiral-Verso.png;
+Striated-Verso.png; 
+Olives-Verso.png;
+Basket-Recto.png; 
+Naive-Scribble-Verso.png; 
+Root5spiral-Recto.png; 
+Naive-Scribble-Recto.png;
+Striated-Recto.png; 
+Olives-Recto.png
 
 "Stuck in the Middle with You", by Gerry Rafferty and Joe Egan (Stealer
 Wheels), 1973:
@@ -251,12 +275,6 @@ Whatever came after each match was a non-letter character.
 
 \newpage
 
-<!-- blank verso page -->
-
-![Blank verso page](images/DNA-1540353349.svg)
-
-\newpage
-
 ## Words and Sequences
 	
 In the previous problem, we identified words that started with 'x' and
@@ -291,6 +309,10 @@ Before you turn the page...
 **Think about what defines word boundaries.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
+
+<!-- blank recto page -->
+
+![Blank recto page](images/Basket_Recto.png)
 
 \newpage
 
@@ -328,7 +350,6 @@ enough to say it is *either* end-of-line (`$`) *or* is a non-letter
 \newpage
 
 ## Endpoint Classes
-
 	
 This puzzle continues the word matching theme of the last two puzzles.
 However, here we have a new wrinkle.  We would like to identify *both*
@@ -559,7 +580,7 @@ Before you turn the page.
 
 <!-- blank recto page -->
 
-![Blank recto page](images/pointyfingerright.svg)
+![Blank recto page](images/Root5spiral_Recto.png)
 
 \newpage
 
@@ -1211,11 +1232,9 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-\newpage
-
 <!-- blank recto page -->
 
-![Blank recto page](images/johnny-automatic-right-hand.svg)
+![Blank recto page](images/Striated_Recto.png)
 
 \newpage
 
@@ -1292,7 +1311,7 @@ def let_count(c, s):
 
 <!-- blank verso page -->
 
-![Blank verso page](images/clown-28772.svg)
+![Blank verso page](images/Olives_Verso.png)
 
 \newpage
 
@@ -1552,7 +1571,7 @@ False
 
 <!-- blank verso page -->
 
-![Blank verso page](images/DNA-1540353349.svg)
+![Blank verso page](images/Basket_Verso.png)
 
 \newpage
 
@@ -1835,7 +1854,7 @@ expressions, simply usual program flow and data structures.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/johnny-automatic-left-hand-spread.svg)
+![Blank verso page](images/Naive_Scribble_Verso.png)
 
 # Easy, Difficult, and Impossible Tasks
 
@@ -1845,7 +1864,7 @@ you to think about which situation each puzzle describes.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/johnny-automatic-left-hand.svg)
+![Blank verso page](images/N_A_B_E_R_I_U_S.jpg)
 
 \newpage
 
@@ -2323,11 +2342,9 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-\newpage
-
 <!-- blank recto page -->
 
-![Blank recto page](images/pointyfingerright.svg)
+![Blank recto page](images/Naive_Scribble_Recto.png)
 
 \newpage
 
@@ -2421,7 +2438,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Atlas_deck_joker_black.svg)
+![Blank recto page](images/Olives_Recto.png)
 
 \newpage
 
