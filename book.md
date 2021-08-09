@@ -1567,8 +1567,6 @@ At this point, you might consider a richer implementation of
 False
 ```
 
-\newpage
-
 <!-- blank verso page -->
 
 ![Blank verso page](images/Basket_Verso.png)
