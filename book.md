@@ -1,7 +1,7 @@
 ---
 title: The Puzzling Quirks of Regular Expresssions
 author: ["David Mertz, Ph.D."]
-date: "2021-08-01"
+date: "2021-08-15"
 keywords: [Regular Expressions, Python]
 documentclass: book
 papersize: a5
