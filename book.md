@@ -584,7 +584,7 @@ Before you turn the page.
 
 \newpage
 
-There are a few key aspect to keep in mind in designing your regular
+There are a few key aspects to keep in mind in designing your regular
 expression.  You want to make sure that your pattern begins at the start
 of the candidate sequence.  Otherwise, you could easily match only a
 valid tail of it.
@@ -707,7 +707,7 @@ human eyes.  None of them end with the "end-of-transmission" character.
 As you can see, whether they end with an entirely invalid symbol `X` or
 simply with a valid symbol and no terminator, is not significant.
 
-You may want to think about whey the quick-failing message also fails.
+You may want to think about why the quick-failing message also fails.
 Pause for a moment. 
 
 But then notice that the final few symbols in that message are "black

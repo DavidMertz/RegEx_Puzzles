@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Building EPUB..."
+pandoc book.md -o book.epub
+echo "Building HTML..."
+pandoc book.md -o book.html
+echo "Building PDF..."
+pandoc --pdf-engine=xelatex book.md -o book.pdf
+echo "Converting to AZW3..."
+ebook-convert book.epub book.azw3
+echo "Converting to MOBI..."
+ebook-convert book.epub book.mobi
+
