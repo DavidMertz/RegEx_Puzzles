@@ -542,7 +542,7 @@ AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGG
 ```
 
 The telomeres at the end are ignored.  In contrast, it we use a
-non-specifi symbol, we will not match.
+non-specific symbol, we will not match.
 
 
 ```
