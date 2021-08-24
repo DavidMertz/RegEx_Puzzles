@@ -1318,7 +1318,7 @@ def let_count(c, s):
 ## Finding a Name for a Function
 	
 Suppose you come across some code that a previous employee on your
-project, long moved on an unavailable wrote.  Their code passes unit
+project, long moved on and unavailable, wrote.  Their code passes unit
 tests and integration tests, so probably it does the right thing.  But
 they have not given a useful name or documentation for a certain
 function:
@@ -1473,7 +1473,7 @@ continue this poker theme.
 
 In the last puzzle, you converted "poker hands" from ASCII to Unicode
 suit symbols, and you also made sure that hands are listed in
-canonical desceneding card order.
+canonical descending card order.
 
 For this puzzle, you want to start using regular expressions to figure
 out whether hands belong to various kinds.  Here's an obvious trick we
@@ -1585,7 +1585,7 @@ That is, just like a straight flush is both a straight and a flush,
 four-of-a-kind is trivially also three-of-a-kind and a pair.  A full
 house is both three-of-a-kind and a pair.  However, for our purposes, we
 will simply assume the various tests are performed in appropriate
-descening order of strength.  The first successful test will be the
+descending order of strength.  The first successful test will be the
 classified type of the hand.
 
 For the next few puzzles, therefore write these functions:

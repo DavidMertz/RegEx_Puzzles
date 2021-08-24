@@ -628,7 +628,7 @@ counter = {
 <img src="images/Olives_Verso.png" alt="" /><figcaption>Blank verso page</figcaption>
 </figure>
 <h2 id="finding-a-name-for-a-function">Finding a Name for a Function</h2>
-<p>Suppose you come across some code that a previous employee on your project, long moved on an unavailable wrote. Their code passes unit tests and integration tests, so probably it does the right thing. But they have not given a useful name or documentation for a certain function:</p>
+<p>Suppose you come across some code that a previous employee on your project, long moved on and unavailable, wrote. Their code passes unit tests and integration tests, so probably it does the right thing. But they have not given a useful name or documentation for a certain function:</p>
 <pre><code>def is_something(s):
     return not re.match(r&#39;^(.+?)\1+$&#39;, s)</code></pre>
 <p>For this puzzle, simply provide a good name and a docstring for this function, to be kind to later programmers.</p>
@@ -701,7 +701,7 @@ counter = {
 <img src="images/johnny-automatic-left-hand-spread.svg" alt="" /><figcaption>Blank verso page</figcaption>
 </figure>
 <h2 id="playing-poker-part-2">Playing Poker (Part 2)</h2>
-<p>In the last puzzle, you converted “poker hands” from ASCII to Unicode suit symbols, and you also made sure that hands are listed in canonical desceneding card order.</p>
+<p>In the last puzzle, you converted “poker hands” from ASCII to Unicode suit symbols, and you also made sure that hands are listed in canonical descending card order.</p>
 <p>For this puzzle, you want to start using regular expressions to figure out whether hands belong to various kinds. Here’s an obvious trick we can use as a shortcut:</p>
 <pre><code>def is_straight_flush(hand):
     return is_straight(hand) and is_flush(hand)</code></pre>
@@ -748,7 +748,7 @@ False</code></pre>
 </figure>
 <h2 id="playing-poker-part-3">Playing Poker (Part 3)</h2>
 <p>In this puzzle let’s continue with matching poker hands. We handled straights and flushes in the last puzzle (and straight flushes by obvious combination). There are some other types of hands to consider now.</p>
-<p>The next several types of hand have containing relationships among them. That is, just like a straight flush is both a straight and a flush, four-of-a-kind is trivially also three-of-a-kind and a pair. A full house is both three-of-a-kind and a pair. However, for our purposes, we will simply assume the various tests are performed in appropriate descening order of strength. The first successful test will be the classified type of the hand.</p>
+<p>The next several types of hand have containing relationships among them. That is, just like a straight flush is both a straight and a flush, four-of-a-kind is trivially also three-of-a-kind and a pair. A full house is both three-of-a-kind and a pair. However, for our purposes, we will simply assume the various tests are performed in appropriate descending order of strength. The first successful test will be the classified type of the hand.</p>
 <p>For the next few puzzles, therefore write these functions:</p>
 <ul>
 <li><code>is_four_of_kind(hand)</code></li>
