@@ -1688,7 +1688,7 @@ sorting assumes that.
 
 The pattern itself is either two of the high number followed by three of
 the low number, or three of the high number followed by two of the low
-number.  For later use, we can be extra nice in by returning the 3-card
+number.  For later use, we can be extra nice by returning the 3-card
 number first as the "truthy" value in a match.  In most poker rules, the
 3-card match takes precedence when the same hands are evaluated for the
 win.
@@ -1802,7 +1802,7 @@ def is_pair(hand):
 
 Matching two pairs is actually a little trickier.  Remember that for a
 full house we matched either two of one number followed by three of the
-other, or matched the reverse three then two.  However, the "gap" of a
+other, or matched the reverse three then two.  However, the "gap" of an
 unmatched number can occur in more different ways in this case.
 Thinking about it, two pairs might look like any of the following (even
 assuming sorting):
@@ -1997,13 +1997,13 @@ matching the current word, is group 2, hence named as `\2`.
 ## Testing an IPv4 Address
 
 	
-"Internet protocol version 4" addresses are very prevalent in almost
-everythingwe do with computers.  "Under the hood" (so to speak), an IPv4
-address is just a 32-bit unsigned integer.  However, it is universal to
-write them in a human-memorable way as so-called dotted-quads.  In that
-format, each byte of the address is represented as a decimal number
-between 0 and 255 (the range of an integer byte), and the four bytes are
-separated by periods.
+"Internet protocol version 4" addresses are prevalent in almost
+everything we do with computers.  "Under the hood" (so to speak), an
+IPv4 address is just a 32-bit unsigned integer.  However, it is
+universal to write them in a human-memorable way as so-called
+dotted-quads.  In that format, each byte of the address is represented
+as a decimal number between 0 and 255 (the range of an integer byte),
+and the four bytes are separated by periods.
 
 Some particular address ranges have special or reserved meanings, but
 they remain IPv4 addresses, and should be matched for this puzzle.  Can
@@ -2019,8 +2019,8 @@ The first of these is a good address; it happens to be a range reserved
 for internal addresses with an organization (usually one particular
 router), and hence exists in many local networks.  The others fail for
 various reasons. The first invalid addess contains numbers outside the
-the permitted integer range in one quad.  The second invalid address has
-5 dotted elements rather than 4.  The third invalid address contains
+permitted integer range in one quad.  The second invalid address has 5
+dotted elements rather than 4.  The third invalid address contains
 characters other than decimal digits in one of the quads.
 
 Before you turn the page...

@@ -793,7 +793,7 @@ False</code></pre>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <p>One approach you might take for this puzzle is to identify both <code>is_three_of_kind()</code> and <code>is_pair()</code> in the same hand. Every full house will match those functions. However, in many of the obvious implementations of those support functions, the two initial cards that make up a triple would trigger <code>is_pair()</code> even if the last two cards are unmatched. There are ways to make that work, but let’s instead do it directly.</p>
 <p>For this solution we use regular expressions to strip the suits, and also to match the actual pattern. We can utilize the <code>cardsort()</code> function from an earlier puzzle to guarantee the hand is sorted; we also make sure it is the “pretty” version rather than the ASCII version since sorting assumes that.</p>
-<p>The pattern itself is either two of the high number followed by three of the low number, or three of the high number followed by two of the low number. For later use, we can be extra nice in by returning the 3-card number first as the “truthy” value in a match. In most poker rules, the 3-card match takes precedence when the same hands are evaluated for the win.</p>
+<p>The pattern itself is either two of the high number followed by three of the low number, or three of the high number followed by two of the low number. For later use, we can be extra nice by returning the 3-card number first as the “truthy” value in a match. In most poker rules, the 3-card match takes precedence when the same hands are evaluated for the win.</p>
 <pre><code>&gt;&gt;&gt; def is_full_house(hand):
 ...     try:
 ...         hand = prettify(hand)
@@ -863,7 +863,7 @@ False
     pat = r&#39;(.)\1&#39;  # No begin/end markers
     match = re.search(pat, hand)
     return match.group(1) if match else False</code></pre>
-<p>Matching two pairs is actually a little trickier. Remember that for a full house we matched either two of one number followed by three of the other, or matched the reverse three then two. However, the “gap” of a unmatched number can occur in more different ways in this case. Thinking about it, two pairs might look like any of the following (even assuming sorting):</p>
+<p>Matching two pairs is actually a little trickier. Remember that for a full house we matched either two of one number followed by three of the other, or matched the reverse three then two. However, the “gap” of an unmatched number can occur in more different ways in this case. Thinking about it, two pairs might look like any of the following (even assuming sorting):</p>
 <ul>
 <li><code>X X _ Y Y</code></li>
 <li><code>_ X X Y Y</code></li>
@@ -934,7 +934,7 @@ assert re.match(pat, s2).group() == &#39;this &#39;</code></pre>
 <p>So far, so good. But we have not excluded the repeated words. We do that with the negative lookahead, <code>(?!.*\2\b)</code>. That is, we want to look through the entire rest of the string being evaluated, and make sure that we do not encounter the same word currently matched. The initial <code>.*</code> just matches any number of characters, but the <code>\2</code> is the actual current word. We still use word boundary in the negative lookahead because a longer word of which the current word is a prefix would be permitted.</p>
 <p>Keep in mind how groups are numbered. Since there are parentheses surrounding the entire expression (other than the <code>+</code> quantifier), that whole thing is group 1. So the first subpattern inside of that, matching the current word, is group 2, hence named as <code>\2</code>.</p>
 <h2 id="testing-an-ipv4-address">Testing an IPv4 Address</h2>
-<p>“Internet protocol version 4” addresses are very prevalent in almost everythingwe do with computers. “Under the hood” (so to speak), an IPv4 address is just a 32-bit unsigned integer. However, it is universal to write them in a human-memorable way as so-called dotted-quads. In that format, each byte of the address is represented as a decimal number between 0 and 255 (the range of an integer byte), and the four bytes are separated by periods.</p>
+<p>“Internet protocol version 4” addresses are prevalent in almost everything we do with computers. “Under the hood” (so to speak), an IPv4 address is just a 32-bit unsigned integer. However, it is universal to write them in a human-memorable way as so-called dotted-quads. In that format, each byte of the address is represented as a decimal number between 0 and 255 (the range of an integer byte), and the four bytes are separated by periods.</p>
 <p>Some particular address ranges have special or reserved meanings, but they remain IPv4 addresses, and should be matched for this puzzle. Can you write a regular expression to test if a string is a valid IPv4 address? Some examples:</p>
 <ul>
 <li>Valid: 192.168.20.1</li>
@@ -942,7 +942,7 @@ assert re.match(pat, s2).group() == &#39;this &#39;</code></pre>
 <li>Invalid: 5.138.0.21.23</li>
 <li>Invalid: 192.AA.20.1</li>
 </ul>
-<p>The first of these is a good address; it happens to be a range reserved for internal addresses with an organization (usually one particular router), and hence exists in many local networks. The others fail for various reasons. The first invalid addess contains numbers outside the the permitted integer range in one quad. The second invalid address has 5 dotted elements rather than 4. The third invalid address contains characters other than decimal digits in one of the quads.</p>
+<p>The first of these is a good address; it happens to be a range reserved for internal addresses with an organization (usually one particular router), and hence exists in many local networks. The others fail for various reasons. The first invalid addess contains numbers outside the permitted integer range in one quad. The second invalid address has 5 dotted elements rather than 4. The third invalid address contains characters other than decimal digits in one of the quads.</p>
 <p>Before you turn the page…</p>
 <p><strong>Always ask whether regexen are powerful enough for a problem.</strong></p>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
