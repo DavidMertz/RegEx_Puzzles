@@ -1,13 +1,18 @@
 <h1 id="acknowledgments">Acknowledgments</h1>
-<p>I thank my friend Miki Tebeka, who invited me to write this book, albeit in slightly different form than the version you see. I am very grateful to my friends Brad Huntting and Mary Ann Sushinsky who provided clever ideas in the directions of these puzzles.</p>
+<p>I thank my friend Miki Tebeka, who invited me to write this book, albeit in slightly different form than the version you see. I am very grateful to my friend Brad Huntting and partner Mary Ann Sushinsky who provided clever ideas in the directions of these puzzles.</p>
 <p>A number of other friends and family members listened to me enumerate the foibles of another publisher who clings to a cargo-culted toolchain.</p>
 <p>With ambivalence, I thank Noam Chomsky for arranging computability into a neat hierarchy, with regular expressions at the bottom.</p>
+<hr />
+<p>This book is licensed as Creative Commons Attribution-ShareAlike 4.0. The source is available at:</p>
+<blockquote>
+<p>https://github.com/DavidMertz/RegEx_Puzzles.</p>
+</blockquote>
 <!-- blank verso page -->
 <figure>
-<img src="images/Striated_Verso.png" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/Striated_Verso.png" alt="" /><figcaption>Striated_Verso</figcaption>
 </figure>
 <h1 id="credits">Credits</h1>
-<p><em>Freely licensed images used</em></p>
+<p>Cover image: “Alien DNA” by Sven Geier, 2015. Used by permission.</p>
 <p>Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746_0db0b8eba0_o.jpg</p>
 <p>Pixabay (https://pixabay.com/service/license/): clown-28772.svg</p>
 <p>Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black.svg</p>
@@ -21,7 +26,7 @@
 </blockquote>
 <!-- blank verso page -->
 <figure>
-<img src="images/clown-1549219095.svg" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/clown-1549219095.svg" alt="" /><figcaption>clown-1549219095</figcaption>
 </figure>
 <h1 id="preface">Preface</h1>
 <p>Regular expressions—sometimes given the playful back formation <em>regexen</em> or more neurally <em>regex</em>—are a powerful and compact way of describing patterns in text. Many tutorials and “cheat sheets” exist to understand their syntax and semantics in a formally correct manner. I encourage you to read some of those, if you have not already.</p>
@@ -33,7 +38,7 @@
 <p>Solving the puzzles in this section will require you to have a good understanding of the different quantifiers that regular expressions provide, and to pay careful attention to when you should use sub-patterns (themselves likely quanitifed).</p>
 <!-- blank verso page -->
 <figure>
-<img src="images/Prismatic-DNA-Helix-Circles-3.svg" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/Prismatic-DNA-Helix-Circles-3.svg" alt="" /><figcaption>Prismatic-DNA-Helix-Circles-3</figcaption>
 </figure>
 <h2 id="wildcard-scope">Wildcard Scope</h2>
 <p>A powerful element of Python regular expression syntax—shared by many other regex engines—is the option of creating either “greedy” or “non-greedy” matches. The former matches as much as it possibly can, as long as it finds the later part of a pattern. The latter matches as little as it possibly can to reach the next part of a pattern.</p>
@@ -125,7 +130,7 @@ xanthenes xylenol xylol xylenes coextensively
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/Basket_Recto.png" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/Basket_Recto.png" alt="" /><figcaption>Basket_Recto</figcaption>
 </figure>
 <p>There are a few ways you might approach this task. The easiest is to use the explicit “word boundary” special <em>zero-width match</em> pattern, spelled as <code>\b</code> in Python and many other regular expression engines.</p>
 <pre><code>&gt;&gt;&gt; pat4 = re.compile(r&#39;\bx[a-z]*y\b&#39;)
@@ -236,7 +241,7 @@ GTTTAGGGTTAGGGTTAGGGGTTAGGGGTTAGGGTTAGGGTTAGGGTTAGGG
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/Root5spiral_Recto.png" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/Root5spiral_Recto.png" alt="" /><figcaption>Root5spiral_Recto</figcaption>
 </figure>
 <p>There are a few key aspects to keep in mind in designing your regular expression. You want to make sure that your pattern begins at the start of the candidate sequence. Otherwise, you could easily match only a valid tail of it.</p>
 <p>From there, any sequence of ‘C’, ‘A’, ‘T’, and ‘G’ symbols is permitted. However, you definitely want to be non-greedy in matching them since no telomeres should be included. The telomere may be repeated any number of times, but at least three. Moreover, repeated telomeres must continue until the end of the candidate sequence, so we must match <code>$</code> <em>inside</em> the lookahead pattern.</p>
@@ -452,7 +457,7 @@ lose = &#39;ABDABCB&#39;</code></pre>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/johnny-automatic-right-hand.svg" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/johnny-automatic-right-hand.svg" alt="" /><figcaption>johnny-automatic-right-hand</figcaption>
 </figure>
 <p>It probably comes as no surprise to you that a larger tile set would require a larger regular expression to match winning plays. But the principle would remain the same if you used more tiles, up to all of them.</p>
 <p>The basic idea here is that you want each tile to be followed by a tile from some subset of other tiles. Namely, those that begin with the same number of dots that the current tile ends with.</p>
@@ -491,7 +496,7 @@ invalid_4b = &quot;FLHFLL&quot;</code></pre>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/pointyfingerright.svg" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/pointyfingerright.svg" alt="" /><figcaption>pointyfingerright</figcaption>
 </figure>
 <p>This puzzle <em>is</em> solvable with regexen. There are a few observations to keep in mind when thinking about it. The rules for a valid signal actually consist of just two constraints:</p>
 <ul>
@@ -510,7 +515,7 @@ patA =  (r&#39;^(((?=__|_/|_\||\^\^|\^\\|\^\||/\^|\\_|\|\^|\|_)&#39;
 <p>Very often in Python, or in other programming languages, you will want to wrap a regular expression in a small function rather than repeat it inline.</p>
 <!-- blank verso page -->
 <figure>
-<img src="images/johnny-automatic-left-hand.svg" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/johnny-automatic-left-hand.svg" alt="" /><figcaption>johnny-automatic-left-hand</figcaption>
 </figure>
 <h2 id="reimplementing-str.count">Reimplementing str.count()</h2>
 <p>The Python method <code>str.count()</code> is widely useful to find substrings inside a larger string. For example, here is some typical code you might write:</p>
@@ -577,7 +582,7 @@ CGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/Striated_Recto.png" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/Striated_Recto.png" alt="" /><figcaption>Striated_Recto</figcaption>
 </figure>
 <p>This one turns out to be somewhat difficult, but also to be <em>possible</em>, which is itself sort of amazing. No numbers whatsoever are involved in the solution shown. No counters, no integer variables, no Python functions returning numbers.</p>
 <p>We also do not need to use any Python string methods, although it is fair to note that some of what is performed via regular expressions might be more simple to express as string methods. The function can perform strictly and only regular expressions operations… along with a little bit of Python looping (but never over numbers).</p>
@@ -625,7 +630,7 @@ counter = {
         s = re.sub(&#39;@&#39;, &#39;_&#39;, s)</code></pre>
 <!-- blank verso page -->
 <figure>
-<img src="images/Olives_Verso.png" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/Olives_Verso.png" alt="" /><figcaption>Olives_Verso</figcaption>
 </figure>
 <h2 id="finding-a-name-for-a-function">Finding a Name for a Function</h2>
 <p>Suppose you come across some code that a previous employee on your project, long moved on and unavailable, wrote. Their code passes unit tests and integration tests, so probably it does the right thing. But they have not given a useful name or documentation for a certain function:</p>
@@ -645,7 +650,7 @@ counter = {
     return not re.match(r&#39;^(.+?)\1+$&#39;, s)</code></pre>
 <!-- blank recto page -->
 <figure>
-<img src="images/Atlas_deck_joker_black.svg" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/Atlas_deck_joker_black.svg" alt="" /><figcaption>Atlas_deck_joker_black</figcaption>
 </figure>
 <h2 id="playing-poker-part-1">Playing Poker (Part 1)</h2>
 <p>In earlier puzzles, we had fun playing dominoes. For the next few puzzles, let’s play poker. In particular, let’s says that a player has five cards, and we wish to compare two hands to each other. We will do this over several puzzles, by building up small functions to answer various questions.</p>
@@ -698,7 +703,7 @@ counter = {
 <p>We will need more regular expressions in the next few puzzles which continue this poker theme.</p>
 <!-- blank verso page -->
 <figure>
-<img src="images/johnny-automatic-left-hand-spread.svg" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/johnny-automatic-left-hand-spread.svg" alt="" /><figcaption>johnny-automatic-left-hand-spread</figcaption>
 </figure>
 <h2 id="playing-poker-part-2">Playing Poker (Part 2)</h2>
 <p>In the last puzzle, you converted “poker hands” from ASCII to Unicode suit symbols, and you also made sure that hands are listed in canonical descending card order.</p>
@@ -744,7 +749,7 @@ False
 False</code></pre>
 <!-- blank verso page -->
 <figure>
-<img src="images/Basket_Verso.png" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/Basket_Verso.png" alt="" /><figcaption>Basket_Verso</figcaption>
 </figure>
 <h2 id="playing-poker-part-3">Playing Poker (Part 3)</h2>
 <p>In this puzzle let’s continue with matching poker hands. We handled straights and flushes in the last puzzle (and straight flushes by obvious combination). There are some other types of hands to consider now.</p>
@@ -821,7 +826,7 @@ False</code></pre>
 <p>Obviously, this solution involves a moderate amount of non-regex Python. But the heart of it is the same reduction to number-only we saw with <code>is_four_of_kind()</code> followed by the pattern described. The just-Python part is really only to provide the friendly truthy values, not in asking the predicate itself.</p>
 <!-- blank verso page -->
 <figure>
-<img src="images/clown-28772.svg" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/clown-28772.svg" alt="" /><figcaption>clown-28772</figcaption>
 </figure>
 <h2 id="playing-poker-part-5">Playing Poker (Part 5)</h2>
 <p>In the last couple puzzles we identified four-of-a-kind and full house. Much of the logic for this puzzle will be similar to those, but obviously tweaked somewhat for the next cases.</p>
@@ -897,13 +902,13 @@ False</code></pre>
 <p>The remainder of your poker game program is left for a further exercise. The rest of what you’d need to do won’t have much to do with regular expressions, simply usual program flow and data structures.</p>
 <!-- blank verso page -->
 <figure>
-<img src="images/Naive_Scribble_Verso.png" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/Naive_Scribble_Verso.png" alt="" /><figcaption>Naive_Scribble_Verso</figcaption>
 </figure>
 <h1 id="easy-difficult-and-impossible-tasks">Easy, Difficult, and Impossible Tasks</h1>
 <p>Some things are difficult or impossible with regular expressions, and many are elegant and highly expressive. The puzzles in this section ask you to think about which situation each puzzle describes.</p>
 <!-- blank verso page -->
 <figure>
-<img src="images/N_A_B_E_R_I_U_S.jpg" alt="" /><figcaption>Blank verso page</figcaption>
+<img src="images/N_A_B_E_R_I_U_S.jpg" alt="" /><figcaption>N_A_B_E_R_I_U_S</figcaption>
 </figure>
 <h2 id="identifying-equal-counts">Identifying Equal Counts</h2>
 <p>At times we encounter a message or a stream that uses balanced “increment” and “decrement” symbols. For example, one way to check that a message has terminated might be to match up the increments and decrements. The same concept would apply to many kinds of messages and symbols—perhaps you’d like to set the table with the same number of forks and knives, for example.</p>
@@ -985,7 +990,7 @@ INVALID @ @ @@ @@@@</code></pre>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/joker-48067975746_0db0b8eba0_o.jpg" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/joker-48067975746_0db0b8eba0_o.jpg" alt="" /><figcaption>joker-48067975746_0db0b8eba0_o</figcaption>
 </figure>
 <p>Let’s start with the solution, then explain why it works.</p>
 <pre><code>pat = r&quot;^(((@+) )(?=\3\3 ))+(\3\3 )$&quot;</code></pre>
@@ -1059,7 +1064,7 @@ fail2 = &quot;@@ @@@ @@@@ @@@@@ @@@@@@@ &quot;</code></pre>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/Naive_Scribble_Recto.png" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/Naive_Scribble_Recto.png" alt="" /><figcaption>Naive_Scribble_Recto</figcaption>
 </figure>
 <p>This puzzle turns out to be another one that exceeds the ability of regular expressions. On the face of it, it might seem like <em>negative lookahead assertions</em> are exactly what you would use to implement the Sieve, or something akin to it. That is, if some group matched, e.g. <code>(@@@)</code> or <code>(@+)</code>, then you should be able to backreference to a repetition of that group.</p>
 <p>Let’s say the hypothetical group was number 7. In that case, a negative lookahead assertion like <code>(?! \7{2,} )</code> would state precisely that no contiguous number of ‘@’ symbols whose count is a multiple of the number in the prior match group occur later in the string. That sounds a lot like what the Sieve does.</p>
@@ -1088,11 +1093,11 @@ fail2 = &quot;@@@@@ @@@@@@@ @@ @@@ @@@@@@@@@@ &quot;</code></pre>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
 <!-- blank recto page -->
 <figure>
-<img src="images/Olives_Recto.png" alt="" /><figcaption>Blank recto page</figcaption>
+<img src="images/Olives_Recto.png" alt="" /><figcaption>Olives_Recto</figcaption>
 </figure>
 <p>There are a couple issues to consider in this solution. It turns out that such a solution is indeed possible, using much the same style as the Sieve of Eratosthenes, but not an identical technique. That is, as discussed in the last puzzle, we are perfectly well able to reject a string based on a future multiple of a given number.</p>
 <p>The trick is that we do not need to reject <em>infinitely</em> many if we do not assume that a string needs to contain all the initial primes. Instead, we can focus just on a single number at a time, and rule out <em>its</em> multiples. We might miss some primes in our sequence, or indeed have some relatively prime composite numbers. But that satisfies the current puzzle.</p>
-<p>However, for this “striking through” to work, we need also to enforce the rule that sequences are ascending. Otherwise, we might encounter, e.g. <code>@@@@@@@@ @@@@ @@</code> (i.e. ‘8 4 2’). Those are definitely not mutually coprime. However, “string out” multiples of 8 does not help reject 4 later in the string. Python only allows fixed length lookbehind assertions, but some other regex implementation could technically relax this ascending sequence restriction (however, a library that did so would quickly face catastrophic exponential complexity in this case).</p>
+<p>However, for this “striking through” to work, we need also to enforce the rule that sequences are ascending. Otherwise, we might encounter, e.g. <code>@@@@@@@@ @@@@ @@</code> (i.e. ‘8 4 2’). Those are definitely not mutually coprime. However, “struck out” multiples of 8 does not help reject 4 later in the string. Python only allows fixed length lookbehind assertions, but some other regex implementation could technically relax this ascending sequence restriction (however, a library that did so would quickly face catastrophic exponential complexity in this case).</p>
 <pre><code>pat = r&#39;^((@@+) (?=\2@)(?!.* \2{2,} ))+&#39;</code></pre>
 <p>Here we first identify a group of 2 or more ‘@’ symbols. Then we do a postive lookahead to assure that the next group of ‘@’ symbols has at least one more symbol.</p>
 <p>The real crux of this is the <em>negative lookahead</em> assertion that we never later see a (space delimited) sequence of two or more copies of the group. This pattern does not capture the final “number” in the sequence, it is just used to provide a true or false answer to whether the sequence matches.</p>

@@ -2,6 +2,7 @@
 title: The Puzzling Quirks of Regular Expresssions
 author: ["David Mertz, Ph.D."]
 date: "2021-08-15"
+copyright: "CC BY-SA 4.0, 2021"
 keywords: [Regular Expressions, Python]
 documentclass: book
 papersize: a5
@@ -27,8 +28,8 @@ mathfont: texgyredejavu-math.otf
 
 I thank my friend Miki Tebeka, who invited me to write this book, albeit
 in slightly different form than the version you see.  I am very grateful
-to my friends Brad Huntting and Mary Ann Sushinsky who provided clever
-ideas in the directions of these puzzles.
+to my friend Brad Huntting and partner Mary Ann Sushinsky who provided
+clever ideas in the directions of these puzzles.
 
 A number of other friends and family members listened to me enumerate
 the foibles of another publisher who clings to a cargo-culted toolchain.
@@ -36,15 +37,22 @@ the foibles of another publisher who clings to a cargo-culted toolchain.
 With ambivalence, I thank Noam Chomsky for arranging computability into
 a neat hierarchy, with regular expressions at the bottom.
 
+---
+
+This book is licensed as Creative Commons Attribution-ShareAlike 4.0.
+The source is available at:
+
+> https://github.com/DavidMertz/RegEx_Puzzles.
+
 \newpage
 
 <!-- blank verso page -->
 
-![Blank verso page](images/Striated_Verso.png)
+![Striated_Verso](images/Striated_Verso.png)
 
 # Credits
 
-*Freely licensed images used*
+Cover image: "Alien DNA" by Sven Geier, 2015. Used by permission.
 
 Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746_0db0b8eba0_o.jpg
 
@@ -86,7 +94,7 @@ Wheels), 1973:
 
 <!-- blank verso page -->
 
-![Blank verso page](images/clown-1549219095.svg)
+![clown-1549219095](images/clown-1549219095.svg)
 
 # Preface
 
@@ -138,7 +146,7 @@ sub-patterns (themselves likely quanitifed).
 
 <!-- blank verso page -->
 
-![Blank verso page](images/Prismatic-DNA-Helix-Circles-3.svg)
+![Prismatic-DNA-Helix-Circles-3](images/Prismatic-DNA-Helix-Circles-3.svg)
 
 \newpage
 
@@ -312,7 +320,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Basket_Recto.png)
+![Basket_Recto](images/Basket_Recto.png)
 
 \newpage
 
@@ -580,7 +588,7 @@ Before you turn the page.
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Root5spiral_Recto.png)
+![Root5spiral_Recto](images/Root5spiral_Recto.png)
 
 \newpage
 
@@ -940,7 +948,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/johnny-automatic-right-hand.svg)
+![johnny-automatic-right-hand](images/johnny-automatic-right-hand.svg)
 
 \newpage
 
@@ -1040,7 +1048,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/pointyfingerright.svg)
+![pointyfingerright](images/pointyfingerright.svg)
 
 \newpage
 
@@ -1088,7 +1096,7 @@ inline.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/johnny-automatic-left-hand.svg)
+![johnny-automatic-left-hand](images/johnny-automatic-left-hand.svg)
 
 \newpage
 
@@ -1234,7 +1242,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Striated_Recto.png)
+![Striated_Recto](images/Striated_Recto.png)
 
 \newpage
 
@@ -1311,7 +1319,7 @@ def let_count(c, s):
 
 <!-- blank verso page -->
 
-![Blank verso page](images/Olives_Verso.png)
+![Olives_Verso](images/Olives_Verso.png)
 
 \newpage
 
@@ -1357,7 +1365,7 @@ def repeated_prefix(s):
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Atlas_deck_joker_black.svg)
+![Atlas_deck_joker_black](images/Atlas_deck_joker_black.svg)
 
 \newpage
 
@@ -1465,7 +1473,7 @@ continue this poker theme.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/johnny-automatic-left-hand-spread.svg)
+![johnny-automatic-left-hand-spread](images/johnny-automatic-left-hand-spread.svg)
 
 \newpage
 
@@ -1569,7 +1577,7 @@ False
 
 <!-- blank verso page -->
 
-![Blank verso page](images/Basket_Verso.png)
+![Basket_Verso](images/Basket_Verso.png)
 
 \newpage
 
@@ -1728,7 +1736,7 @@ the predicate itself.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/clown-28772.svg)
+![clown-28772](images/clown-28772.svg)
 
 \newpage
 
@@ -1852,7 +1860,7 @@ expressions, simply usual program flow and data structures.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/Naive_Scribble_Verso.png)
+![Naive_Scribble_Verso](images/Naive_Scribble_Verso.png)
 
 # Easy, Difficult, and Impossible Tasks
 
@@ -1862,7 +1870,7 @@ you to think about which situation each puzzle describes.
 
 <!-- blank verso page -->
 
-![Blank verso page](images/N_A_B_E_R_I_U_S.jpg)
+![N_A_B_E_R_I_U_S](images/N_A_B_E_R_I_U_S.jpg)
 
 \newpage
 
@@ -2151,7 +2159,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/joker-48067975746_0db0b8eba0_o.jpg)
+![joker-48067975746_0db0b8eba0_o](images/joker-48067975746_0db0b8eba0_o.jpg)
 
 \newpage
 
@@ -2342,7 +2350,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Naive_Scribble_Recto.png)
+![Naive_Scribble_Recto](images/Naive_Scribble_Recto.png)
 
 \newpage
 
@@ -2436,7 +2444,7 @@ Before you turn the page...
 
 <!-- blank recto page -->
 
-![Blank recto page](images/Olives_Recto.png)
+![Olives_Recto](images/Olives_Recto.png)
 
 \newpage
 
@@ -2453,14 +2461,14 @@ Instead, we can focus just on a single number at a time, and rule out
 have some relatively prime composite numbers.  But that satisfies the
 current puzzle.
 
-However, for this "striking through" to work, we need also to enforce 
-the rule that sequences are ascending.  Otherwise, we might encounter, 
-e.g.  `@@@@@@@@ @@@@ @@` (i.e. '8 4 2').  Those are definitely not 
-mutually coprime.  However, "string out" multiples of 8 does not help 
-reject 4 later in the string.  Python only allows fixed length 
-lookbehind assertions, but some other regex implementation could 
-technically relax this ascending sequence restriction (however, a 
-library that did so would quickly face catastrophic exponential 
+However, for this "striking through" to work, we need also to enforce
+the rule that sequences are ascending.  Otherwise, we might encounter,
+e.g.  `@@@@@@@@ @@@@ @@` (i.e. '8 4 2').  Those are definitely not
+mutually coprime.  However, "struck out" multiples of 8 does not help
+reject 4 later in the string.  Python only allows fixed length
+lookbehind assertions, but some other regex implementation could
+technically relax this ascending sequence restriction (however, a
+library that did so would quickly face catastrophic exponential
 complexity in this case).
 
 
