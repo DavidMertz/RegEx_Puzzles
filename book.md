@@ -20,8 +20,8 @@ mainfontoptions:
     - ItalicFont=*-Italic
     - BoldItalicFont=*-BoldItalic
 sansfont: DejaVuSans.ttf
-monofont: DejaVuSansMono.ttf 
-mathfont: texgyredejavu-math.otf 
+monofont: DejaVuSansMono.ttf
+mathfont: texgyredejavu-math.otf
 ...
 
 # Acknowledgments
@@ -56,14 +56,14 @@ Cover image: "Alien DNA" by Sven Geier, 2015. Used by permission.
 
 Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746_0db0b8eba0_o.jpg
 
-Pixabay (https://pixabay.com/service/license/): clown-28772.svg 
+Pixabay (https://pixabay.com/service/license/): clown-28772.svg
 
 Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black.svg
 
-freesvg.org (Public Domain): 
-johnny-automatic-right-hand.svg; 
+freesvg.org (Public Domain):
+johnny-automatic-right-hand.svg;
 johnny-automatic-left-hand.svg;
-johnny-automatic-left-hand.svg; 
+johnny-automatic-left-hand.svg;
 clown-1549219095.svg;
 pointerfingerright.svg;
 Prismatic-DNA-Helix-Circles-3.svg
@@ -73,16 +73,16 @@ OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19.svg
 Samuel MacGregor Liddel Mathews, "The Goetia: The Lesser Key of Solomon the King" (1904, Public Domain): N_A_B_E_R_I_U_S.jpg
 
 Images by Jay Trolinger (https://www.spoonflower.com/profiles/ormolu) used
-by permission: 
-Basket-Verso.png; 
+by permission:
+Basket-Verso.png;
 Root5spiral-Verso.png;
-Striated-Verso.png; 
+Striated-Verso.png;
 Olives-Verso.png;
-Basket-Recto.png; 
-Naive-Scribble-Verso.png; 
-Root5spiral-Recto.png; 
+Basket-Recto.png;
+Naive-Scribble-Verso.png;
+Root5spiral-Recto.png;
 Naive-Scribble-Recto.png;
-Striated-Recto.png; 
+Striated-Recto.png;
 Olives-Recto.png
 
 "Stuck in the Middle with You", by Gerry Rafferty and Joe Egan (Stealer
@@ -110,13 +110,13 @@ pattern that seems like it should obviously match one thing, actually
 matches something slightly different than you intended.  Or perhaps a
 match pattern has "pathological" behavior and takes far too long.  Or
 sometimes it is simply that a more concise pattern can also be clearer
-in describing what you actually wish to match. 
+in describing what you actually wish to match.
 
 A great many programming languages, libraries, and tools support regular
 expressions, with relatively minor variations in the syntax used.  Such
 software includes `[efr]?grep`, `sed`, `awk`, *Perl*, *Java*, *.NET*,
 *JavaScript*, *Julia*, *XML Schema*, or indeed, pretty much every other
-programming language via a library. 
+programming language via a library.
 
 For this book, we will use Python to pose these puzzles.  In particular,
 we will use the standard library module `re`  Often code samples are
@@ -124,18 +124,18 @@ used in puzzles and in explanation; where I wish to show the output from
 code, the example emulates to the Python shell with lines starting with
 `>>> ` (or continuing with `... `).  Outputs are echoed without a prompt
 in this case.  Where code defines a function that is not necessarily
-executed in the mention, only the plain code is shown. 
+executed in the mention, only the plain code is shown.
 
 While you are reading this book, I strongly encourage you to keep
 open an interactive Python environment.  Many tools enable this, such
 as the Python REPL (read-evaluate-print-loop) itself, or the IPython
 enhanced REPL, or Jupyter notebooks, or the IDLE editor that comes
 with Python, or indeed most modern code editors and IDEs (integrated
-development environment).  A number of online regular expression 
+development environment).  A number of online regular expression
 testers are also available, although those will not capture
 the details of the Python calling details.  Explanations will follow
 each puzzle, but trying to work it out in code before reading it is
-worthwhile. 
+worthwhile.
 
 # Quantifiers and Special Sub-Patterns
 
@@ -160,7 +160,7 @@ little as it possibly can to reach the next part of a pattern.
 
 Suppose you have these two regular expressions:
 
-```
+```python
 pat1 = re.compile(r'x.*y')    # greedy
 pat2 = re.compile(r'x.*?y')   # non-greedy
 ```
@@ -168,15 +168,15 @@ pat2 = re.compile(r'x.*?y')   # non-greedy
 And also this block of text that you want to match.  You can think of it
 as a sort of *lorem ipsum* that only has 'X' words, if you will.
 
-```
+```python
 txt = """
-xenarthral xerically xenomorphically xebec xenomania 
-xenogenic xenogeny xenophobically xenon xenomenia 
-xylotomy xenogenies xenografts xeroxing xenons xanthous 
-xenoglossy xanthopterins xenoglossy xeroxed xenophoby 
-xenoglossies xanthoxyls xenoglossias xenomorphically 
+xenarthral xerically xenomorphically xebec xenomania
+xenogenic xenogeny xenophobically xenon xenomenia
+xylotomy xenogenies xenografts xeroxing xenons xanthous
+xenoglossy xanthopterins xenoglossy xeroxed xenophoby
+xenoglossies xanthoxyls xenoglossias xenomorphically
 xeroxes xanthopterin xebecs xenodochiums xenodochium
-xylopyrography xanthopterines xerochasy xenium xenic 
+xylopyrography xanthopterines xerochasy xenium xenic
 """
 ```
 
@@ -184,7 +184,7 @@ You'd like to match all and only words that start with 'X' and end with
 'Y'.  What pattern makes sense to use, and why?  The code to find the
 words can look like:
 
-```
+```python
 xy_words = re.findall(_pat, txt)
 ```
 
@@ -203,7 +203,7 @@ If you liked `pat1`, you've greedily matched too much. The 'y' might
 occur in later words (per line), and the match won't end until the last
 'y' on a line.
 
-```
+```python
 >>> for match in re.findall(pat1, txt):
 ...     print(match)
 ...
@@ -221,12 +221,11 @@ with only the line beginning with 'xylotomy' happening to be the only
 word we actually want.  The line that begins with 'xeroxes' is not
 matched at all, which is what we want.
 
-If you liked `pat2` you often get words, but at other times either 
-too much *or too little* might be matched.  For example, if 'xy' occurs 
-in a longer word, either as a prefix or in the middle, it can also match. 
+If you liked `pat2` you often get words, but at other times either too
+much *or too little* might be matched.  For example, if 'xy' occurs in a
+longer word, either as a prefix or in the middle, it can also match.
 
-
-```
+```python
 >>> for match in re.findall(pat2, txt):
 ...     print(match)
 ...
@@ -253,12 +252,11 @@ boundaries*. Things that are not letters (for our wordlist, all are
 lowercase) cannot be part of matches. In this simple case, non-letters
 are all spaces and newlines, but other characters might occur in other
 texts.
- 
-We can be greedy to avoid matching prefixes or infixes, but we also 
-want to ignore non-letter characters..
 
+We can be greedy to avoid matching prefixes or infixes, but we also want
+to ignore non-letter characters..
 
-```
+```python
 >>> pat3 = re.compile(r'x[a-z]*y')
 >>> for match in re.findall(pat3, txt):
 ...     print(match)
@@ -292,7 +290,7 @@ your solution was clever enough not to fall for the danger shown in this
 puzzle.  Namely, perhaps not all words will actually start with 'x' to
 begin with.
 
-```
+```python
 >>> txt = """
 expurgatory xylometer xenotime xenomorphically exquisitely
 xylology xiphosurans xenophile oxytocin xylogen
@@ -302,9 +300,9 @@ xanthenes xylenol xylol xylenes coextensively
 """
 >>> pat3 = re.compile(r'x[a-z]*y')
 >>> re.findall(pat3, txt)
-['xpurgatory', 'xy', 'xenomorphically', 'xquisitely', 
-'xylology', 'xy', 'xy', 'xerochasy', 'xplicably', 'xaby', 
-'xpressibly', 'xtremity', 'xiphophy', 'xy', 'xly', 
+['xpurgatory', 'xy', 'xenomorphically', 'xquisitely',
+'xylology', 'xy', 'xy', 'xerochasy', 'xplicably', 'xaby',
+'xpressibly', 'xtremity', 'xiphophy', 'xy', 'xly',
 'xillology', 'xy', 'xy', 'xy', 'xtensively']
 ```
 
@@ -328,8 +326,7 @@ There are a few ways you might approach this task.  The easiest is to
 use the explicit "word boundary" special *zero-width match* pattern,
 spelled as `\b` in Python and many other regular expression engines.
 
-
-```
+```python
 >>> pat4 = re.compile(r'\bx[a-z]*y\b')
 >>> re.findall(pat4, txt)
 ['xenomorphically', 'xylology', 'xerochasy']
@@ -339,8 +336,7 @@ Less easy ways to accomplish this include using look-ahead and
 look-behind to find non-matching characters that must "bracket" the
 actual match.  For example:
 
-
-```
+```python
 >>> pat5 = r'(?<=^|(?<=[^a-z]))x[a-z]+y(?=$|[^a-z])')
 >>> re.findall(pat5, txt)
 ['xenomorphically', 'xylology', 'xerochasy']
@@ -354,7 +350,6 @@ non-letter character look-behind. For the look-ahead element, it is
 enough to say it is *either* end-of-line (`$`) *or* is a non-letter
 (`[^a-z]`).
 
-
 \newpage
 
 ## Endpoint Classes
@@ -366,8 +361,7 @@ with 'y' and end with 'x'.
 
 Remembering the word boundary special zero-width pattern we already saw, a first try at this task might be:
 
-
-```
+```python
 >>> txt = """
 expurgatory xylometer yex xenomorphically exquisitely
 xylology xiphosurans xenophile yunx oxytocin xylogen
@@ -376,7 +370,7 @@ extremity xerox xylographic complexly vexillology
 xanthenes xylenol xylol yexing xylenes coextensively
 >>> pat6 = re.compile(r'\b[xy][a-z]*[xy]\b')
 >>> re.findall(pat6, txt)
-['yex', 'xenomorphically', 'xylology', 'yunx', 'xerochasy', 
+['yex', 'xenomorphically', 'xylology', 'yunx', 'xerochasy',
 'yonderly', 'xerox']
 """
 ```
@@ -403,39 +397,31 @@ myself have made embarrassingly many times in real code. A robust
 approach is simply to list everything you want as alternatives in a
 pattern.
 
- 
-```
+```python
 >>> pat7 = re.compile(r'\b((x[a-z]*y)|(y[a-z]*x))\b')
 >>> [m[0] for m in re.findall(pat7, txt)]
 ['yex', 'xenomorphically', 'xylology', 'yunx', 'xerochasy']
 ```
-
 In this solution, there is a little bit of Python specific detail in the
 function API.  The function `re.findall()` returns tuples when a pattern
 contains multiple groups.  Group 1 will be the whole word, but one or
 the other of group 2 and 3 will be blank, i.e.:
-
  
-```
+```python
 >>> re.findall(pat7, txt)
-[('yex', '', 'yex'), 
-('xenomorphically', 'xenomorphically', ''), 
-('xylology', 'xylology', ''), 
-('yunx', '', 'yunx'), 
+[('yex', '', 'yex'),
+('xenomorphically', 'xenomorphically', ''),
+('xylology', 'xylology', ''),
+('yunx', '', 'yunx'),
 ('xerochasy', 'xerochasy', '')]
 ```
-
-	
-
 \newpage
 
 ## A Configuration Format
 
-	
 This exercise requires just a little bit of Python itself, but is mainly
 about choosing the right regular expression.  Let's suppose you have a
 configuration format that looks like this:
-
 
 ```
 config = """
@@ -451,8 +437,7 @@ convert text in this format to a dictionary mapping the numbers to the
 left of the equal sign to the strings to the right.  For example, the
 above example would produce:
 
-
-```
+```python
 {3: 'foobar', 14: 'baz', 9: 'fizzbuzz', 21: 'more_stuff,here'}
 ```
 
@@ -476,10 +461,9 @@ groups for each side, which will be exposed by `re.findall()` and other
 regular expression functions.  We *almost* get the right answer with
 this:
 
- 
-```
+```python
 >>> dict(re.findall(r'^(\d+) *= *(.*)$', s, re.MULTILINE))
-{'3': 'foobar', '14': 'baz', '9': 'fizzbuzz', 
+{'3': 'foobar', '14': 'baz', '9': 'fizzbuzz',
 '21': 'more_stuff,here'}
 ```
 
@@ -488,9 +472,8 @@ of the string.  The one problem is that the puzzle requested that
 numbers appear as numbers not as strings of digits.  There are a number
 of ways we might achieve that in Python, but one easy one is:
 
-
-```
->>> {int(k): v for k, v in 
+```python
+>>> {int(k): v for k, v in
             re.findall(r'^(\d+) *= *(.*)$', s, re.MULTILINE)}
 {3: 'foobar', 14: 'baz', 9: 'fizzbuzz', 21: 'more_stuff,here'}
 ```
@@ -498,7 +481,6 @@ of ways we might achieve that in Python, but one easy one is:
 \newpage
 
 ## The Human Genome
-
 
 Genomics commonly uses a format called FASTA to represent genetic
 sequences.  This puzzle uses a subset of the overall format.  Let's
@@ -529,8 +511,7 @@ For this puzzle, assume that all the FASTA symbols are on a single line.
 Normally as published they have a fixed width less than 80 characters;
 but newlines are simply ignored.  Examples of matches and failures:
 
-
-```
+```python
 >>> from textwrap import wrap
 >>> print('\n'.join(wrap(valid, 60)))
 CATGGCTTTGGGACAACTCGGGGCTGCATGGACGGTGAATAAAATCTTTCCCGGTTGCTG
@@ -552,8 +533,7 @@ AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGG
 The telomeres at the end are ignored.  In contrast, it we use a
 non-specific symbol, we will not match.
 
-
-```
+```python
 >>> print('\n'.join(wrap(bad_telomere, 60)))
 CATGGCTTTGGGACAACTCGGGGCTGCATGGACGGTGAATAAAATCTTTCCCGGTTGCTG
 CCCTGAATAATCAAGGTCACAGACCAGTTAGAATGGTTTAGTGTGGAAAGCGGGAAACGA
@@ -604,8 +584,7 @@ of times, but at least three.  Moreover, repeated telomeres must
 continue until the end of the candidate sequence, so we must match `$`
 *inside* the lookahead pattern.
 
-
-```
+```python
 pat = r'^([CATG]+?)(?=(TTAGGG){3,}$)'
 ```
 
@@ -716,7 +695,7 @@ As you can see, whether they end with an entirely invalid symbol `X` or
 simply with a valid symbol and no terminator, is not significant.
 
 You may want to think about why the quick-failing message also fails.
-Pause for a moment. 
+Pause for a moment.
 
 But then notice that the final few symbols in that message are "black
 square" which can only occur in type 1 blocks; a type 2 block must
@@ -764,10 +743,10 @@ Structure 1 2 1 2  | Message '■▲◉ ▫ ■ ▪▫!' is Valid
 Missing terminator | Message '■▲◉▫■▪▫' is Invalid
 Structure 1 1 2 1  | Message '▲▲▲ ■■■ ▫▫▫ ○○○!' is Invalid
 
-Quick match     | 
+Quick match     |
         '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
                 |  Checked in 0.00 seconds
-Quick failure   | 
+Quick failure   |
         '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
                 |  Checked in 0.00 seconds
 Failure         | '▲□□▲▲□□▲▲▲□□□□□□□□▲▲□▲□▲□▲X' is Invalid
@@ -787,7 +766,6 @@ Ambiguous quick | '▲▲▲▲□▲□□▲▲□▲□□□□□□□□�
 \newpage
 
 ## Playing Dominoes
-
 
 Dominoes is an old family of games dating at least from the Yuan Dynasty
 (around 1300 CE).  The game is played with tiles in which each half of
@@ -855,7 +833,7 @@ of the next tile.  Therefore, we can shortcut specifically matching '3's
 with '3's and '5's with '5's.  Instead, we can just use a lookahead to
 match a back reference group.
 
-```
+```python
 >>> good = '{1:3}{3:3}{3:6}{6:1}{1:3}{3:3}{3:3}'
 >>> bad = '{1:3}{3:3}{6:1}{1:3}{3:3}{3:6}{3:3}' # mismatched ends
 >>> awful = '{1:3}{{3:5}}{5:2}'  # malformed syntax
@@ -869,30 +847,28 @@ match a back reference group.
 ...     else:
 ...         print(play, "loses!")
 ...
+```
+```
 {1:3}{3:3}{3:6}{6:1}{1:3}{3:3}{3:3} wins!
 {1:3}{3:3}{6:1}{1:3}{3:3}{3:6}{3:3} loses!
 {1:3}{{3:5}}{5:2} loses!
 ```
 
-	
-
 \newpage
 
 ## Advanced Dominoes
-
 
 As the last puzzle showed, there are Unicode characters for domino
 tiles.  In the last puzzle, we played a game of evaluating whether a
 particular sequence of "tiles"—represented by ASCII sequences—were
 winning plays. However, in that last puzzle, we took a shortcut by
-taking advantage of the internal structure of the ASCII representation. 
+taking advantage of the internal structure of the ASCII representation.
 
 It is not too hard to match domino tiles as their Unicode characters.
 For example, this pattern matches any linear sequence of (horizontal)
 tiles:
 
-
-```
+```python
 pat = (r'[\N{Domino Tile Horizontal-00-00}-'
          '\N{Domino Tile Horizontal-06-06}]+)'
 ```
@@ -929,8 +905,7 @@ easy to type.
 
 Repeating our winning and losing examples with this encoding:
 
-
-```
+```python
 win  = 'ABCDABB'
 lose = 'ABDABCB'
 ```
@@ -960,14 +935,14 @@ them.
 The basic idea here is that you want each tile to be followed by a tile
 from some subset of other tiles. Namely, those that begin with the same
 number of dots that the current tile ends with.
- 
+
 Of course, a given tile might be the end of a play, so you have to
 include that option in your lookahead pattern.  You also definitely want
 a match to begin at the start of the play and end at the end of the
 play, so be sure to include the match patterns `^` and `$` to indicate
 that.
 
-```
+```python
 >>> win = 'ABCDABB'
 >>> lose = 'ABDABCB'
 >>> pat = r'^(A(?=$|[BC])|B(?=$|[BC])|C(?=$|D)|D(?=$|A))+$'
@@ -999,7 +974,7 @@ characters can be escaped, but it makes the patterns harder to read.
 
 Some valid and invalid signals are below:
 
-```
+```python
 valid_1a = "_/^^^\_/^|___|^\____|^^\__/"
 valid_1b = "LuHHHdLuHFLLLFHdLLLLFHHdLLu"
 valid_2a = "____/^^^^^^"
@@ -1038,7 +1013,7 @@ define—"ASCII" or "linedraw", but not intermixed—and find the pattern
 you need.
 
 That is, find the pattern that will work *only if* regular expressions
-are sufficienty powerful to perform this test. 
+are sufficienty powerful to perform this test.
 
 Before you turn the page...
 
@@ -1057,7 +1032,7 @@ keep in mind when thinking about it.  The rules for a valid signal
 actually consist of just two constraints:
 
 * All signals must be drawn only from the limited alphabet
-* Only a subset of *digrams** of symbols are valid. 
+* Only a subset of *digrams** of symbols are valid.
 
 In particular, since the alphabet is 5 symbols, there are 25 possible
 digrams.  However, only 10 of those can occur in a valid signal.  You
@@ -1080,7 +1055,7 @@ then the much more difficult to read `patA` which uses several symbols
 requiring escaping for the pattern definition since they would otherwise
 have regex meanings.
 
-```
+```python
 patB =  (r'^(((?=LL|Lu|LF|HH|Hd|HF|uH|dL|FH|FL)'
          r'|(?=.$))[LHudF])+$')
 
@@ -1104,9 +1079,9 @@ inline.
 
 The Python method `str.count()` is widely useful to find substrings
 inside a larger string.  For example, here is some typical code you
-might write: 
+might write:
 
-```
+```python
 # Lyric from song "Hot Knife" by Fiona Apple
 >>> s = """If I'm butter, if I'm butter
 If I'm butter, then he's a hot knife
@@ -1123,8 +1098,7 @@ Imagine that Python did not have the method `str.count()` but you wished
 to implement a similar function by utiizing regular expressions, with
 the signature:
 
-
-```
+```python
 def my_count(substring: str, string: str) -> int:
     # re.sub(..., ...)  # maybe something like this?
     ...
@@ -1142,7 +1116,7 @@ Two functions in the Python `re` module seem especially likely to be
 useful.  The `re.sub()` function will replace a pattern with something
 else.  We might try a solution using that, for example:
 
-```
+```python
 >>> def my_count(substring, string):
 ...     return len(re.sub(fr"[^{substring}]", "", string))
 >>> my_count('e', s)
@@ -1161,8 +1135,7 @@ we would count the individual letters in the pattern.
 We can fix this with a more complex regular expression (think about how
 as a bonus puzzle), but even easier is using `re.findall()`:
 
-
-```
+```python
 >>> def my_count(substring, string):
 ...     return len(re.findall(fr"{substring}", string))
 >>> my_count('e', s)
@@ -1170,8 +1143,6 @@ as a bonus puzzle), but even easier is using `re.findall()`:
 >>> my_count('tt', s)
 3
 ```
-
-
 
 \newpage
 
@@ -1198,8 +1169,7 @@ assume the input strings are exclusively nucleotide symbols like in the
 example below (generalizing this isn't too difficult).  A solution will
 look something like this:
 
-
-```
+```python
 >>> def let_count(char: str, string: str) -> str:
 ...     # maybe a while loop, some calls to re.something()
         ...
@@ -1207,8 +1177,7 @@ look something like this:
 
 For example, using it to count nucleotides:
 
-
-```
+```python
 >>> mRNA = '''
 GGGAAATAAGAGAGAAAAGAAGAGTAAGAAGAAATATAAGACCCCGGCGCCGCCACCAT
 GTTCGTGTTCCTGGTGCTGCTGCCCCTGGTGAGCAGCCAGTGCGTGAACCTGACCACCC
@@ -1223,7 +1192,7 @@ CGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTT
 
 \newpage
 
-```
+```python
 >>> let_count('G', mRNA)
 '120'
 >>> let_count('C', mRNA)
@@ -1249,7 +1218,7 @@ Before you turn the page...
 This one turns out to be somewhat difficult, but also to be *possible*,
 which is itself sort of amazing.  No numbers whatsoever are involved in
 the solution shown.  No counters, no integer variables, no Python
-functions returning numbers. 
+functions returning numbers.
 
 We also do not need to use any Python string methods, although it is
 fair to note that some of what is performed via regular expressions
@@ -1262,7 +1231,7 @@ number of items at a certain power of ten, or the number at the next
 higher power.  A dictionary can map zero to nine repetions of a sentinel
 to the corresponding numeral, but leave the rest of string unchanged.
 
-```
+```python
 # Group 1: zero or more leading @'s
 # Group 2: some specific number of _'s
 # Group 3: anything until end; digits expected
@@ -1289,17 +1258,16 @@ unicode codepoint in the astral plane—or even a private-use
 codepoint—could just as well be used instead if collision with the
 initial string were a concern.
 
-
-```
+```python
 def let_count(c, s):
-    # The first lines only convert single character to sentinel, 
-    # but could be generalized to any regex pattern 
+    # First lines only convert single char to sentinel,
+    # but could be generalized to any regex pattern
     # Remove everything that isn't the target character
     s = re.sub(fr'[^{c}]', '', s)
     # Convert the target to the underscore sentinel
     s = re.sub(fr'{c}', '_', s)
 
-    # Loop indefinitely since do not know how many digits needed
+    # Loop indefinitely: do not know number digits needed
     while True:
         # Ten underscores become an @ sign
         s = re.sub(r'__________', '@', s)
@@ -1331,8 +1299,7 @@ tests and integration tests, so probably it does the right thing.  But
 they have not given a useful name or documentation for a certain
 function:
 
-
-```
+```python
 def is_something(s):
     return not re.match(r'^(.+?)\1+$', s)
 ```
@@ -1353,12 +1320,12 @@ understanding what the regular expression is doing is the crucual
 element.  The short pattern might look odd, and you need to figure it
 out.  Here is a possibility.
 
-```
+```python
 def repeated_prefix(s):
-    """Look for any prefix string in 's' and match only if that
-    prefix is repeated at least once, but it might be repeated
-    many times.  No other substring may occur between the start 
-    and end of the string for a match.
+    """Look for any prefix string in 's' and match only if
+    that prefix is repeated at least once, but it might be 
+    repeated many times.  No other substring may occur 
+    between the start and end of the string for a match.
     """
     return not re.match(r'^(.+?)\1+$', s)
 ```
@@ -1375,7 +1342,7 @@ In earlier puzzles, we had fun playing dominoes.  For the next few
 puzzles, let's play poker.  In particular, let's says that a player has
 five cards, and we wish to compare two hands to each other.  We will do
 this over several puzzles, by building up small functions to answer
-various questions.  
+various questions.
 
 As much as possible, you should use regular expressions to express the
 logic; however, a few of the questions will require a little bit of
@@ -1426,7 +1393,7 @@ First let's transform any ASCII version of a hand into the Unicode
 version. Along the way, we make sure the hand consists of five valid
 ASCII cards.
 
-```
+```python
 def prettify(hand):
     assert re.search(r'^([2-9TJQKA][SHDC] ?){5}$', hand)
     symbols = {'S': '\u2660', 'H': '\u2665',
@@ -1441,7 +1408,7 @@ on the fact that Python's sort is *stable*.  This means the order will not
 change between equivalent elements.  Therefore, sorting first by suit,
 then by number will be guaranteed to have the right overall effect.
 
-```
+```python
 def cardsort(hand):
     def by_num(card):
         map = {'T':'A', 'J':'B', 'Q':'C',
@@ -1459,11 +1426,12 @@ def cardsort(hand):
     hand.sort(key=by_num, reverse=True)
     return ' '.join(hand)
 ```
+
 \newpage
 
 Combining these:
 
-```
+```python
 >>> cardsort(prettify('8C AS 4H KS 2C'))
 'A♠ K♠ 8♣ 4♥ 2♣'
 ```
@@ -1487,8 +1455,7 @@ For this puzzle, you want to start using regular expressions to figure
 out whether hands belong to various kinds.  Here's an obvious trick we
 can use as a shortcut:
 
-
-```
+```python
 def is_straight_flush(hand):
     return is_straight(hand) and is_flush(hand)
 ```
@@ -1517,8 +1484,7 @@ But while we are creating the function, we can also return extra
 "truthy" information in the return value.  Namely, if it *is* a flush,
 let's return the suit also.
 
-
-```
+```python
 >>> def is_flush(hand):
 ...     match = re.search(r'^.(.)(.*\1){4}$', hand)
 ...     return match.group(1) if match else False
@@ -1540,8 +1506,7 @@ in the return value.  Obviously, if the hand is not a straight, we
 should return False.  But if it is one, we can return the high card
 number for later use.  Those are all "truthy" values (like all strings).
 
-
-```
+```python
 >>> def is_straight(hand):
 ...     pat = r'[ SHDC\u2660\u2665\u2666\u2663]'
 ...     h = re.sub(pat, '', hand)
@@ -1562,8 +1527,7 @@ We could easily add that if we wanted, of course.
 At this point, you might consider a richer implementation of
 `is_straight_flush()`.  Perhaps this:
 
-
-```
+```python
 >>> def is_straight_flush(hand):
 ...     s = is_straight(hand)
 ...     f = is_flush(hand)
@@ -1585,7 +1549,7 @@ False
 
 In this puzzle let's continue with matching poker hands.  We handled
 straights and flushes in the last puzzle (and straight flushes by
-obvious combination).  There are some other types of hands to consider 
+obvious combination).  There are some other types of hands to consider
 now.
 
 The next several types of hand have containing relationships among them.
@@ -1622,7 +1586,7 @@ cards are completely ordered, then the four can only occur as the
 initial four or the final four.  But the following implementation does
 not rely on that ordering:
 
-```
+```python
 >> def is_four_of_kind(hand):
 ...     hand = re.sub(r'[^AKQJT98765432]', '', hand)
 ...     pat = r'^.?(.)(.*\1){3}'
@@ -1654,7 +1618,6 @@ reference would not be needed, but it does no harm in being zero width.
 \newpage
 
 ## Playing Poker (Part 4)
-
 
 Keeping in mind that we need only minimally identify each type of hand
 within the corresponding function, not rule out other higher ranked
@@ -1701,7 +1664,7 @@ number first as the "truthy" value in a match.  In most poker rules, the
 3-card match takes precedence when the same hands are evaluated for the
 win.
 
-```
+```python
 >>> def is_full_house(hand):
 ...     try:
 ...         hand = prettify(hand)
@@ -1772,7 +1735,7 @@ four-of-a-kind, just with fewer repetitions.  We could do it without
 sorting the hand, but doing so, as with our full house solution, is a
 bit easier.
 
-```
+```python
 >>> def is_three_of_kind(hand):
 ...     try:
 ...         hand = prettify(hand)
@@ -1794,8 +1757,7 @@ False
 Identifying a pair is basically identical.  We simply need to settle for
 one copy of a card number rather two copies.
 
-
-```
+```python
 def is_pair(hand):
     try:
         hand = prettify(hand)
@@ -1827,8 +1789,7 @@ As elsewhere, we return the helpful "truthy" value that might be used
 later in comparing hands of the same type (namely, the two numbers of
 the pairs, in sorted order).
 
-
-```
+```python
 >>> def is_two_pairs(hand):
 ...     try:
 ...         hand = prettify(hand)
@@ -1856,7 +1817,7 @@ False
 
 The remainder of your poker game program is left for a further exercise.
 The rest of what you'd need to do won't have much to do with regular
-expressions, simply usual program flow and data structures. 
+expressions, simply usual program flow and data structures.
 
 <!-- blank verso page -->
 
@@ -1885,7 +1846,7 @@ forks and knives, for example.
 
 As a simplification of the general problem, write a regular expression
 that matches strings that consist  of any number of 'A' characters,
-followed by the same number of 'B' characters. 
+followed by the same number of 'B' characters.
 
 For example `AAABBB` and `AAAAAAABBBBBBB` should match, while
 `AAAABBBBBB` should fail to match.
@@ -1928,7 +1889,6 @@ dracones*! (here be dragons).
 
 ## Match Before Duplicate Words
 
-
 If you looked at the last puzzle, you saw that some match patterns you
 might anticipate to be possible with regular expressions are actually
 not expressible with regexen.  Think about whether this puzzle is
@@ -1938,8 +1898,7 @@ Write a regular expression that will match all the initial words of a
 string (including any punctuation or spacing that might surround words),
 stopping before any word that is duplicated in the string.  For example:
 
-
-```
+```python
 s1 = "this and that not other"
 assert re.match(pat, s1).group() == s1
 ```
@@ -1950,8 +1909,7 @@ to begin the pattern with `^`.  In the first example no word is
 duplicated in the phrase, and therefore the entire phrase matches.  In
 contrast:
 
-
-```
+```python
 s2 = "this and that and other"
 assert re.match(pat, s2).group() == 'this '
 ```
@@ -1973,7 +1931,7 @@ This match pattern is indeed possible to write as a regular expression.
 We need to use back references to check it, but those are a standard
 feature of reqular expression engines.
 
-```
+```python
 pat = r'((\w+\b)(?!.*\2\b)\W*)+'
 ```
 
@@ -2043,7 +2001,7 @@ It would be very easy to match naive *dotted quads* that simply
 consisted of four numbers with up to three digits, separated by dots.
 You might express that as:
 
-```
+```python
 pat = r'^(\d{1-3}){3}\.\d{1-3}$'
 ```
 
@@ -2052,8 +2010,7 @@ many things that are invalid, such as `992.0.100.13`.  Matching
 three-digit numbers that  begin with 3-9 are definitely wrong.  We can
 try to fix that oversight by allowing only acceptable hundreds digits:
 
-
-```
+```python
 pat = r'^([12]?\d{1-2}){3}\.[12]?\d{1-2}$'
 ```
 
@@ -2067,8 +2024,7 @@ quads we can allow.  That is, if a quad starts with a '25' and has
 three digits, the next digit can only be 0-5.  And if it starts with
 a '2' it definitely cannot have a digit more than 5 next.
 
-
-```
+```python
 pat = (
     '^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}'
       '(25[0-5]|2[0-4]\d|[01]?\d\d?)$'
@@ -2100,7 +2056,6 @@ permissible quads.
 
 ## Matching a Numeric Sequence
 
-
 Here's a giveaway for you.  This puzzle is *possible* to solve.  I won't
 give you that same assurance when I describe the next two (related)
 puzzles.
@@ -2118,7 +2073,7 @@ Nonetheless, we would like to recognize a distinct integer sequence, and
 rule out other integer sequences, using a regular expression.  The trick
 here is that we can represent integer as repetitions of the same
 character, and the number of such repetitions can (to us, at least)
-represent numbers.  
+represent numbers.
 
 Specifically, for this puzzle, you would like to identify strings that
 represent successive doublings, and exclude all strings that do not
@@ -2126,8 +2081,7 @@ have that pattern.  We use the symbol '@' for one unit simply because it
 is available and doesn't have special meaning with regex patterns.
 Spaces can separate numbers from each other. So for example:
 
-
-```
+```python
 >>> s1 = "@@@ @@@@@@ @@@@@@@@@@@@ " # 3 6 12
 >>> s2 = "@ @@ @@@@ @@@@@@@@ @@@@@@@@@@@@@@@@ " # 1 2 4 8 16
 >>> s3 = "@@ @@@@ @@@@@ @@@@@@@@@@ " # 2 4 5 10
@@ -2165,7 +2119,7 @@ Before you turn the page...
 
 Let's start with the solution, then explain why it works.
 
-```
+```python
 pat = r"^(((@+) )(?=\3\3 ))+(\3\3 )$"
 ```
 
@@ -2188,12 +2142,9 @@ groups, collect the same pattern as the lookahead just before the end of
 the string.  We want to have the entire sequence in `match.group()`, not
 to leave off the last "number."
 
-
-
 \newpage
 
 ## Matching the Fibonacci Sequence
-
 
 Here we get to something harder than the last puzzle.  It is not obvious
 whether regular expressions are powerful enough to express this
@@ -2218,15 +2169,14 @@ one is the sum of those prior two.
 As in the last puzzle, we represent numeric sequences by a number of
 repetitions of the '@' symbol followed by spaces.  For example:
 
-
-```
+```python
 # Match: 1 1 2 3 5 8
 fibs = "@ @ @@ @@@ @@@@@ @@@@@@@@ "
 # Match: 2 1 3 4 7 11
-lucas = "@@ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@ " 
+lucas = "@@ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@ "
 # Match: 3 2 5 7 12 19
-fib2 = "@@@ @@ @@@@@ @@@@@@@ @@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@ " 
-# Fail: 1 1 3 4 7 11 
+fib2 = "@@@ @@ @@@@@ @@@@@@@ @@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@ "
+# Fail: 1 1 3 4 7 11
 wrong1 = "@ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@ "
 # Fail: 1 1 2 3 4 7
 wrong2 = "@ @ @@ @@@ @@@@ @@@@@@@ "
@@ -2253,7 +2203,7 @@ is that we need to backreference two groups in the lookahead pattern
 rather than just one.  Study the explanation of the last puzzle before
 looking at the solution to this one.
 
-```
+```python
 >>> pat1 = r"^(((@+) (@+) )(?=$|\3\4 ))+(\3\4)?$"
 >>> pat2 = r"^@+ (((@+) (@+) )(?=\3\4 ))+"
 >>> for s in (fibs, lucas, fib2, wrong1, wrong2):
@@ -2285,12 +2235,9 @@ incorrectly match as Fibonacci-like. Since `pat1` already collects the
 final "number", there is no need for `pat2` to do so as well, the
 lookahead suffices.
 
-
-
 \newpage
 
 ## Matching the Prime Numbers
-
 
 Perhaps surprisingly, in the last puzzle we were able to match
 Fibonacci-like sequences using regular expressions.  Let's turn next to
@@ -2302,8 +2249,7 @@ As in the last two puzzles, we encode numeric sequences using a number
 of contiguous '@' symbols, with each "number" separated by spaces. For
 example:
 
-
-```
+```python
 # Match: 2 3 5 7
 primes4 = "@@ @@@ @@@@@ @@@@@@@ "
 # Match: 2 3 5 7 11
@@ -2320,8 +2266,7 @@ steps through all the natural numbers, leaving only primes thereby.  In
 a compact Python implementation it can look like the below (this can be
 made much more efficient, but at the price of more code).
 
-
-```
+```python
 def get_primes():
     "Simple lazy Sieve of Eratosthenes"
     candidate = 2
@@ -2388,12 +2333,9 @@ calculations that are not possible in regular expressions.
 
 [^fn-grh]: The Miller-Rabin test can be made deterministic if the Generalized Riemann hypothesis holds.
 
-
-
 \newpage
 
 ## Matching Relative Prime Numbers
-
 
 If you read the last puzzle, you saw the subtle reason why a regular
 expression cannot match an initial sequence of primes.  Think *finite*
@@ -2418,7 +2360,7 @@ As in the last three puzzles, we encode numeric sequences using a
 number of contiguous '@' symbols, with each "number" separated by
 spaces. For example:
 
-```
+```python
 # Match: 2 3 5 7 11
 primes5 = "@@ @@@ @@@@@ @@@@@@@ @@@@@@@@@@@ "
 # Match: 2 5 7 9 11
@@ -2432,6 +2374,7 @@ fail1 = "@@ @@@ @@@@ @@@@@ @@@@@@@ "
 # Fail: 5 7 2 3 11 (all primes, non-ascending)
 fail2 = "@@@@@ @@@@@@@ @@ @@@ @@@@@@@@@@ "
 ```
+
 \newpage
 
 Are relative primes consigned to the same fate as primes?
@@ -2471,8 +2414,7 @@ technically relax this ascending sequence restriction (however, a
 library that did so would quickly face catastrophic exponential
 complexity in this case).
 
-
-```
+```python
 pat = r'^((@@+) (?=\2@)(?!.* \2{2,} ))+'
 ```
 
@@ -2485,8 +2427,6 @@ never later see a (space delimited) sequence of two or more copies of
 the group.  This pattern does not capture the final "number" in the
 sequence, it is just used to provide a true or false answer to whether
 the sequence matches.
-
-
 
 \newpage
 
