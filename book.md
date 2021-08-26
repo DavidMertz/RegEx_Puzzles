@@ -1,5 +1,5 @@
 ---
-title: The Puzzling Quirks of Regular Expresssions
+title: The Puzzling Quirks of Regular Expressions
 author: ["David Mertz, Ph.D."]
 date: "2021-08-15"
 copyright: "CC BY-SA 4.0, 2021"
@@ -29,7 +29,9 @@ mathfont: texgyredejavu-math.otf
 I thank my friend Miki Tebeka, who invited me to write this book, albeit
 in slightly different form than the version you see.  I am very grateful
 to my friend Brad Huntting and partner Mary Ann Sushinsky who provided
-clever ideas in the directions of these puzzles.
+clever ideas in the directions of these puzzles.  Thanks to my
+colleague, Lucy Wan, who provided a final proofreading, finding the
+silly typos missed on many prior reads.
 
 A number of other friends and family members listened to me enumerate
 the foibles of another publisher who clings to a cargo-culted toolchain.
@@ -85,7 +87,7 @@ Naive-Scribble-Recto.png;
 Striated-Recto.png;
 Olives-Recto.png
 
-"Stuck in the Middle with You", by Gerry Rafferty and Joe Egan (Stealer
+*Stuck in the Middle with You*, by Gerry Rafferty and Joe Egan (Stealer
 Wheels), 1973:
 
 > Clowns to the left of me! /
@@ -106,11 +108,11 @@ you to read some of those, if you have not already.
 
 These puzzles begin at a certain point where the formal descriptions
 leave off.  As you work with regexen, you will find subtle pitfalls.  A
-pattern that seems like it should obviously match one thing, actually
+pattern that seems like it should obviously match one thing actually
 matches something slightly different than you intended.  Or perhaps a
 match pattern has "pathological" behavior and takes far too long.  Or
-sometimes it is simply that a more concise pattern can also be clearer
-in describing what you actually wish to match.
+sometimes it is simply that a more concise pattern would be clearer in
+describing what you actually wish to match.
 
 A great many programming languages, libraries, and tools support regular
 expressions, with relatively minor variations in the syntax used.  Such
@@ -119,30 +121,30 @@ software includes `[efr]?grep`, `sed`, `awk`, *Perl*, *Java*, *.NET*,
 programming language via a library.
 
 For this book, we will use Python to pose these puzzles.  In particular,
-we will use the standard library module `re`  Often code samples are
+we will use the standard library module `re`.  Often code samples are
 used in puzzles and in explanation; where I wish to show the output from
-code, the example emulates to the Python shell with lines starting with
+code, the example emulates the Python shell with lines starting with
 `>>> ` (or continuing with `... `).  Outputs are echoed without a prompt
 in this case.  Where code defines a function that is not necessarily
 executed in the mention, only the plain code is shown.
 
-While you are reading this book, I strongly encourage you to keep
-open an interactive Python environment.  Many tools enable this, such
-as the Python REPL (read-evaluate-print-loop) itself, or the IPython
-enhanced REPL, or Jupyter notebooks, or the IDLE editor that comes
-with Python, or indeed most modern code editors and IDEs (integrated
-development environment).  A number of online regular expression
-testers are also available, although those will not capture
-the details of the Python calling details.  Explanations will follow
-each puzzle, but trying to work it out in code before reading it is
-worthwhile.
+While you are reading this book, I strongly encourage you to keep open
+an interactive Python environment.  Many tools enable this, such as the
+Python REPL (read-evaluate-print-loop) itself, or the IPython enhanced
+REPL, or Jupyter notebooks, or the IDLE editor that comes with Python,
+or indeed most modern code editors and IDEs (integrated development
+environments).  A number of online regular expression testers are also
+available, although those will not capture the the Python calling
+details.  Explanations will follow each puzzle, but trying to work it
+out in code before reading it is worthwhile.  C'mon, not thinking about
+a puzzle before reading the solution is a cop-out.
 
 # Quantifiers and Special Sub-Patterns
 
 Solving the puzzles in this section will require you to have a good
 understanding of the different quantifiers that regular expressions
 provide, and to pay careful attention to when you should use
-sub-patterns (themselves likely quanitifed).
+subpatterns (themselves likely quantified).
 
 <!-- blank verso page -->
 
@@ -165,8 +167,9 @@ pat1 = re.compile(r'x.*y')    # greedy
 pat2 = re.compile(r'x.*?y')   # non-greedy
 ```
 
-And also this block of text that you want to match.  You can think of it
-as a sort of *lorem ipsum* that only has 'X' words, if you will.
+And also the following block of text that you want to match.  You can
+think of it as a sort of *lorem ipsum* that only has 'X' words, if you
+will.
 
 ```python
 txt = """
@@ -217,9 +220,9 @@ xylopyrography xanthopterines xerochasy
 
 On each line, the greedy pattern started at the first 'x', which is
 often not what you want.  Moreover, most lines match multiple words,
-with only the line beginning with 'xylotomy' happening to be the only
-word we actually want.  The line that begins with 'xeroxes' is not
-matched at all, which is what we want.
+with only the line beginning with 'xylotomy' happening to be the
+isolated word we actually want.  The line that begins with 'xeroxes' is
+not matched at all, which is what we want.
 
 If you liked `pat2` you often get words, but at other times either too
 much *or too little* might be matched.  For example, if 'xy' occurs in a
@@ -248,13 +251,12 @@ By being non-greedy, we stop when the first 'y' is encountered, but as
 you see, that still is not quite what we want.
 
 What we actually need to focus on for this task is the *word
-boundaries*. Things that are not letters (for our wordlist, all are
-lowercase) cannot be part of matches. In this simple case, non-letters
-are all spaces and newlines, but other characters might occur in other
-texts.
+boundaries*. Things that are not lowercase letters cannot be part of
+matches. In this simple case, non-letters are all spaces and newlines,
+but other characters might occur in other texts.
 
 We can be greedy to avoid matching prefixes or infixes, but we also want
-to ignore non-letter characters..
+to ignore non-letter characters.
 
 ```python
 >>> pat3 = re.compile(r'x[a-z]*y')
@@ -282,13 +284,13 @@ Whatever came after each match was a non-letter character.
 \newpage
 
 ## Words and Sequences
-	
+
 In the previous problem, we identified words that started with 'x' and
 ended with 'y'.  You may have noticed, however, that we had already
 included the assumption that all the words started with 'x'.  Perhaps
 your solution was clever enough not to fall for the danger shown in this
 puzzle.  Namely, perhaps not all words will actually start with 'x' to
-begin with.
+begin with; i.e. if we try to apply our previous regex to such text.
 
 ```python
 >>> txt = """
@@ -306,8 +308,8 @@ xanthenes xylenol xylol xylenes coextensively
 'xillology', 'xy', 'xy', 'xy', 'xtensively']
 ```
 
-As you can see, we matched a number of substrings within word, not only
-whole words.  What pattern can you use actually to match only words that
+As you can see, we matched a number of substrings within words, not only
+whole words.  What pattern can you use to actually match only words that
 start with 'x' and end with 'y'?
 
 Before you turn the page...
@@ -332,8 +334,8 @@ spelled as `\b` in Python and many other regular expression engines.
 ['xenomorphically', 'xylology', 'xerochasy']
 ```
 
-Less easy ways to accomplish this include using look-ahead and
-look-behind to find non-matching characters that must "bracket" the
+Less easy ways to accomplish this include using lookahead and
+lookbehind to find non-matching characters that must "bracket" the
 actual match.  For example:
 
 ```python
@@ -342,18 +344,18 @@ actual match.  For example:
 ['xenomorphically', 'xylology', 'xerochasy']
 ```
 
-One trick here is that when we perform a look-behind assertion, it must
+One trick here is that when we perform a lookbehind assertion, it must
 have a fixed width of the match.  However, words in our list might
 either follow spaces or occur at the start of a line.  So we need to
-create an alternation between the zero-width look-behind and the one
-non-letter character look-behind. For the look-ahead element, it is
+create an alternation between the zero-width lookbehind and the one
+non-letter character lookbehind. For the lookahead element, it is
 enough to say it is *either* end-of-line (`$`) *or* is a non-letter
 (`[^a-z]`).
 
 \newpage
 
 ## Endpoint Classes
-	
+
 This puzzle continues the word matching theme of the last two puzzles.
 However, here we have a new wrinkle.  We would like to identify *both*
 words that start with 'x' and end with 'y', but *also* words that start
@@ -368,7 +370,9 @@ xylology xiphosurans xenophile yunx oxytocin xylogen
 xeriscapes xerochasy inexplicably yonderly inexpressibly
 extremity xerox xylographic complexly vexillology
 xanthenes xylenol xylol yexing xylenes coextensively
+
 >>> pat6 = re.compile(r'\b[xy][a-z]*[xy]\b')
+
 >>> re.findall(pat6, txt)
 ['yex', 'xenomorphically', 'xylology', 'yunx', 'xerochasy',
 'yonderly', 'xerox']
@@ -402,11 +406,11 @@ pattern.
 >>> [m[0] for m in re.findall(pat7, txt)]
 ['yex', 'xenomorphically', 'xylology', 'yunx', 'xerochasy']
 ```
-In this solution, there is a little bit of Python specific detail in the
+In this solution, there is a little bit of Python-specific detail in the
 function API.  The function `re.findall()` returns tuples when a pattern
 contains multiple groups.  Group 1 will be the whole word, but one or
 the other of group 2 and 3 will be blank, i.e.:
- 
+
 ```python
 >>> re.findall(pat7, txt)
 [('yex', '', 'yex'),
@@ -469,13 +473,14 @@ this:
 
 Notice that we required the "multiline" modifier to match on each line
 of the string.  The one problem is that the puzzle requested that
-numbers appear as numbers not as strings of digits.  There are a number
+numbers appear as numbers, not as strings of digits.  There are a number
 of ways we might achieve that in Python, but one easy one is:
 
 ```python
 >>> {int(k): v for k, v in
             re.findall(r'^(\d+) *= *(.*)$', s, re.MULTILINE)}
-{3: 'foobar', 14: 'baz', 9: 'fizzbuzz', 21: 'more_stuff,here'}
+{3: 'foobar', 14: 'baz', 9: 'fizzbuzz', 
+21: 'more_stuff,here'}
 ```
 
 \newpage
@@ -485,11 +490,11 @@ of ways we might achieve that in Python, but one easy one is:
 Genomics commonly uses a format called FASTA to represent genetic
 sequences.  This puzzle uses a subset of the overall format.  Let's
 provide just a few quick tips.  The letters 'A', 'C', 'G', 'T' represent
-nucleotide bases in DNA.  FASTA may also contains the symbol 'N' for
+nucleotide bases in DNA.  FASTA may also contain the symbol 'N' for
 "unknown nucleotide" and '-' for "gap of indeterminate length."
 
 As well, in biological organisms, spans of DNA are terminated by
-"telomeres" which are special sequences which indicate that the read
+"telomeres" which are special sequences indicating that the read
 mechanism should stop transcription and form a protein.  Telomeres are
 often repeated as much as thousands of times at the ends of sequences.
 In a gross simplification for this puzzle, let's suppose that three or
@@ -509,48 +514,56 @@ have gaps or unknowns.
 
 For this puzzle, assume that all the FASTA symbols are on a single line.
 Normally as published they have a fixed width less than 80 characters;
-but newlines are simply ignored.  Examples of matches and failures:
+but newlines are simply ignored.  An example of a match:[^fn-nucleotide]
+
+[^fn-nucleotide]: Some characters shown have Unicode combining
+diacritics to draw your eye to features.  Technically, therefore, some
+characters shown are not actually the FASTA codes they look similar
+to.
 
 ```python
 >>> from textwrap import wrap
 >>> print('\n'.join(wrap(valid, 60)))
-CATGGCTTTGGGACAACTCGGGGCTGCATGGACGGTGAATAAAATCTTTCCCGGTTGCTG
 CCCTGAATAATCAAGGTCACAGACCAGTTAGAATGGTTTAGTGTGGAAAGCGGGAAACGA
 AAAGCCTCTCTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG
 CAGGGTTCAACTGCAGCGTCGCAACTCAAATGCAGCATTCCTAATGCACACATGACACCC
-AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGGTTAGGGTTAGG
-GTTTAGGGTTAGGGTTAGGGGTTAGGGGTTAGGGTTAGGGTTAGGGTTAGGG
-
->>> coding = re.search(pat, valid).group()
->>> print('\n'.join(wrap(coding, 60)))
-CATGGCTTTGGGACAACTCGGGGCTGCATGGACGGTGAATAAAATCTTTCCCGGTTGCTG
-CCCTGAATAATCAAGGTCACAGACCAGTTAGAATGGTTTAGTGTGGAAAGCGGGAAACGA
-AAAGCCTCTCTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG
-CAGGGTTCAACTGCAGCGTCGCAACTCAAATGCAGCATTCCTAATGCACACATGACACCC
-AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGG
+AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGGT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠
+G̠TT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠GT̠T̠A̠G̠G̠G̠GT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠
 ```
 
-The telomeres at the end are ignored.  In contrast, it we use a
-non-specific symbol, we will not match.
+Using a good pattern, we can identify everything up to, but not
+including, the telomere repetitions.
+
+```python
+>>> coding = re.search(pat, valid).group()
+>>> print('\n'.join(wrap(coding, 60)))
+CCCTGAATAATCAAGGTCACAGACCAGTTAGAATGGTTTAGTGTGGAAAGCGGGAAACGA
+AAAGCCTCTCTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG
+CAGGGTTCAACTGCAGCGTCGCAACTCAAATGCAGCATTCCTAATGCACACATGACACCC
+AAAACTATAACAGACATATTACTCATGGAGGGTGAGGGTGGGGGTGAGGG
+```
+
+The next two are failures.  The first does not have sufficient
+repetitions.  The second has a a non-specific nucleotide symbol:
 
 ```python
 >>> print('\n'.join(wrap(bad_telomere, 60)))
-CATGGCTTTGGGACAACTCGGGGCTGCATGGACGGTGAATAAAATCTTTCCCGGTTGCTG
 CCCTGAATAATCAAGGTCACAGACCAGTTAGAATGGTTTAGTGTGGAAAGCGGGAAACGA
 AAAGCCTCTCTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG
 CAGGGTTCAACTGCAGCGTCGCAACTCAAATGCAGCATTCCTAATGCACACATGACACCC
-AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGGTTAGGGTTAGG
-GTTTAGGGTTAGGGTTAGGGGTTAGGGGTTAGGGTTAGGGTTAGGGTTTAGG
+AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGGT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠
+G̠TT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠TT̠T̠A̠G̠G̠G̠GT̠T̠A̠G̠G̠G̠GT̠T̠A̠G̠G̠G̠AT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠TTTAGG
+
 >>> re.search(pat, bad_telomere) or "No Match"
 'No Match'
 
 >>> print('\n'.join(wrap(unknown_nucleotide, 60)))
-CATGGCTTTGGGACAACTCGGGGCTGCATGGACGGTGAATAAAATCTTTCCCGGTTGCTG
 CCCTGAATAATCAAGGTCACAGACCAGTTAGAATGGTTTAGTGTGGAAAGCGGGAAACGA
-AAAGCCTCNCTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG
+AAAGCCTCN̅CTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG
 CAGGGTTCAACTGCAGCGTCGCAACTCAAATGCAGCATTCCTAATGCACACATGACACCC
 AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGGTTAGGGTTAGG
 GTTTAGGGTTAGGGTTAGGGGTTAGGGGTTAGGGTTAGGGTTAGGGTTAGGG
+
 >>> re.search(pat, unknown_nucleotide) or "No Match"
 'No Match'
 ```
@@ -560,7 +573,7 @@ valid telomeres.  In the second mismatch, the 'N' symbol is used.  Both
 of these are valid FASTA encoding, but not the sequences specified for
 puzzle.
 
-Before you turn the page.
+Before you turn the page...
 
 **Remember the central dogma of molecular biology.**
 
@@ -580,9 +593,9 @@ valid tail of it.
 From there, any sequence of 'C', 'A', 'T', and 'G' symbols is permitted.
 However, you definitely want to be non-greedy in matching them since no
 telomeres should be included.  The telomere may be repeated any number
-of times, but at least three.  Moreover, repeated telomeres must
-continue until the end of the candidate sequence, so we must match `$`
-*inside* the lookahead pattern.
+of times, but at least three.  Optionally, repeated telomeres can be
+required to continue until the end of the candidate sequence, so we must
+match `$` *inside* the lookahead pattern.
 
 ```python
 pat = r'^([CATG]+?)(?=(TTAGGG){3,}$)'
@@ -591,8 +604,8 @@ pat = r'^([CATG]+?)(?=(TTAGGG){3,}$)'
 # Pitfalls and Sand in the Gears
 
 As compact and expressive as regular expressions can be, there are times
-when they simply go disasterously wrong.  Be careful to avoid, or at
-least to understand and identify, where such difficulties arise.
+when they simply go disastrously wrong.  Be careful to avoid pitfalls,
+and at least to understand and identify where such difficulties arise.
 
 \newpage
 
@@ -602,17 +615,17 @@ In this puzzle, we imagine a certain message protocol (as we do in many
 of the other puzzles).  We have an message alphabet that consists of the
 following symbols:
 
-| Code point | Name            | Appearance
-|------------|-----------------|------------
-| U+25A0     | Black Square    | ■
-| U+25AA     | Black Sm Square | ▪
-| U+25CB     | White Circle    | ○
-| U+25C9     | Fisheye         | ◉
-| U+25A1     | White Square    | □
-| U+25AB     | White Sm Square | ▫
-| U+25B2     | Black Up Triang | ▲
-| U+25CF     | Black Circle    | ●
-| U+2404     | End Transmit    | ! (substituted)
+| Codepoint  | Name              | Appearance
+|------------|-------------------|------------
+| U+25A0     | Black Square      | ■
+| U+25AA     | Black Small Square| ▪
+| U+25CB     | White Circle      | ○
+| U+25C9     | Fisheye           | ◉
+| U+25A1     | White Square      | □
+| U+25AB     | White Small Squa  re| ▫
+| U+25B2     | Black Up Triang   | ▲
+| U+25CF     | Black Circle      | ●
+| U+2404     | End Transmit      | ! (substituted)
 
 These geometric characters are attractive and are chosen to avoid
 thinking of matches in terms of natural language words that some other
@@ -622,7 +635,7 @@ as the correspondences are one-to-one, it doesn't matter what symbols
 are used.
 
 A message in this protocol consists of alternating blocks, belonging to
-either "type 1" or "type 2".  Each block has at least one symbol in it,
+either "type 1" or "type 2."  Each block has at least one symbol in it,
 but type 1 can have any of black square, black up triangle, white
 circle, fisheye, or white square, in any number and order of each.  Type
 2 blocks, in contrast, may have white small square, white square, black
@@ -632,7 +645,7 @@ Optionally, a space may separate blocks, but it is not required.
 The "end of transmission" character indicates the end of a message.
 
 An "obvious" pattern to describe a valid message apparently
-matches appropriately. Some example are shown below:
+matches appropriately. Some examples are shown below:
 
 ```
 Regex: (^(([■▲○◉□]+) ?([▫□▪●▲]+) ?)+)!
@@ -664,13 +677,13 @@ One more symbol | '▲▲▲▲□▲□□▲▲□▲□□□□□□□□�
                 |  Checked in 31.53 seconds
 ```
 
-Why does this happen?! Both the valid and the first invalid pattern
+Why does this happen? Both the valid and the first invalid pattern
 timed are longer than those that detect mismatches slowly.  You can see
 that the time to determine the last four messages are invalid
 approximately doubles with each additional character.
 
-Before you look at explanation, both determine why this occurs and come
-up with a solution using an alternate regular expression that still
+Before you look at the explanation, both determine why this occurs and
+come up with a solution using an alternate regular expression that still
 validates the message format.  Your solution should take a small
 fraction of a second in all cases (even messages that are thousands of
 symbols long).
@@ -683,7 +696,7 @@ easier to use your keyboard.
 
 Before you turn the page...
 
-**Try hard to avoid catastrophies.**
+**Try hard to avoid catastrophes.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -691,42 +704,44 @@ Before you turn the page...
 
 The reason why the slow-failing messages fail is somewhat obvious to
 human eyes.  None of them end with the "end-of-transmission" character.
-As you can see, whether they end with an entirely invalid symbol `X` or
+As you can see, whether they end with an entirely invalid symbol `X`, or
 simply with a valid symbol and no terminator, is not significant.
 
 You may want to think about why the quick-failing message also fails.
 Pause for a moment.
 
 But then notice that the final few symbols in that message are "black
-square" which can only occur in type 1 blocks; a type 2 block must
-always come immediatey before the end-of-transmission terminator.
-Nonetheless, the regular expression engine figures that out in
-(significantly) less than 1/100th of a second.
+square" which can only occur in type 1 blocks; in the specification, a
+type 2 block must always come immediatey before the end-of-transmission
+terminator.  Nonetheless, the regular expression engine figures that out
+in (significantly) less than 1/100th of a second.
 
 What you need to notice is that the symbol set overlaps between type 1
 blocks and type 2 blocks. Therefore, it is ambiguous whether a given
 symbol belongs to a given block or the next block.  If we simply look
 for a match, *one possible* match is found quickly, when it exists.  For
 example, this message that has only the ambiguous "white square" and
-"black up triangle" validates immediately.  However we do not know how
-many blocks of type 1 and how many of type 2 were created in the match
-(pedantically, I know enough about the internals of the regular
-expression engine to know that answer, but we are not guaranteed by the
-API; it could be different in a later version of the library without
-breaking compatibility).
+"black up triangle" validates immediately:
 
 ```
 Ambiguous quick | '▲▲▲▲□▲□□▲▲□▲□□□□□□□□▲▲□▲□▲□▲▲!' is Valid
                 |  Checked in 0.00 seconds
 ```
 
+However we do not know how many blocks of type 1 and how many of type 2
+were created in the match (pedantically, I know enough about the
+internals of the regular expression engine to know that answer, but we
+are not guaranteed by the API; it could be different in a later version
+of the library without breaking compatibility).
+
 Regular expressions are not smart enough to look ahead to the final
 symbol to make sure it is a terminator, unless we tell it to do so.  The
 produced answer is still *eventually* correct, but it is not as
-efficient as we would like.  The engine tries every possible permutation
-of "some symbols in this block, some in that"—which is of exponential
-complexity on the length of the message—before it finally decides that
-none match.
+efficient as we would like.
+
+The engine tries every possible permutation of "some symbols in this block,
+some in that"—which is of exponential complexity on the length of the
+message—before it finally decides that none match.
 
 Let's solve that by doing a little extra work for the engine.
 Specifically, before we try to identify alternating type 1 and type 2
@@ -761,23 +776,21 @@ Ambiguous quick | '▲▲▲▲□▲□□▲▲□▲□□□□□□□□�
                 |  Checked in 0.00 seconds
 ```
 
-	
-
 \newpage
 
 ## Playing Dominoes
 
 Dominoes is an old family of games dating at least from the Yuan Dynasty
-(around 1300 CE).  The game is played with tiles in which each half of
+(around 1300 CE).  The game is played with tiles on which each half of
 one side is marked, generally with a number of dots corresponding to a
 number.  Specific games vary in their rules, but most require matching
-the symbol or number on half of a tile with the corresponding symbols on
+the symbol or number on half of a tile with the corresponding symbol on
 another tile.
 
-There are, in fact, unicode characters for all the domino tiles having
-zero to six dots on each half.  We will come back to those characters in
-the next puzzle.  As a reminder, some of those Unicode characters are
-listed in this table.
+There are, in fact, Unicode characters for all the domino tiles that
+have zero to six dots on each half.  We will come back to those
+characters in the next puzzle.  As a reminder, some of those Unicode
+characters are listed in this table.
 
 ![](images/Dominoes-examples.png)
 
@@ -831,12 +844,13 @@ not be available with the icon characters for the domino tiles.
 The same digit must occur at the end of one tile, and again at the start
 of the next tile.  Therefore, we can shortcut specifically matching '3's
 with '3's and '5's with '5's.  Instead, we can just use a lookahead to
-match a back reference group.
+match a backreference group.
 
 ```python
->>> good = '{1:3}{3:3}{3:6}{6:1}{1:3}{3:3}{3:3}'
->>> bad = '{1:3}{3:3}{6:1}{1:3}{3:3}{3:6}{3:3}' # mismatched ends
->>> awful = '{1:3}{{3:5}}{5:2}'  # malformed syntax
+# Mismatched ends in bad, malformed syntax in awful
+>>> good =  '{1:3}{3:3}{3:6}{6:1}{1:3}{3:3}{3:3}'
+>>> bad =   '{1:3}{3:3}{6:1}{1:3}{3:3}{3:6}{3:3}' 
+>>> awful = '{1:3}{{3:5}}{5:2}' 
 
 >>> pat = r'^(({[1-6]:([1-6])})(?=$|{\3))+$'
 
@@ -860,7 +874,7 @@ match a back reference group.
 
 As the last puzzle showed, there are Unicode characters for domino
 tiles.  In the last puzzle, we played a game of evaluating whether a
-particular sequence of "tiles"—represented by ASCII sequences—were
+particular sequence of "tiles"—represented by ASCII sequences—was
 winning plays. However, in that last puzzle, we took a shortcut by
 taking advantage of the internal structure of the ASCII representation.
 
@@ -896,12 +910,12 @@ However, this puzzle is simplified further by only utilizing four of the
 representation.  The letters are not mnemonic, but at least they are
 easy to type.
 
-| Code point | Name                         | Substitute
-|------------|------------------------------|------------
-| U+1F03B    | Domino Tile Horizontal-01-03 | A
-| U+1F049    | Domino Tile Horizontal-03-03 | B
-| U+1F04C    | Domino Tile Horizontal-03-06 | C
-| U+1F05C    | Domino Tile Horizontal-06-01 | D
+| Codepoint | Name                         | Substitute
+|-----------|------------------------------|------------
+| U+1F03B   | Domino Tile Horizontal-01-03 | A
+| U+1F049   | Domino Tile Horizontal-03-03 | B
+| U+1F04C   | Domino Tile Horizontal-03-06 | C
+| U+1F05C   | Domino Tile Horizontal-06-01 | D
 
 Repeating our winning and losing examples with this encoding:
 
@@ -956,19 +970,19 @@ that.
 
 ## Sensor Art
 
-A hypothical data format uses a character string to represent state
+A hypothetical data format uses a character string to represent state
 transitions in a two-state system.  For example, this might be the
 status of some sort of electrical sensor.  Each string represents a
 "signal" of some time duration.
 
 The signal can occupy the "high" state for any duration, and it can
 occupy the "low" state for any duration.  Moreover, the transition
-between the two can either be "fast" or "slow", but it must stay in a
+between the two can either be "fast" or "slow," but it must stay in a
 state for at least one time interval after each transition.
 
 The format has a mnemonic version that uses simple ASCII art to
-represent states and transitions.  However, it also has a letter based
-version you may wish to play with instead, simply because some of the
+represent states and transitions.  However, it also has a letter-based
+version you may wish to play with instead, simply because many of the
 line drawing characters have special meanings in regex syntax. Special
 characters can be escaped, but it makes the patterns harder to read.
 
@@ -990,30 +1004,29 @@ invalid_4a = "|_^|__"
 invalid_4b = "FLHFLL"
 ```
 
-Signals `valid_1a` and `valid_1b` represent the same measurement.  Where
-'L' maps to '_' (low state), 'u' maps to '/' (up transition), 'd' maps
-to '\\' (down transition),'H' maps to '^' (high state), and 'F' maps to
-'|' (fast transition).  Likewise, `valid_2a` and `valid_2b` are
-equivalent and simpler signals with just one up transition, but a
-duration in each state.
+Signals `valid_1a` and `valid_1b` represent the same measurement.  In
+the correspondence, 'L' maps to '_' (low state), 'u' maps to '/' (up
+transition), 'd' maps to '\\' (down transition),'H' maps to '^' (high
+state), and 'F' maps to '|' (fast transition).  Likewise, `valid_2a` and
+`valid_2b` are equivalent and simpler signals with just one up
+transition, but a duration in each state.
 
-The invalid signals are likewise matched up by the different character
-options.  Signals `invalid_1a` or `invalid_1b` have *several* problems.
-Low and high states are adjacent with no transition (not permitted).  An
-alleged up transition occurs from the high state (also not permitted).
-Likewise a down transition from the low state.  The chief problem with
-`invalid_2a` or `invalid_2b` are that they have transitions with no
-states in between, which is also prohibited.  In the case of
-`invalid_3a` or `invalid_3b`, the states and transitions are generally
-fine, but there is an invalid symbol thrown in.
+The invalid signals are similarly have the different character options.
+Signals `invalid_1a` or `invalid_1b` have *several* problems.  Low and high
+states are adjacent with no transition (not permitted).  An alleged up
+transition occurs from the high state (also not permitted).  Movoer, a down
+transition occurs from the low state.  The chief problem with `invalid_2a` or
+`invalid_2b` are that they have transitions with no states in between, which is
+also prohibited.  In the case of `invalid_3a` or `invalid_3b`, the states and
+transitions are generally fine, but there is an invalid symbol thrown in.
 
 You wish to define a regular expression that will match *all* and *only*
 valid signal strings.  Pick which character set you wish to
-define—"ASCII" or "linedraw", but not intermixed—and find the pattern
+define—"ASCII" or "linedraw," but not intermixed—and find the pattern
 you need.
 
 That is, find the pattern that will work *only if* regular expressions
-are sufficienty powerful to perform this test.
+are sufficiently powerful to perform this test.
 
 Before you turn the page...
 
@@ -1032,7 +1045,7 @@ keep in mind when thinking about it.  The rules for a valid signal
 actually consist of just two constraints:
 
 * All signals must be drawn only from the limited alphabet
-* Only a subset of *digrams** of symbols are valid.
+* Only a subset of *digrams* of symbols are valid
 
 In particular, since the alphabet is 5 symbols, there are 25 possible
 digrams.  However, only 10 of those can occur in a valid signal.  You
@@ -1046,7 +1059,7 @@ What we need to do is *lookahead* to two symbols, but then only match
 one symbol.  Moreover, we need to consider the special case where the
 regex engine is currently looking at the final symbol in the signal,
 since that needs to be included as well.  So an alternate lookahead of
-"anything then end" is used.  Notice that we can use the `.` wildcard
+"anything then end" is used.  Notice that we can use the '.' wildcard
 because the digram was already guaranteed by the *prior* lookahead in
 the repetition.
 
@@ -1062,12 +1075,12 @@ patB =  (r'^(((?=LL|Lu|LF|HH|Hd|HF|uH|dL|FH|FL)'
 patA =  (r'^(((?=__|_/|_\||\^\^|\^\\|\^\||/\^|\\_|\|\^|\|_)'
          r'|(?=.$))[_\^/\\\|])+$')
 ```
-	
+
 # Creating Functions using Regexen
 
 Very often in Python, or in other programming languages, you will want
 to wrap a regular expression in a small function rather than repeat it
-inline.	
+inline.
 
 <!-- blank verso page -->
 
@@ -1095,7 +1108,7 @@ Showing the dancing bird of paradise
 ```
 
 Imagine that Python did not have the method `str.count()` but you wished
-to implement a similar function by utiizing regular expressions, with
+to implement a similar function by utilizing regular expressions, with
 the signature:
 
 ```python
@@ -1128,8 +1141,8 @@ else.  We might try a solution using that, for example:
 So that try is not quite correct. It will count single characters fine,
 but for larger substrings it gets confused.  In the example, the
 inversion of the character class is `[^tt]` which is the same as
-simply being "not a 't'".  In other words, we counted the 't's not
-the 'tt's.  Even if the substring hadn't been the same letter twice,
+simply being *not a "t"*.  In other words, we counted the "t"'s not
+the "tt"'s.  Even if the substring hadn't been the same letter twice,
 we would count the individual letters in the pattern.
 
 We can fix this with a more complex regular expression (think about how
@@ -1148,7 +1161,6 @@ as a bonus puzzle), but even easier is using `re.findall()`:
 
 ## Reimplementing str.count() (more restrictions)
 
-	
 In the last puzzle, we reimplemented `str.count()` using regular
 expressions.  However, the solutions I presented—and most likely the
 solution you arrvied at on your own—ultimately came down to utilizing
@@ -1223,13 +1235,14 @@ functions returning numbers.
 We also do not need to use any Python string methods, although it is
 fair to note that some of what is performed via regular expressions
 might be more simple to express as string methods.  The function can
-perform strictly and only regular expressions operations... along with a
+perform strictly and only regular expression operations... along with a
 little bit of Python looping (but never over numbers).
 
 We use two sentinels in alternation for the loop, indicating either the
 number of items at a certain power of ten, or the number at the next
-higher power.  A dictionary can map zero to nine repetions of a sentinel
-to the corresponding numeral, but leave the rest of string unchanged.
+higher power.  A dictionary can map zero to nine repetitions of a
+sentinel to the corresponding numeral, but leave the rest of the string
+unchanged.
 
 ```python
 # Group 1: zero or more leading @'s
@@ -1254,9 +1267,11 @@ easy to extend the main function to map a generic regular expression
 pattern to that same sentinel.
 
 The two sentinels underscore and at-sign are used here, but some rare
-unicode codepoint in the astral plane—or even a private-use
+Unicode codepoint in the astral plane—or even a private-use
 codepoint—could just as well be used instead if collision with the
 initial string were a concern.
+
+\newpage 
 
 ```python
 def let_count(c, s):
@@ -1292,10 +1307,10 @@ def let_count(c, s):
 \newpage
 
 ## Finding a Name for a Function
-	
+
 Suppose you come across some code that a previous employee on your
 project, long moved on and unavailable, wrote.  Their code passes unit
-tests and integration tests, so probably it does the right thing.  But
+tests and integration tests, so it probably does the right thing.  But
 they have not given a useful name or documentation for a certain
 function:
 
@@ -1316,15 +1331,15 @@ Before you turn the page...
 \newpage
 
 This puzzle certainly has many possible answers.  For all of them,
-understanding what the regular expression is doing is the crucual
+understanding what the regular expression is doing is the crucial
 element.  The short pattern might look odd, and you need to figure it
 out.  Here is a possibility.
 
 ```python
 def repeated_prefix(s):
     """Look for any prefix string in 's' and match only if
-    that prefix is repeated at least once, but it might be 
-    repeated many times.  No other substring may occur 
+    that prefix is repeated at least once, but it might be
+    repeated many times.  No other substring may occur
     between the start and end of the string for a match.
     """
     return not re.match(r'^(.+?)\1+$', s)
@@ -1339,7 +1354,7 @@ def repeated_prefix(s):
 ## Playing Poker (Part 1)
 
 In earlier puzzles, we had fun playing dominoes.  For the next few
-puzzles, let's play poker.  In particular, let's says that a player has
+puzzles, let's play poker.  In particular, let's say that a player has
 five cards, and we wish to compare two hands to each other.  We will do
 this over several puzzles, by building up small functions to answer
 various questions.
@@ -1349,7 +1364,7 @@ logic; however, a few of the questions will require a little bit of
 non-regex code as well.  First, let's remind ourselves of the ranking of
 different hands of 5 cards.  Our encoding will simplify card
 representations a little bit.  Specifically, the card that might be
-called, e.g. `10♥` will be called `T♥` so that every card is a two
+called, e.g., `10♥` will be called `T♥` so that every card is a two
 symbol combination.
 
 * Straight flush, e.g. `J♣ T♣ 9♣ 8♣ 7♣`
@@ -1359,12 +1374,12 @@ symbol combination.
 * Straight, e.g. `9♦ 8♣ 7♣ 6♥ 5♣`
 * Three of a kind, e.g. `Q♣ 8♠ 8♦ 8♣ 3♥`
 * Two pairs, e.g. `J♠ J♣ 9♥ 8♥ 8♦`
-* One Pair, e.g. `A♥ K♦ 4♠ 4♥ 3♠`
+* One pair, e.g. `A♥ K♦ 4♠ 4♥ 3♠`
 * High card, e.g. `K♠ 9♥ 8♠ 4♥ 2♣`
 
 Within the same kind of hand, other rules come into play.  Let's ignore
 those for now.  We'd like two support functions to start.  First, you
-should write a function `prettify(hand)` that takes an easier to type
+should write a function `prettify(hand)` that takes an easier-to-type
 representation of suits as 'S', 'H', 'D', 'C', and turns the hands into
 their Unicode symbols.
 
@@ -1375,7 +1390,7 @@ sure all the cards are sorted in descending order (as in the examples),
 where aces are always considered high, and the suits are ordered spades,
 hearts, diamonds, clubs.
 
-This second function, `cardsort(hand)` uses more Python than regular
+This second function, `cardsort(hand)`, uses more Python than regular
 expressions per se, so just read the solution if you are less
 comfortable with Python itself.
 
@@ -1468,7 +1483,7 @@ you wrote if it makes entering test cases easier.
 
 Before you turn the page...
 
-**Functions are a big help in larger programs.**
+**Large buildings are built from small bricks.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -1510,16 +1525,17 @@ number for later use.  Those are all "truthy" values (like all strings).
 >>> def is_straight(hand):
 ...     pat = r'[ SHDC\u2660\u2665\u2666\u2663]'
 ...     h = re.sub(pat, '', hand)
-...     return h[0] if re.search(h, 'AKQJT98765432') else False
+...     match = re.search(h, 'AKQJT98765432') 
+...     return h[0] if match else False
 ```
 
 As with the first function, we might as well be friendly in accepting
-the ASCII version of suits, even though they could always be
-`prettify()`d if necessary.  The pattern looks for everything that is a
-suit character or a space, and strips it out to create a simplified
-"hand".
+the ASCII version of suits, even though they could always be imporved
+with `prettify()` if necessary.  The pattern looks for everything that
+is a suit character or a space, and strips it out to create a simplified
+"hand."
 
-With the simplified hand of just "numbers", we know that any straight
+With the simplified hand of just "numbers," we know that any straight
 must be a substring of the run of all numbers.  We do not check again
 that the length is 5, trusting that other functions have validated this.
 We could easily add that if we wanted, of course.
@@ -1560,7 +1576,7 @@ will simply assume the various tests are performed in appropriate
 descending order of strength.  The first successful test will be the
 classified type of the hand.
 
-For the next few puzzles, therefore write these functions:
+For the next few puzzles, therefore, write these functions:
 
 * `is_four_of_kind(hand)`
 * `is_full_house(hand)`
@@ -1568,13 +1584,13 @@ For the next few puzzles, therefore write these functions:
 * `is_two_pairs(hand)`
 * `is_pair()`
 
-This and the next frew puzzles cover the various functions. See if you
+This and the next few puzzles cover the various functions. See if you
 can solve all of them (possibly using shared functionality) before
 looking at the discussion.
 
 Before you turn the page...
 
-**Functions are a big help in larger programs.**
+**You better cheat, cheat, if you can't win.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -1610,10 +1626,9 @@ card.
 
 The group simply grabs one character, then we must find 3 more copies of
 that group, but allow any prefix before each repetition.  If we promised
-that the hand was always ordered the extra stuff before the back
-reference would not be needed, but it does no harm in being zero width.
-
-	
+that the hand was always ordered, the extra stuff before the
+backreference would not be needed, but it does no harm in being zero
+width.
 
 \newpage
 
@@ -1637,7 +1652,7 @@ possible, to identify a hand that contains a full house.
 
 Before you turn the page...
 
-**You might risk identifying the "dead man's hand".**
+**You might risk identifying the "dead man's hand."**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -1653,9 +1668,9 @@ it directly.
 
 For this solution we use regular expressions to strip the suits, and
 also to match the actual pattern.  We can utilize the `cardsort()`
-function from an earlier puzzle to guarantee the hand is sorted; we also
-make sure it is the "pretty" version rather than the ASCII version since
-sorting assumes that.
+function, from Part 1 of the poker puzzles, to guarantee the hand is
+sorted; we also make sure it is the "pretty" version rather than the
+ASCII version since sorting assumes that.
 
 The pattern itself is either two of the high number followed by three of
 the low number, or three of the high number followed by two of the low
@@ -1705,7 +1720,7 @@ the predicate itself.
 
 ## Playing Poker (Part 5)
 
-In the last couple puzzles we identified four-of-a-kind and full house.
+In the last few puzzles we identified four-of-a-kind and full house.
 Much of the logic for this puzzle will be similar to those, but
 obviously tweaked somewhat for the next cases.
 
@@ -1730,7 +1745,7 @@ Before you turn the page...
 
 \newpage
 
-Identifying two or three of a kind is a lot like identifying
+Identifying two- or three-of-a-kind is a lot like identifying
 four-of-a-kind, just with fewer repetitions.  We could do it without
 sorting the hand, but doing so, as with our full house solution, is a
 bit easier.
@@ -1755,7 +1770,7 @@ False
 ```
 
 Identifying a pair is basically identical.  We simply need to settle for
-one copy of a card number rather two copies.
+one copy of a card number rather than two copies.
 
 ```python
 def is_pair(hand):
@@ -1776,6 +1791,8 @@ other, or matched the reverse three then two.  However, the "gap" of an
 unmatched number can occur in more different ways in this case.
 Thinking about it, two pairs might look like any of the following (even
 assuming sorting):
+
+\newpage
 
 * `X X _ Y Y`
 * `_ X X Y Y`
@@ -1836,7 +1853,7 @@ you to think about which situation each puzzle describes.
 \newpage
 
 ## Identifying Equal Counts
-	
+
 At times we encounter a message or a stream that uses balanced
 "increment" and "decrement" symbols.  For example, one way to check that
 a message has terminated might be to match up the increments and
@@ -1868,10 +1885,10 @@ additional power.
 
 In computer science or mathematical terms, a regular expression is
 equivalet to a *nondeterministic finite automaton* (NFA), where a regex
-provides a very compact spelling of such an NDA.  More powerful machines
+provides a very compact spelling of such an NFA.  More powerful machines
 include *pushdown automata* (PDA) which have an indefinitely large
 "stack" of stored symbols.  One most often encounters PDAs as parsers.
-A PDA, even the nondeterministic variety remains formally less powerful
+A PDA, even the nondeterministic variety, remains formally less powerful
 than a Turing Machine.
 
 In simple terms, if you want to count occurrences, you need to use
@@ -1881,19 +1898,17 @@ hold the symbols).
 Many new users of regexen fall into a trap of hoping this puzzle is
 solvable. Or more often still, something equivalent like matching up
 opening and closing parentheses, brackets, or XML/HTML tags.  *Hic sunt
-dracones*! (here be dragons).
-
-	
+dracones*! (Here be dragons)
 
 \newpage
 
-## Match Before Duplicate Words
+## Matching Before Duplicate Words
 
 If you looked at the last puzzle, you saw that some match patterns you
 might anticipate to be possible with regular expressions are actually
 not expressible with regexen.  Think about whether this puzzle is
-possible, and if so how.
-	
+possible and, if so, how.
+
 Write a regular expression that will match all the initial words of a
 string (including any punctuation or spacing that might surround words),
 stopping before any word that is duplicated in the string.  For example:
@@ -1916,7 +1931,7 @@ assert re.match(pat, s2).group() == 'this '
 
 The second example is a little different.  The first word 'this' never
 reoccurs.  But the second word 'and' does occur later in the phrase, and
-therefore it, and everything following the duplicated word must be
+therefore it, and everything following the duplicated word, must be
 excluded.
 
 Before you turn the page...
@@ -1928,16 +1943,16 @@ Before you turn the page...
 \newpage
 
 This match pattern is indeed possible to write as a regular expression.
-We need to use back references to check it, but those are a standard
-feature of reqular expression engines.
+We need to use backreferences to check it, but those are a standard
+feature of regular expression engines.
 
 ```python
 pat = r'((\w+\b)(?!.*\2\b)\W*)+'
 ```
 
-As well as the back reference, we use a negative lookahead assertion.
+As well as the backreference, we use a negative lookahead assertion.
 That is, the basic thing being matched is `(\w+\b)\W*)+`.  That is to
-say, match one or more alphanumeic characters `\w` followed by a word
+say, match one or more alphanumeric characters `\w` followed by a word
 boundary.  That "word" might be followed by zero or more
 non-alphanumeric characters.  Then overall, match one or more
 repetitions of that general pattern.
@@ -1956,18 +1971,15 @@ surrounding the entire expression (other than the `+` quantifier), that
 whole thing is group 1.  So the first subpattern inside of that,
 matching the current word, is group 2, hence named as `\2`.
 
-	
-
 \newpage
 
 ## Testing an IPv4 Address
 
-	
 "Internet protocol version 4" addresses are prevalent in almost
 everything we do with computers.  "Under the hood" (so to speak), an
 IPv4 address is just a 32-bit unsigned integer.  However, it is
 universal to write them in a human-memorable way as so-called
-dotted-quads.  In that format, each byte of the address is represented
+dotted quads.  In that format, each byte of the address is represented
 as a decimal number between 0 and 255 (the range of an integer byte),
 and the four bytes are separated by periods.
 
@@ -1982,16 +1994,16 @@ address?  Some examples:
 * Invalid: 192.AA.20.1
 
 The first of these is a good address; it happens to be a range reserved
-for internal addresses with an organization (usually one particular
+for internal addresses within an organization (usually one particular
 router), and hence exists in many local networks.  The others fail for
-various reasons. The first invalid addess contains numbers outside the
+various reasons. The first invalid address contains numbers outside the
 permitted integer range in one quad.  The second invalid address has 5
 dotted elements rather than 4.  The third invalid address contains
 characters other than decimal digits in one of the quads.
 
 Before you turn the page...
 
-**Always ask whether regexen are powerful enough for a problem.**
+**Ask whether regexen are powerful enough for a problem.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -2033,7 +2045,7 @@ pat = (
 
 The pattern is a bit of a mouthful, but when we see how it is built up,
 the pattern becomes quite  clear and elegant.  All the stuff after the
-number quantifier, `{3}` is just a repetition of the earlier subpattern.
+number quantifier `{3}` is just a repetition of the earlier subpattern.
 This is simply because we match three numbers that are followed by a
 period, but the final number must not be followed by anything.
 
@@ -2043,14 +2055,12 @@ describe all the valid numbers in the 200+ range.  For the rest, we get
 a little clever.
 
 If the quad isn't three digits beginning with a '2', it can either be
-three-digits beginning with 1 or 0.  Conventionally, leading zeros or
-dropped, but that is not required.  However, two-digit or one-digit
+three-digits beginning with '1' or '0'.  Conventionally, leading zeros
+are dropped, but that is not required.  However, two-digit or one-digit
 numbers are also common; any such two- or one-digit numbers are
 permitted.  So we make the initial `[01]` optional, and also make the
 final digit optional with `\d?`.  This gives all and only the remaining
 permissible quads.
-
-	
 
 \newpage
 
@@ -2063,9 +2073,9 @@ puzzles.
 Regular expressions do not really understand numbers.  A '7' or a '777'
 might be sequences of digits matched in a string, but they are not
 fundamentally different, to regexen, than any other character patterns.
-Quantifiers can express numbers, either 0/1 with '?', 0 or more with
-'*', or 1 or more with '+'.  In extended regexen like Python uses, we
-can even express specific counts like '{3, 6}' for "at least three and
+Quantifiers can express numbers, either 0/1 with `?`, 0 or more with
+`*`, or 1 or more with `+`.  In extended regexen like Python uses, we
+can even express specific counts like `{3,6}` for "at least three and
 not more than 6."  But those are specific numbers, not calculated
 quantities.
 
@@ -2126,11 +2136,11 @@ pat = r"^(((@+) )(?=\3\3 ))+(\3\3 )$"
 What we do here is several steps:
 
 First, make sure we are beginning at the start of the string ('^').  This
-is where 's4' failed, it doubles as a suffix, but we are required to
+is where 's4' failed; it doubles as a suffix, but we are required to
 start at the beginning.
 
 Second, match at least one '@' symbol, up to however many occur in a
-row.  After that group of '@'s, we have a space that is not part of the
+row.  After that group of '@' symbols, we have a space that is not part of the
 group.
 
 Third, *lookahead* to a pattern that has twice as many '@' symbols as
@@ -2174,8 +2184,8 @@ repetitions of the '@' symbol followed by spaces.  For example:
 fibs = "@ @ @@ @@@ @@@@@ @@@@@@@@ "
 # Match: 2 1 3 4 7 11
 lucas = "@@ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@ "
-# Match: 3 2 5 7 12 19
-fib2 = "@@@ @@ @@@@@ @@@@@@@ @@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@ "
+# Match: 3 1 4 5 9 14
+fib2 = "@@@ @ @@@@ @@@@@ @@@@@@@@@ @@@@@@@@@@@@@@ "
 # Fail: 1 1 3 4 7 11
 wrong1 = "@ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@ "
 # Fail: 1 1 2 3 4 7
@@ -2193,7 +2203,7 @@ Before you turn the page...
 
 \newpage
 
-It turns out, matching properly encoded Fibonacci-like sequences is
+It turns out that matching properly encoded Fibonacci-like sequences is
 within the power of regular expressions.  Adding together two prior
 elements is actually a lot like simply doubling the one prior element as
 we did in the last puzzle.
@@ -2215,7 +2225,7 @@ looking at the solution to this one.
 ...
 VALID @ @ @@ @@@ @@@@@ @@@@@@@@
 VALID @@ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@
-VALID @@@ @@ @@@@@ @@@@@@@ @@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@
+VALID @@@ @ @@@@ @@@@@ @@@@@@@@@ @@@@@@@@@@@@@@
 INVALID @ @ @@@ @@@@ @@@@@@@ @@@@@@@@@@@
 INVALID @ @ @@ @@@ @@@@ @@@@@@@
 ```
@@ -2228,11 +2238,11 @@ different '@' sequences at a time; and hence that there must be an even
 number if we match to the end.
 
 The second issue is that since we stride two-by-two through the
-"numbers", we need to use a second regular expression to make sure the
+"numbers," we need to use a second regular expression to make sure the
 sequence *predicts* the next element when offset by one element as well.
 We see that problem in `wrong1`. If we only utilized `pat1` it would
 incorrectly match as Fibonacci-like. Since `pat1` already collects the
-final "number", there is no need for `pat2` to do so as well, the
+final "number," there is no need for `pat2` to do so as well; the
 lookahead suffices.
 
 \newpage
@@ -2243,7 +2253,8 @@ Perhaps surprisingly, in the last puzzle we were able to match
 Fibonacci-like sequences using regular expressions.  Let's turn next to
 whether we might do the same thing with prime numbers.  In particular,
 if you can find it, your regular expression(s) will only need to match
-initial sequences of the primes, but all such initial sequences.
+ascending initial sequences of the primes, but all such initial
+sequences.
 
 As in the last two puzzles, we encode numeric sequences using a number
 of contiguous '@' symbols, with each "number" separated by spaces. For
@@ -2260,7 +2271,7 @@ fail1 = "@@ @@@ @@@@@@@ @@@@@@@@@@@ "
 fail2 = "@@ @@@ @@@@ @@@@@ @@@@@@@ "
 ```
 
-The Sieve of Erathosthenes is a lovely and ancient algorithm for finding
+The Sieve of Eratosthenes is a lovely and ancient algorithm for finding
 all the prime numbers.  It "strikes out" each multiple of a prime as it
 steps through all the natural numbers, leaving only primes thereby.  In
 a compact Python implementation it can look like the below (this can be
@@ -2272,8 +2283,8 @@ def get_primes():
     candidate = 2
     found = []
     while True:
-    	if all(candidate % prime != 0 for prime in found):
-        	yield candidate
+        if all(candidate % prime != 0 for prime in found):
+            yield candidate
             found.append(candidate)
         candidate += 1
 ```
@@ -2283,9 +2294,9 @@ def get_primes():
 The form of the Sieve is definitely reminiscent of lookahead assertions
 which we have used in many of the puzzles.  Think about whether you can
 implement this using regular expressions (don't think about performance
-for this puzzle).  Before you look at the discussion, try to either find
-a regular expression to match the valid sequences or formulate clearly
-why you cannot.
+for this puzzle).  Before you look at the discussion, try either to find
+a regular expression to match the valid sequences or to formulate
+clearly why you cannot.
 
 Before you turn the page...
 
@@ -2308,13 +2319,13 @@ repetition of that group.
 
 Let's say the hypothetical group was number 7.  In that case, a negative
 lookahead assertion like `(?! \7{2,} )` would state precisely that no
-contiguous number of '@' symbols whose count is a multiple of the number
-in the prior match group occur later in the string.  That sounds a lot
+contiguous numbers of '@' symbols, whose count is a multiple of the number
+in the prior match group, occur later in the string.  That sounds a lot
 like what the Sieve does.
 
 Negative lookahead is indeed a powerful and useful technique.  In fact,
 you could perfectly well implement a partial sieve to exclude all the
-multiples of the first N primes from occuring in a candidate string.
+multiples of the first N primes from occurring in a candidate string.
 The problem is that regular expressions can only have a finite number of
 match groups by definition.  That is, regular expressions are a way of
 expressing *finite state* machines.  The exact maximum number of groups
@@ -2327,11 +2338,12 @@ To match *every* string of initial primes, we need to "strike out"
 indefinitely many primes along the way.  This same problem would occur for
 every other sequential prime-finding algorithm.  There do exist direct
 primality tests that do not iterate through the smaller primes, such as the
-probabalistic Miller–Rabin test[^fn-grh] or the deterministic
+probabilistic Miller–Rabin test[^fn-grh] or the deterministic
 Agrawal–Kayal–Saxena test.  However, all of those require mathematical
 calculations that are not possible in regular expressions.
 
-[^fn-grh]: The Miller-Rabin test can be made deterministic if the Generalized Riemann hypothesis holds.
+[^fn-grh]: The Miller-Rabin test can be made deterministic if the
+Generalized Riemann hypothesis holds.
 
 \newpage
 
@@ -2345,11 +2357,11 @@ your understanding of the Sieve of Eratosthenes.
 Mathematics has a concept of *relative primes* which is slightly weaker
 than primality.  All prime numbers are relatively prime—also called
 *coprime*—with each other, but other pairs are as well.  Two coprime
-numbers have no common divisors other than 1.  This is certainly true
-of prime numbers; for example, 11 and 53 are relatively prime since
-neither has an divisors other than themselves and 1.  But likewise 10
-and 21 are relatively since the divisors of the first are 2 and 5, but
-those of the second are 3 and 7, which do not overlap.
+numbers have no common divisors other than 1.  This is certainly true of
+prime numbers; for example, 11 and 53 are relatively prime since neither
+have any divisors other than themselves and 1.  But likewise 10 and 21
+are coprime since the divisors of the first are 2 and 5, but those of
+the second are 3 and 7, which do not overlap.
 
 So the question for this puzzle is whether you can create an expression
 that will identify all and only sequences of ascending natural numbers
@@ -2391,7 +2403,7 @@ Before you turn the page...
 
 \newpage
 
-There are a couple issues to consider in this solution.  It turns out
+There are a couple of issues to consider in this solution.  It turns out
 that such a solution is indeed possible, using much the same style as
 the Sieve of Eratosthenes, but not an identical technique.  That is, as
 discussed in the last puzzle, we are perfectly well able to reject a
@@ -2419,13 +2431,13 @@ pat = r'^((@@+) (?=\2@)(?!.* \2{2,} ))+'
 ```
 
 Here we first identify a group of 2 or more '@' symbols.  Then we do a
-postive lookahead to assure that the next group of '@' symbols has at
+postive lookahead to ensure that the next group of '@' symbols has at
 least one more symbol.
 
 The real crux of this is the *negative lookahead* assertion that we
 never later see a (space delimited) sequence of two or more copies of
 the group.  This pattern does not capture the final "number" in the
-sequence, it is just used to provide a true or false answer to whether
+sequence; it is just used to provide a true or false answer to whether
 the sequence matches.
 
 \newpage
