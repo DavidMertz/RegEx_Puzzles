@@ -29,9 +29,9 @@ mathfont: texgyredejavu-math.otf
 I thank my friend Miki Tebeka, who invited me to write this book, albeit
 in slightly different form than the version you see.  I am very grateful
 to my friend Brad Huntting and partner Mary Ann Sushinsky who provided
-clever ideas in the directions of these puzzles.  Thanks to my
-colleague, Lucy Wan, who provided a final proofreading, finding the
-silly typos missed on many prior reads.
+clever ideas in the directions of these puzzles.  Thanks to my colleague
+Lucy Wan, who provided a final proofreading, finding the many silly
+typos missed on many prior reads.
 
 A number of other friends and family members listened to me enumerate
 the foibles of another publisher who clings to a cargo-culted toolchain.
@@ -39,14 +39,27 @@ the foibles of another publisher who clings to a cargo-culted toolchain.
 With ambivalence, I thank Noam Chomsky for arranging computability into
 a neat hierarchy, with regular expressions at the bottom.
 
+\newpage 
+
+![La Liberté éclairant le monde](images/Liberty.png)
+
+# Rights of (Wo)Man
+
+"Whatever is my right as a man is also the right of another; and it becomes my
+duty to guarantee as well as to possess." 
+
+> ― Thomas Paine
+
 ---
 
-This book is licensed as Creative Commons Attribution-ShareAlike 4.0.
+This book is copyright of David Mertz, 2021.
+
+It is licensed as Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0).
 The source is available at:
 
 > https://github.com/DavidMertz/RegEx_Puzzles.
 
-\newpage
+Please feel free to utilize it within these terms (but give me credit).
 
 <!-- blank verso page -->
 
@@ -56,36 +69,26 @@ The source is available at:
 
 Cover image: "Alien DNA" by Sven Geier, 2015. Used by permission.
 
-Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746_0db0b8eba0_o.jpg
+Back cover photo by Mary Ann Sushinsky, 2018. Used by permission.
 
-Pixabay (https://pixabay.com/service/license/): clown-28772.svg
+Images by Jay Trolinger (https://www.spoonflower.com/profiles/ormolu) used by
+permission: Basket-Verso; Root5spiral-Verso; Striated-Verso; Olives-Verso;
+Basket-Recto; Naive-Scribble-Verso; Root5spiral-Recto; Naive-Scribble-Recto;
+Striated-Recto; Olives-Recto
 
-Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black.svg
+Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746
 
-freesvg.org (Public Domain):
-johnny-automatic-right-hand.svg;
-johnny-automatic-left-hand.svg;
-johnny-automatic-left-hand.svg;
-clown-1549219095.svg;
-pointerfingerright.svg;
-Prismatic-DNA-Helix-Circles-3.svg
+Pixabay (https://pixabay.com/service/license/): clown-28772
 
-OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19.svg
+Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black
 
-Samuel MacGregor Liddel Mathews, "The Goetia: The Lesser Key of Solomon the King" (1904, Public Domain): N_A_B_E_R_I_U_S.jpg
+freesvg.org (Public Domain): johnny-automatic-right-hand;
+johnny-automatic-left-hand; johnny-automatic-left-hand; clown-1549219095;
+pointerfingerright; Prismatic-DNA-Helix-Circles-3
 
-Images by Jay Trolinger (https://www.spoonflower.com/profiles/ormolu) used
-by permission:
-Basket-Verso.png;
-Root5spiral-Verso.png;
-Striated-Verso.png;
-Olives-Verso.png;
-Basket-Recto.png;
-Naive-Scribble-Verso.png;
-Root5spiral-Recto.png;
-Naive-Scribble-Recto.png;
-Striated-Recto.png;
-Olives-Recto.png
+OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19
+
+Samuel MacGregor Liddel Mathews, "The Goetia: The Lesser Key of Solomon the King" (1904, Public Domain): N_A_B_E_R_I_U_S
 
 *Stuck in the Middle with You*, by Gerry Rafferty and Joe Egan (Stealer
 Wheels), 1973:
@@ -622,10 +625,10 @@ following symbols:
 | U+25CB     | White Circle      | ○
 | U+25C9     | Fisheye           | ◉
 | U+25A1     | White Square      | □
-| U+25AB     | White Small Squa  re| ▫
+| U+25AB     | White Small Square| ▫
 | U+25B2     | Black Up Triang   | ▲
 | U+25CF     | Black Circle      | ●
-| U+2404     | End Transmit      | ! (substituted)
+| U+2404     | End Transmition   | `!` (herein) 
 
 These geometric characters are attractive and are chosen to avoid
 thinking of matches in terms of natural language words that some other
@@ -642,10 +645,9 @@ circle, fisheye, or white square, in any number and order of each.  Type
 small square, black circle, or black up triangle, in the same way.
 Optionally, a space may separate blocks, but it is not required.
 
-The "end of transmission" character indicates the end of a message.
-
-An "obvious" pattern to describe a valid message apparently
-matches appropriately. Some examples are shown below:
+The "end of transmission" character indicates the end of a message.  An
+"obvious" pattern to describe a valid message apparently matches
+appropriately. Some examples are shown below:
 
 ```
 Regex: (^(([■▲○◉□]+) ?([▫□▪●▲]+) ?)+)!
@@ -653,7 +655,7 @@ Regex: (^(([■▲○◉□]+) ?([▫□▪●▲]+) ?)+)!
 Structure 1/2/1/2  | Message '■▲◉▫■▪▫!' is Valid
 Structure 1 2 1 2  | Message '■▲◉ ▫ ■ ▪▫!' is Valid
 Missing terminator | Message '■▲◉▫■▪▫' is Invalid
-Structure 1 1 2 1  | Message '▲▲▲ ■■■ ▫▫▫ ○○○!' is Invalid
+Structure 1 1 2 1  | Message '▲▲▲ ■◉■ ▫▫● ◉○○!' is Invalid
 ```
 
 The regex pattern shown actually *is* correct in a mathematical sense.
@@ -662,10 +664,10 @@ For example:
 
 ```
 Quick match     |
-        '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
+        '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■◉■▲▲□□◉▲!' is Valid
                 |  Checked in 0.00 seconds
 Quick failure   |
-        '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
+        '■▲○◉■▲▫▪●●■◉■▲▲◉◉◉■□□□▫▫▪●●●▫■◉■!' is Invalid
                 |  Checked in 0.00 seconds
 Failure         | '▲□□▲▲□□▲▲▲□□□□□□□□▲▲□▲□▲□▲X' is Invalid
                 |  Checked in 4.42 seconds
@@ -759,10 +761,10 @@ Missing terminator | Message '■▲◉▫■▪▫' is Invalid
 Structure 1 1 2 1  | Message '▲▲▲ ■■■ ▫▫▫ ○○○!' is Invalid
 
 Quick match     |
-        '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■■■▲▲□□◉▲!' is Valid
+        '■▲○◉□▫□▪●◉◉▫▪▪●●□□▲▲○○◉■◉■▲▲□□◉▲!' is Valid
                 |  Checked in 0.00 seconds
 Quick failure   |
-        '■▲○◉■▲▫▪●●■■■▲▲◉◉◉■□□□▫▫▪●●●▫■■■!' is Invalid
+        '■▲○◉■▲▫▪●●■◉■▲▲◉◉◉■□□□▫▫▪●●●▫■◉■!' is Invalid
                 |  Checked in 0.00 seconds
 Failure         | '▲□□▲▲□□▲▲▲□□□□□□□□▲▲□▲□▲□▲X' is Invalid
                 |  Checked in 0.00 seconds
@@ -805,6 +807,8 @@ And second, an invalid/losing pattern:
 
 ![](images/Dominoes-bad.png)
 
+\newpage
+
 In this game, tiles are placed in linear order, and two may occur
 adjacently only if they have the same number of dots where they "touch."
 Unlike with physical tiles, these symbols may not be turned around, but
@@ -831,7 +835,7 @@ more tiles is trivially losing.
 
 Before you turn the page...
 
-**You may be able to do this more efficiently than your first thought.**
+**You might do this more efficiently than your first thought.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
@@ -867,6 +871,10 @@ match a backreference group.
 {1:3}{3:3}{6:1}{1:3}{3:3}{3:6}{3:3} loses!
 {1:3}{{3:5}}{5:2} loses!
 ```
+
+<!-- blank recto page -->
+
+![johnny-automatic-right-hand](images/johnny-automatic-right-hand.svg)
 
 \newpage
 
@@ -910,8 +918,10 @@ However, this puzzle is simplified further by only utilizing four of the
 representation.  The letters are not mnemonic, but at least they are
 easy to type.
 
+\newpage
+
 | Codepoint | Name                         | Substitute
-|-----------|------------------------------|------------
+|-----------|------------------------------|:----------:
 | U+1F03B   | Domino Tile Horizontal-01-03 | A
 | U+1F049   | Domino Tile Horizontal-03-03 | B
 | U+1F04C   | Domino Tile Horizontal-03-06 | C
@@ -934,10 +944,6 @@ Before you turn the page...
 **Thoughts about digrams are always pleasant thoughts.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-<!-- blank recto page -->
-
-![johnny-automatic-right-hand](images/johnny-automatic-right-hand.svg)
 
 \newpage
 
@@ -965,6 +971,13 @@ that.
 >>> re.search(pat, lose) or "No Match"
 'No Match'
 ```
+
+
+![pointyfingerright](images/pointyfingerright.svg)
+
+<!-- blank recto page -->
+
+![Root5spiral_Recto](images/Root5spiral_Recto.png)
 
 \newpage
 
@@ -1005,9 +1018,9 @@ invalid_4b = "FLHFLL"
 ```
 
 Signals `valid_1a` and `valid_1b` represent the same measurement.  In
-the correspondence, 'L' maps to '_' (low state), 'u' maps to '/' (up
-transition), 'd' maps to '\\' (down transition),'H' maps to '^' (high
-state), and 'F' maps to '|' (fast transition).  Likewise, `valid_2a` and
+the correspondence, `L` maps to `_` (low state), `u` maps to `/` (up
+transition), `d` maps to \\ (down transition), `H` maps to `^` (high
+state), and `F` maps to `|` (fast transition).  Likewise, `valid_2a` and
 `valid_2b` are equivalent and simpler signals with just one up
 transition, but a duration in each state.
 
@@ -1033,10 +1046,6 @@ Before you turn the page...
 **Find a matching pattern, if possible.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-<!-- blank recto page -->
-
-![pointyfingerright](images/pointyfingerright.svg)
 
 \newpage
 
@@ -1157,9 +1166,13 @@ as a bonus puzzle), but even easier is using `re.findall()`:
 3
 ```
 
+<!-- blank recto page -->
+
+![Striated_Recto](images/Striated_Recto.png)
+
 \newpage
 
-## Reimplementing str.count() (more restrictions)
+## Reimplementing str.count() (stricter)
 
 In the last puzzle, we reimplemented `str.count()` using regular
 expressions.  However, the solutions I presented—and most likely the
@@ -1220,10 +1233,6 @@ Before you turn the page...
 **Write a Python function with the restrictions given.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-<!-- blank recto page -->
-
-![Striated_Recto](images/Striated_Recto.png)
 
 \newpage
 
@@ -1356,7 +1365,7 @@ def repeated_prefix(s):
 In earlier puzzles, we had fun playing dominoes.  For the next few
 puzzles, let's play poker.  In particular, let's say that a player has
 five cards, and we wish to compare two hands to each other.  We will do
-this over several puzzles, by building up small functions to answer
+this, over several puzzles, by building up small functions to answer
 various questions.
 
 As much as possible, you should use regular expressions to express the
@@ -1535,6 +1544,8 @@ with `prettify()` if necessary.  The pattern looks for everything that
 is a suit character or a space, and strips it out to create a simplified
 "hand."
 
+\newpage
+
 With the simplified hand of just "numbers," we know that any straight
 must be a substring of the run of all numbers.  We do not check again
 that the length is 5, trusting that other functions have validated this.
@@ -1697,7 +1708,11 @@ win.
 ...         return hand[4] + hand [0]
 ...     else:
 ...         return hand[0] + hand[4]
+```
 
+\newpage
+
+```python
 >>> is_full_house(prettify('AS AC 8H 8D 8C'))
 '8A'
 >>> is_full_house(prettify('AS AH AC 8D 8C'))
@@ -1787,7 +1802,7 @@ def is_pair(hand):
 
 Matching two pairs is actually a little trickier.  Remember that for a
 full house we matched either two of one number followed by three of the
-other, or matched the reverse three then two.  However, the "gap" of an
+other, or matched the reverse, three then two.  However, the "gap" of an
 unmatched number can occur in more different ways in this case.
 Thinking about it, two pairs might look like any of the following (even
 assuming sorting):
@@ -2062,6 +2077,10 @@ permitted.  So we make the initial `[01]` optional, and also make the
 final digit optional with `\d?`.  This gives all and only the remaining
 permissible quads.
 
+<!-- blank recto page -->
+
+![joker-48067975746](images/joker-48067975746_0db0b8eba0_o.jpg)
+
 \newpage
 
 ## Matching a Numeric Sequence
@@ -2108,6 +2127,7 @@ VALID @ @@ @@@@ @@@@@@@@ @@@@@@@@@@@@@@@@
 INVALID @@ @@@@ @@@@@ @@@@@@@@@@
 INVALID @ @ @@ @@@@
 ```
+\newpage
 
 The pattern you come up with should match strings of any length that
 follow the doubling sequence, and should reject strings of any length
@@ -2120,10 +2140,6 @@ Before you turn the page...
 **Be sure to rule out the strings that do not express the sequence.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-<!-- blank recto page -->
-
-![joker-48067975746_0db0b8eba0_o](images/joker-48067975746_0db0b8eba0_o.jpg)
 
 \newpage
 
@@ -2139,11 +2155,11 @@ First, make sure we are beginning at the start of the string ('^').  This
 is where 's4' failed; it doubles as a suffix, but we are required to
 start at the beginning.
 
-Second, match at least one '@' symbol, up to however many occur in a
-row.  After that group of '@' symbols, we have a space that is not part of the
+Second, match at least one `@` symbol, up to however many occur in a
+row.  After that group of `@` symbols, we have a space that is not part of the
 group.
 
-Third, *lookahead* to a pattern that has twice as many '@' symbols as
+Third, *lookahead* to a pattern that has twice as many `@` symbols as
 the group we last saw.  I spelled that as `\3\3`, which feels intuitive,
 but you could likewise spell it as `\3{2}` to mean the same thing.
 
@@ -2177,7 +2193,7 @@ matching "Fibonacci-like" sequences, where given two elements, the next
 one is the sum of those prior two.
 
 As in the last puzzle, we represent numeric sequences by a number of
-repetitions of the '@' symbol followed by spaces.  For example:
+repetitions of the `@` symbol followed by spaces.  For example:
 
 ```python
 # Match: 1 1 2 3 5 8
@@ -2245,6 +2261,10 @@ incorrectly match as Fibonacci-like. Since `pat1` already collects the
 final "number," there is no need for `pat2` to do so as well; the
 lookahead suffices.
 
+<!-- blank recto page -->
+
+![Naive_Scribble_Recto](images/Naive_Scribble_Recto.png)
+
 \newpage
 
 ## Matching the Prime Numbers
@@ -2257,7 +2277,7 @@ ascending initial sequences of the primes, but all such initial
 sequences.
 
 As in the last two puzzles, we encode numeric sequences using a number
-of contiguous '@' symbols, with each "number" separated by spaces. For
+of contiguous `@` symbols, with each "number" separated by spaces. For
 example:
 
 ```python
@@ -2304,10 +2324,6 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
-<!-- blank recto page -->
-
-![Naive_Scribble_Recto](images/Naive_Scribble_Recto.png)
-
 \newpage
 
 This puzzle turns out to be another one that exceeds the ability of
@@ -2319,7 +2335,7 @@ repetition of that group.
 
 Let's say the hypothetical group was number 7.  In that case, a negative
 lookahead assertion like `(?! \7{2,} )` would state precisely that no
-contiguous numbers of '@' symbols, whose count is a multiple of the number
+contiguous numbers of `@` symbols, whose count is a multiple of the number
 in the prior match group, occur later in the string.  That sounds a lot
 like what the Sieve does.
 
@@ -2342,8 +2358,12 @@ probabilistic Miller–Rabin test[^fn-grh] or the deterministic
 Agrawal–Kayal–Saxena test.  However, all of those require mathematical
 calculations that are not possible in regular expressions.
 
-[^fn-grh]: The Miller-Rabin test can be made deterministic if the
+[^fn-grh]: A version of the Miller-Rabin test can be made deterministic if the
 Generalized Riemann hypothesis holds.
+
+<!-- blank recto page -->
+
+![Olives_Recto](images/Olives_Recto.png)
 
 \newpage
 
@@ -2369,25 +2389,25 @@ where all of them are relatively prime to each other.  Trivially, any
 sequence of ascending primes qualifies here, but so do other sequences.
 
 As in the last three puzzles, we encode numeric sequences using a
-number of contiguous '@' symbols, with each "number" separated by
+number of contiguous `@` symbols, with each "number" separated by
 spaces. For example:
+
+\newpage
 
 ```python
 # Match: 2 3 5 7 11
 primes5 = "@@ @@@ @@@@@ @@@@@@@ @@@@@@@@@@@ "
 # Match: 2 5 7 9 11
 relprime1 = "@@ @@@@@ @@@@@@@ @@@@@@@@@ @@@@@@@@@@@ "
-# Match: 3 4 7 10
-relprime2 = "@@@ @@@@ @@@@@@@ @@@@@@@@@ "
+# Match: 3 4 7 11
+relprime2 = "@@@ @@@@ @@@@@@@ @@@@@@@@@@@ "
 # Match: 9 16
-startbig = "@@@@@@@@@ @@@@@@@@@@@@@@@ "
+startbig = "@@@@@@@@@ @@@@@@@@@@@@@@@@ "
 # Fail: 2 3 4 5 7  (2, 4 relatively composite)
 fail1 = "@@ @@@ @@@@ @@@@@ @@@@@@@ "
 # Fail: 5 7 2 3 11 (all primes, non-ascending)
-fail2 = "@@@@@ @@@@@@@ @@ @@@ @@@@@@@@@@ "
+fail2 = "@@@@@ @@@@@@@ @@ @@@ @@@@@@@@@@@ "
 ```
-
-\newpage
 
 Are relative primes consigned to the same fate as primes?
 
@@ -2396,10 +2416,6 @@ Before you turn the page...
 **Nothing is either true or false but thinking makes it so.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-<!-- blank recto page -->
-
-![Olives_Recto](images/Olives_Recto.png)
 
 \newpage
 
@@ -2419,7 +2435,7 @@ current puzzle.
 However, for this "striking through" to work, we need also to enforce
 the rule that sequences are ascending.  Otherwise, we might encounter,
 e.g.  `@@@@@@@@ @@@@ @@` (i.e. '8 4 2').  Those are definitely not
-mutually coprime.  However, "struck out" multiples of 8 does not help
+mutually coprime.  However, "stricking out" multiples of 8 does not help
 reject 4 later in the string.  Python only allows fixed length
 lookbehind assertions, but some other regex implementation could
 technically relax this ascending sequence restriction (however, a
@@ -2430,8 +2446,8 @@ complexity in this case).
 pat = r'^((@@+) (?=\2@)(?!.* \2{2,} ))+'
 ```
 
-Here we first identify a group of 2 or more '@' symbols.  Then we do a
-postive lookahead to ensure that the next group of '@' symbols has at
+Here we first identify a group of 2 or more `@` symbols.  Then we do a
+postive lookahead to ensure that the next group of `@` symbols has at
 least one more symbol.
 
 The real crux of this is the *negative lookahead* assertion that we
