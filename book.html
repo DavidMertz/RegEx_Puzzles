@@ -28,7 +28,7 @@
 <p>Leo Reynolds (CC BY-NC-SA 2.0): joker-48067975746</p>
 <p>Pixabay (https://pixabay.com/service/license/): clown-28772</p>
 <p>Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black</p>
-<p>freesvg.org (Public Domain): johnny-automatic-right-hand; johnny-automatic-left-hand; johnny-automatic-left-hand; clown-1549219095; pointerfingerright; Prismatic-DNA-Helix-Circles-3</p>
+<p>freesvg.org (Public Domain): johnny-automatic-right-hand; johnny-automatic-left-hand; johnny-automatic-left-hand; clown-1549219095; Prismatic-DNA-Helix-Circles-3</p>
 <p>OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19</p>
 <p>Samuel MacGregor Liddel Mathews, “The Goetia: The Lesser Key of Solomon the King” (1904, Public Domain): N_A_B_E_R_I_U_S</p>
 <p><em>Stuck in the Middle with You</em>, by Gerry Rafferty and Joe Egan (Stealer Wheels), 1973:</p>
@@ -207,6 +207,10 @@
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>            re.findall(<span class="vs">r&#39;^(\d+) *= *(.*)$&#39;</span>, s, re.MULTILINE)}</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>{<span class="dv">3</span>: <span class="st">&#39;foobar&#39;</span>, <span class="dv">14</span>: <span class="st">&#39;baz&#39;</span>, <span class="dv">9</span>: <span class="st">&#39;fizzbuzz&#39;</span>, </span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a><span class="dv">21</span>: <span class="st">&#39;more_stuff,here&#39;</span>}</span></code></pre></div>
+<!-- blank recto page -->
+<figure>
+<img src="images/Root5spiral_Recto.png" alt="" /><figcaption>Root5spiral_Recto</figcaption>
+</figure>
 <h2 id="the-human-genome">The Human Genome</h2>
 <p>Genomics commonly uses a format called FASTA to represent genetic sequences. This puzzle uses a subset of the overall format. Let’s provide just a few quick tips. The letters ‘A’, ‘C’, ‘G’, ‘T’ represent nucleotide bases in DNA. FASTA may also contain the symbol ‘N’ for “unknown nucleotide” and ‘-’ for “gap of indeterminate length.”</p>
 <p>As well, in biological organisms, spans of DNA are terminated by “telomeres” which are special sequences indicating that the read mechanism should stop transcription and form a protein. Telomeres are often repeated as much as thousands of times at the ends of sequences. In a gross simplification for this puzzle, let’s suppose that three or more repetitions of a telomere indicate the end of a sequence for a protein. In vertebrates, the telomere used is ‘TTAGGG’.</p>
@@ -251,10 +255,6 @@
 <p>Before you turn the page…</p>
 <p><strong>Remember the central dogma of molecular biology.</strong></p>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
-<!-- blank recto page -->
-<figure>
-<img src="images/Root5spiral_Recto.png" alt="" /><figcaption>Root5spiral_Recto</figcaption>
-</figure>
 <p>There are a few key aspects to keep in mind in designing your regular expression. You want to make sure that your pattern begins at the start of the candidate sequence. Otherwise, you could easily match only a valid tail of it.</p>
 <p>From there, any sequence of ‘C’, ‘A’, ‘T’, and ‘G’ symbols is permitted. However, you definitely want to be non-greedy in matching them since no telomeres should be included. The telomere may be repeated any number of times, but at least three. Optionally, repeated telomeres can be required to continue until the end of the candidate sequence, so we must match <code>$</code> <em>inside</em> the lookahead pattern.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>pat <span class="op">=</span> <span class="vs">r&#39;^([CATG]+?)(?=(TTAGGG){3,}$)&#39;</span></span></code></pre></div>
@@ -473,6 +473,9 @@ Ambiguous quick | &#39;▲▲▲▲□▲□□▲▲□▲□□□□□□□
 <p>Before you turn the page…</p>
 <p><strong>Thoughts about digrams are always pleasant thoughts.</strong></p>
 <p><img src="images/Elegant-Flourish-Frame-Extrapolated-19.svg" /></p>
+<figure>
+<img src="images/Root5spiral_Verso.png" alt="" /><figcaption>Root5spiral_Verso</figcaption>
+</figure>
 <p>It probably comes as no surprise to you that a larger tile set would require a larger regular expression to match winning plays. But the principle would remain the same if you used more tiles, up to all of them.</p>
 <p>The basic idea here is that you want each tile to be followed by a tile from some subset of other tiles. Namely, those that begin with the same number of dots that the current tile ends with.</p>
 <p>Of course, a given tile might be the end of a play, so you have to include that option in your lookahead pattern. You also definitely want a match to begin at the start of the play and end at the end of the play, so be sure to include the match patterns <code>^</code> and <code>$</code> to indicate that.</p>
@@ -483,13 +486,6 @@ Ambiguous quick | &#39;▲▲▲▲□▲□□▲▲□▲□□□□□□□
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a><span class="op">&lt;</span>re.Match <span class="bu">object</span><span class="op">;</span> span<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">7</span>), match<span class="op">=</span><span class="st">&#39;ABCDABB&#39;</span><span class="op">&gt;</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> re.search(pat, lose) <span class="kw">or</span> <span class="st">&quot;No Match&quot;</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true"></a><span class="co">&#39;No Match&#39;</span></span></code></pre></div>
-<figure>
-<img src="images/pointyfingerright.svg" alt="" /><figcaption>pointyfingerright</figcaption>
-</figure>
-<!-- blank recto page -->
-<figure>
-<img src="images/Root5spiral_Recto.png" alt="" /><figcaption>Root5spiral_Recto</figcaption>
-</figure>
 <h2 id="sensor-art">Sensor Art</h2>
 <p>A hypothetical data format uses a character string to represent state transitions in a two-state system. For example, this might be the status of some sort of electrical sensor. Each string represents a “signal” of some time duration.</p>
 <p>The signal can occupy the “high” state for any duration, and it can occupy the “low” state for any duration. Moreover, the transition between the two can either be “fast” or “slow,” but it must stay in a state for at least one time interval after each transition.</p>

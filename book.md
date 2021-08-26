@@ -84,11 +84,12 @@ Dmitry Fomin (CC0 1.0): Atlas_deck_joker_black
 
 freesvg.org (Public Domain): johnny-automatic-right-hand;
 johnny-automatic-left-hand; johnny-automatic-left-hand; clown-1549219095;
-pointerfingerright; Prismatic-DNA-Helix-Circles-3
+Prismatic-DNA-Helix-Circles-3
 
 OpenClipArt (Public Domain): Elegant-Flourish-Frame-Extrapolated-19
 
-Samuel MacGregor Liddel Mathews, "The Goetia: The Lesser Key of Solomon the King" (1904, Public Domain): N_A_B_E_R_I_U_S
+Samuel MacGregor Liddel Mathews, "The Goetia: The Lesser Key of Solomon the
+King" (1904, Public Domain): N_A_B_E_R_I_U_S
 
 *Stuck in the Middle with You*, by Gerry Rafferty and Joe Egan (Stealer
 Wheels), 1973:
@@ -486,6 +487,10 @@ of ways we might achieve that in Python, but one easy one is:
 21: 'more_stuff,here'}
 ```
 
+<!-- blank recto page -->
+
+![Root5spiral_Recto](images/Root5spiral_Recto.png)
+
 \newpage
 
 ## The Human Genome
@@ -581,10 +586,6 @@ Before you turn the page...
 **Remember the central dogma of molecular biology.**
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
-
-<!-- blank recto page -->
-
-![Root5spiral_Recto](images/Root5spiral_Recto.png)
 
 \newpage
 
@@ -945,6 +946,8 @@ Before you turn the page...
 
 ![](images/Elegant-Flourish-Frame-Extrapolated-19.svg)
 
+![Root5spiral_Verso](images/Root5spiral_Verso.png)
+
 \newpage
 
 It probably comes as no surprise to you that a larger tile set would
@@ -971,14 +974,6 @@ that.
 >>> re.search(pat, lose) or "No Match"
 'No Match'
 ```
-
-
-![pointyfingerright](images/pointyfingerright.svg)
-
-<!-- blank recto page -->
-
-![Root5spiral_Recto](images/Root5spiral_Recto.png)
-
 \newpage
 
 ## Sensor Art
