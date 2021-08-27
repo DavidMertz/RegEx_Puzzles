@@ -223,7 +223,7 @@
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>AAAGCCTCTCTGAATCCTGCGCACCGAGATTCTCCCAAGGCAAGGCGAGGGGCTGTATTG</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a>CAGGGTTCAACTGCAGCGTCGCAACTCAAATGCAGCATTCCTAATGCACACATGACACCC</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a>AAAATATAACAGACATATTACTCATGGAGGGTGAGGGTGAGGGTGAGGGT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>G̠TT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠GT̠T̠A̠G̠G̠G̠GT̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠</span></code></pre></div>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠T̠T̠A̠G̠G̠G̠</span></code></pre></div>
 <p>Using a good pattern, we can identify everything up to, but not including, the telomere repetitions.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> coding <span class="op">=</span> re.search(pat, valid).group()</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join(wrap(coding, <span class="dv">60</span>)))</span>
