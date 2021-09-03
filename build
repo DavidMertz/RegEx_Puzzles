@@ -1,13 +1,21 @@
 #!/bin/bash
 echo "Building EPUB..."
 pandoc book.md -o book.epub
+
 echo "Building HTML..."
-pandoc book.md -o book.html
+pandoc -o www/web.epub --epub-chapter-level=4 --epub-subdirectory=HTML --toc-depth=4 --css=book.css book.md
+cd www
+unzip -o web.epub
+./add-toc
+cd ..
+
 echo "Building PDF..."
 pandoc --pdf-engine=xelatex book.md -o book.pdf
 cp book.pdf 'The Puzzling Quirks of Regular Expressions.pdf'
+
 echo "Converting to AZW3..."
 ebook-convert book.epub book.azw3
+
 echo "Converting to MOBI..."
 ebook-convert book.epub book.mobi
 
