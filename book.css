@@ -356,9 +356,9 @@ figure {
 
 #donation {
     position: fixed;
-    font-size: 85%;
+    font-size: 95%;
     text-align: right;
-    right: 0px;
+    right: 10px;
     top: 0px;
-    padding-right: 5px;
+    padding-right: 15px;
 }
