@@ -8,10 +8,14 @@ cd www
 unzip -o web.epub
 ./add-toc
 cd ..
+rsync -av www/ /home/dmertz/git/DavidMertz.github.io/regex
 
 echo "Building PDF..."
 pandoc --pdf-engine=xelatex book.md -o book.pdf
 cp book.pdf 'The Puzzling Quirks of Regular Expressions.pdf'
+
+echo "Building LaTeX..."
+pandoc --pdf-engine=xelatex book.md -o book.tex
 
 echo "Converting to AZW3..."
 ebook-convert book.epub book.azw3

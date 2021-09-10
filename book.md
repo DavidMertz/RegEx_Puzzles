@@ -105,7 +105,7 @@ Wheels), 1973:
 # Preface
 
 Regular expressions—sometimes given the playful back formation *regexen*
-or more neurally *regex*—are a powerful and compact way of describing
+or more neutrally *regex*—are a powerful and compact way of describing
 patterns in text.  Many tutorials and "cheat sheets" exist to understand
 their syntax and semantics in a formally correct manner.  I encourage
 you to read some of those, if you have not already.
@@ -502,7 +502,7 @@ nucleotide bases in DNA.  FASTA may also contain the symbol 'N' for
 "unknown nucleotide" and '-' for "gap of indeterminate length."
 
 As well, in biological organisms, spans of DNA are terminated by
-"telomeres" which are special sequences indicating that the read
+"telomeres," which are special sequences indicating that the read
 mechanism should stop transcription and form a protein.  Telomeres are
 often repeated as much as thousands of times at the ends of sequences.
 In a gross simplification for this puzzle, let's suppose that three or
@@ -552,7 +552,7 @@ AAAACTATAACAGACATATTACTCATGGAGGGTGAGGGTGGGGGTGAGGG
 ```
 
 The next two are failures.  The first does not have sufficient
-repetitions.  The second has a a non-specific nucleotide symbol:
+repetitions.  The second has a non-specific nucleotide symbol:
 
 ```python
 >>> print('\n'.join(wrap(bad_telomere, 60)))
@@ -616,7 +616,7 @@ and at least to understand and identify where such difficulties arise.
 ## Catastrophic Backtracking
 
 In this puzzle, we imagine a certain message protocol (as we do in many
-of the other puzzles).  We have an message alphabet that consists of the
+of the other puzzles).  We have n message alphabet that consists of the
 following symbols:
 
 | Codepoint  | Name              | Appearance
@@ -627,7 +627,7 @@ following symbols:
 | U+25C9     | Fisheye           | ◉
 | U+25A1     | White Square      | □
 | U+25AB     | White Small Square| ▫
-| U+25B2     | Black Up Triang   | ▲
+| U+25B2     | Black Up Triangle | ▲
 | U+25CF     | Black Circle      | ●
 | U+2404     | End Transmition   | `!` (herein) 
 
@@ -713,9 +713,9 @@ simply with a valid symbol and no terminator, is not significant.
 You may want to think about why the quick-failing message also fails.
 Pause for a moment.
 
-But then notice that the final few symbols in that message are "black
-square" which can only occur in type 1 blocks; in the specification, a
-type 2 block must always come immediatey before the end-of-transmission
+But then notice that the final symbol in that message is "black square"
+which can only occur in type 1 blocks; in the specification, a type 2
+block must always come immediatey before the end-of-transmission
 terminator.  Nonetheless, the regular expression engine figures that out
 in (significantly) less than 1/100th of a second.
 
@@ -1019,14 +1019,15 @@ state), and `F` maps to `|` (fast transition).  Likewise, `valid_2a` and
 `valid_2b` are equivalent and simpler signals with just one up
 transition, but a duration in each state.
 
-The invalid signals are similarly have the different character options.
-Signals `invalid_1a` or `invalid_1b` have *several* problems.  Low and high
-states are adjacent with no transition (not permitted).  An alleged up
-transition occurs from the high state (also not permitted).  Movoer, a down
-transition occurs from the low state.  The chief problem with `invalid_2a` or
-`invalid_2b` are that they have transitions with no states in between, which is
-also prohibited.  In the case of `invalid_3a` or `invalid_3b`, the states and
-transitions are generally fine, but there is an invalid symbol thrown in.
+The invalid signals similarly have the different character options.
+Signals `invalid_1a` or `invalid_1b` have *several* problems.  Low and
+high states are adjacent with no transition (not permitted).  An alleged
+up transition occurs from the high state (also not permitted).
+Moreover, a down transition occurs from the low state.  The chief
+problem with `invalid_2a` or `invalid_2b` are that they have transitions
+with no states in between, which is also prohibited.  In the case of
+`invalid_3a` or `invalid_3b`, the states and transitions are generally
+fine, but there is an invalid symbol thrown in.
 
 You wish to define a regular expression that will match *all* and *only*
 valid signal strings.  Pick which character set you wish to
@@ -1534,7 +1535,7 @@ number for later use.  Those are all "truthy" values (like all strings).
 ```
 
 As with the first function, we might as well be friendly in accepting
-the ASCII version of suits, even though they could always be imporved
+the ASCII version of suits, even though they could always be improved
 with `prettify()` if necessary.  The pattern looks for everything that
 is a suit character or a space, and strips it out to create a simplified
 "hand."
@@ -2095,7 +2096,7 @@ quantities.
 
 Nonetheless, we would like to recognize a distinct integer sequence, and
 rule out other integer sequences, using a regular expression.  The trick
-here is that we can represent integer as repetitions of the same
+here is that we can represent an integer as repetitions of the same
 character, and the number of such repetitions can (to us, at least)
 represent numbers.
 
